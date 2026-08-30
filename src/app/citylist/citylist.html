@@ -1,0 +1,37 @@
+<p>citylist works!</p>
+<div style="text-align: right;"><button (click)="AddCity()">Add City</button></div>
+
+<table border="1" style="border-collapse: collapse; width:100%; table-layout:fixed;">
+    <thead>
+        <tr>
+            <th style="width:10%; text-align:left;">Sr No</th>
+            <th style="width:10%; text-align:left;">City Id</th>
+            <th style="width:20%; text-align:left;">City Code</th>
+            <th style="width:25%; text-align:left;">City Name</th>
+            <th style="width:25%; text-align:left;">State Name</th>
+            <th style="width:30%; text-align:center;">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (item of cities(); track $index) {
+         
+        <tr>
+            <td>{{$index + 1}}</td>
+            <td>{{item.CityId}}</td>
+            <td>{{item.CityCode}}</td>
+            <td>{{item.CityName}}</td>
+            <td>{{item.StateName}}</td>
+            <td style="text-align:center;">
+                <i class="bi bi-pencil-square action-icon edit"
+                   title="Edit" (click)="city(item.CityId)">
+                </i>
+                <i class="bi bi-trash-fill action-icon delete"
+                   title="Delete" (click)="deleteCity(item.CityId)">
+                </i>
+           </td>
+        </tr>
+       }
+    </tbody>
+</table>
+

@@ -1,0 +1,176 @@
+<h1>controlflow Example!</h1><br>
+<h5>ex.1(Showing/Hiding Div on Button Click using if statement)</h5>
+<br><br>
+<div class="row">
+    <div class="col-3">
+        @if (isDivVisible==true){
+        <div class="bg-primary p-4">
+            div1 - {{isDivVisible}}
+        </div>
+        }
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-3">
+        <button class="btn btn-warning" (click)="toggleDiv()"> {{isDivVisible==true?"Hide": "Show"}} </button>
+    </div>
+</div>
+<br>
+<br>
+
+<h5>ex.2(Showing/Hiding TextBox checkbox click using if and else Statement alongwith ngModel)</h5>
+
+<div class="row">
+    <div class="col-3">
+        <input type="checkbox" [(ngModel)]="isoffer"> Is Offer Code Available
+
+        @if(isoffer){
+        <input type="text" placeholder="entercode">
+        }@else{
+        <p>No Offer Code Available</p>
+        }
+
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<h5>ex.3(Showing status of order on selecting order status from dropdown  using if and else statement)</h5>
+
+<div class="row">
+    <div class="col-3">
+        <select [(ngModel)] = "orderstatus">
+            <option value="N">New</option>
+            <option value="P">Packed</option>
+            <option value="S">Shipped</option>
+            <option value="D">Delivered</option>
+            <option value="F">Failed</option>
+        </select>
+    </div>
+</div>
+
+<h3>Order 
+    @if(orderstatus=="N"){
+        Placed
+    }
+    @else if (orderstatus=="P") {
+        Packed
+    }
+    @else if (orderstatus=="S") {
+        Shipped
+    }
+    @else if (orderstatus=="D") {
+        Delivered
+    }
+    @else {
+    <span class="text-danger"> Failed </span>
+    }
+</h3>
+<br>
+
+<h5>ex.4(Showing list of city in ul tag using 'for' statement)</h5>
+<div class="row">
+    <div class="col-3">
+        <ul>
+            @for (item of cityList; track $index) {
+            <li>{{item}}</li>
+            }
+        </ul>
+    </div>
+</div>
+<br>
+<h5>ex.5(Showing list of city in button using 'for' statement)</h5>
+
+<div class="row">
+    <div class="col-4">
+        @for (item of cityList; track $index) {
+        <button class="btn btn-success mx-2 mt-2">{{item}}</button>
+        }
+    </div>
+</div>
+
+<br>
+<h5>ex.6(Showing City List in Dropdown from cityList Array using 'for' statement)</h5>
+
+<div class="row">
+    <div class="col-3">
+        <select class="form-select">
+            <option value="">--Select City--</option>
+
+            @for (item of cityList; track $index) {                
+                <option>{{item}}</option>
+            }
+
+        </select>
+    </div>
+</div>
+
+<br>
+<h5>ex.7(Showing city list in table (with border line) from cityList Array using 'for' statement)</h5>
+
+<div class="row">
+    <div class="col-3">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Sr No</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Roll No</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of studentList; track $index) {
+                <tr>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.city}}</td>
+                    <td>{{item.rollNo}}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br>
+<h5>ex.8(Showing Selected Student name from dropdown using 'for' statement)</h5>
+<div class="row">
+    <div class="col-3">
+        <select [(ngModel)]="selectedStudent">
+                <option value="">--Select Student--</option>
+
+            @for (item of studentList; track $index) {
+                <option> {{item.name}} </option>
+            }
+        </select>
+    </div>
+
+    <div class="col-3">
+        Selected Student => {{selectedStudent}}
+    </div>
+    <div class="col-3">
+        <input type ="text" [(ngModel)] = "selectedStudent">
+    </div>
+</div>
+
+<br>
+<h5>ex.9(Showing Student Detail from studentList Array in Bootstrap Card using for loop)</h5>
+
+<div class="row">
+    @for (item of studentList; track $index) {
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">{{item.name}}</h4>
+                <p class="card-text">{{item.rollNo}}</p>
+                <a href="#" class="card-link">View</a>
+                <a href="#" class="card-link">Edit</a>
+                <a href="#" class="card-link">Delete</a>
+            </div>
+        </div>
+    </div>
+    }
+</div>

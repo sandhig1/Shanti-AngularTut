@@ -1,0 +1,35 @@
+<h4>State List</h4>
+<div style="text-align: right;"><button (click)="AddState()">Add State</button></div>
+
+<table border="1" style="border-collapse: collapse; width:100%; table-layout:fixed;">
+    <thead>
+        <tr>
+            <th style="width:10%; text-align:left;">Sr No</th>
+            <th style="width:20%; text-align:left;">State Code</th>
+            <th style="width:25%; text-align:left;">State Name</th>
+            <th style="width:30%; text-align:center;">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (item of states(); track $index) {
+         
+        <tr>
+            <td>{{$index + 1}}</td>
+            <td>{{item.StateCode}}</td>
+            <td>{{item.StateName}}</td>
+            <td style="text-align:center;">
+                <i class="bi bi-eye-fill action-icon view"
+                   title="View" (click)="viewstate(item.StateId)"></i>
+
+                <i class="bi bi-pencil-square action-icon edit"
+                   title="Edit" (click)="editState(item.StateId)">
+                </i>
+
+                <i class="bi bi-trash-fill action-icon delete"
+                   title="Delete" (click)="deleteState(item.StateId)"></i>
+            </td>
+        </tr>
+       }
+    </tbody>
+</table>

@@ -1,0 +1,52 @@
+<h1 style="text-align: center;">Welcome To Homepage</h1>
+
+<p style="text-align: center;">This is Home</p>
+         
+<div>
+    <ul style="display: flex; list-style-type: none;">
+        <li>
+           <button (click)="enquiry()">Enquiry</button>
+        </li>
+        <li>
+           <button (click)="state()">State</button>
+        </li>
+        <li>
+           <button (click)="city()">City</button>
+        </li>
+        <li>
+           <button (click)="arealist()">Area</button>
+        </li>
+        <li>
+           <button (click)="cliniclist()">Clinic</button>
+        </li>
+        <li>
+           <button (click)="dashboard()">Dashboard</button>
+        </li>
+        
+        <li>
+           <button (click)="binding()">Binding</button>
+        </li>
+        <li>
+           <button (click)="directive()">Directive</button>
+        </li>
+        <li>
+           <button (click)="controlflow()">ControlFlow</button>
+        </li>
+         <li>
+            <button  (click)="signOut()">signOut</button>
+         </li>
+      </ul>
+</div>
+
+<!--getAllState() {
+    debugger;
+    this.stateServ.getStates().subscribe({
+      next: (res: any) => {
+        debugger;
+        this.states.set(res.data)
+      }
+    })
+}-->
+
+         
+<router-outlet></router-outlet>

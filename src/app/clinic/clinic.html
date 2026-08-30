@@ -1,0 +1,518 @@
+<div class="container-fluid css-page py-4">
+
+  <div class="row">
+
+    <!-- =====================================================
+         CLINIC FORM COLUMN
+    ====================================================== -->
+    <div class="col-12 col-lg-7 col-xl-6 css-form-column">
+
+      <div class="card css-card">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+        <div class="card-header css-header">
+
+          <div class="header-content">
+
+            <!-- LEFT SIDE -->
+            <div class="header-left">
+
+              <div class="header-icon">
+                <i class="fa fa-building"></i>
+              </div>
+
+              <div class="header-text">
+
+                <h5 class="css-title">
+                  {{ clinicData().ClinicId <= 0 ? 'Add' : 'Edit' }} Clinic
+                </h5>
+
+                <div class="css-subtitle">
+                  Manage clinic information
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm css-list-btn"
+              (click)="cliniclist()">
+
+              <i class="fa fa-list-ul"></i>
+
+              <span>
+                Clinic List
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CARD BODY
+        ================================================== -->
+        <div class="card-body css-body">
+
+          <form #form="ngForm">
+
+            <!-- =================================================
+                 CLINIC DETAILS
+            ================================================== -->
+            <div class="form-section">
+
+              <!-- SECTION HEADING -->
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa fa-hospital"></i>
+                </div>
+
+                <div>
+
+                  <h6 class="section-title">
+                    Clinic Details
+                  </h6>
+
+                  <small class="section-description">
+                    Basic information about the clinic
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <!-- =================================================
+                   CLINIC FIELDS
+              ================================================== -->
+              <div class="row g-3">
+
+                <!-- =================================================
+                     CLINIC CODE
+                ================================================== -->
+                <div class="col-md-5">
+
+                  <label class="form-label">
+                    Clinic Code
+                    <span class="required">*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    #ClinicCodeError="ngModel"
+                    [(ngModel)]="clinicData().ClinicCode"
+                    name="ClinicCode"
+                    placeholder="Enter code"
+                    minlength="2"
+                    maxlength="10"
+                    required>
+
+                  @if(ClinicCodeError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      Clinic Code is required
+                    </div>
+
+                  }
+                  @else if(ClinicCodeError.errors?.['minlength']) {
+
+                    <div class="validation-message">
+                      Minimum 2 characters required
+                    </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     CLINIC NAME
+                ================================================== -->
+                <div class="col-md-7">
+
+                  <label class="form-label">
+                    Clinic Name
+                    <span class="required">*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    #ClinicNameError="ngModel"
+                    [(ngModel)]="clinicData().ClinicName"
+                    name="ClinicName"
+                    placeholder="Enter clinic name"
+                    minlength="3"
+                    maxlength="50"
+                    required>
+
+                  @if(ClinicNameError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      Clinic Name is required
+                    </div>
+
+                  }
+                  @else if(ClinicNameError.errors?.['minlength']) {
+
+                    <div class="validation-message">
+                      Minimum 3 characters required
+                    </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     CLINIC ADDRESS
+                ================================================== -->
+                <div class="col-12">
+
+                  <label class="form-label">
+                    Clinic Address
+                    <span class="required">*</span>
+                  </label>
+
+                  <textarea
+                    class="form-control css-address"
+                    #ClinicAddressError="ngModel"
+                    [(ngModel)]="clinicData().ClinicAddress"
+                    name="ClinicAddress"
+                    rows="2"
+                    placeholder="Enter clinic address"
+                    minlength="3"
+                    maxlength="200"
+                    required></textarea>
+
+                  @if(ClinicAddressError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      Clinic Address is required
+                    </div>
+
+                  }
+                  @else if(ClinicAddressError.errors?.['minlength']) {
+
+                    <div class="validation-message">
+                      Minimum 3 characters required
+                    </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     STATE
+                ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    State
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-location-dot"></i>
+                    </span>
+
+                    <select
+                      class="form-select"
+                      #StateNameError="ngModel"
+                      [(ngModel)]="clinicData().StateId"
+                      name="StateId"
+                      (change)="onStateChange()"
+                      required>
+
+                      <option value="0">
+                        -- Select State --
+                      </option>
+                      
+                      @for (item of states(); track $index) {
+                        <option value="{{item.StateId}}">
+                          {{item.StateName}}
+                        </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(StateNameError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      State is required
+                    </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     CITY
+                ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    City
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-location-dot"></i>
+                    </span>
+
+                    <select
+                      class="form-select"
+                      #CityNameError="ngModel"
+                      [(ngModel)]="clinicData().CityId"
+                      name="CityId"
+                      required>
+
+                      <option value="0">
+                        -- Select City --
+                      </option>
+
+                      @for (item of filteredCities(); track $index) {
+                        <option value="{{item.CityId}}">
+                          {{item.CityName}}
+                        </option>
+                      }
+                    </select>
+
+                  </div>
+
+                  @if(CityNameError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      City is required
+                    </div>
+
+                  }
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DIVIDER
+            ================================================== -->
+            <div class="section-divider"></div>
+
+
+            <!-- =================================================
+                 CONTACT DETAILS
+            ================================================== -->
+            <div class="form-section">
+
+              <!-- SECTION HEADING -->
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-address-book"></i>
+                </div>
+
+                <div>
+
+                  <h6 class="section-title">
+                    Contact Details
+                  </h6>
+
+                  <small class="section-description">
+                    Contact information for the clinic
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <!-- =================================================
+                   CONTACT FIELDS
+              ================================================== -->
+              <div class="row g-3">
+
+                <!-- =================================================
+                     MOBILE NUMBER
+                ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    Mobile No
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa fa-mobile"></i>
+                    </span>
+
+                    <input
+                      type="text"
+                      class="form-control"
+                      #MobileNoError="ngModel"
+                      [(ngModel)]="clinicData().MobileNo"
+                      name="MobileNo"
+                      placeholder="Enter mobile number"
+                      maxlength="10"
+                      required>
+
+                  </div>
+
+                  @if(MobileNoError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      Mobile No. is required
+                    </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     PHONE NUMBER
+                ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    Phone No.
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa fa-phone"></i>
+                    </span>
+
+                    <input
+                      type="text"
+                      class="form-control"
+                      #PhoneNoError="ngModel"
+                      [(ngModel)]="clinicData().PhoneNo"
+                      name="PhoneNo"
+                      placeholder="Enter phone number"
+                      maxlength="15">
+
+                  </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     EMAIL
+                ================================================== -->
+                <div class="col-12">
+
+                  <label class="form-label">
+                    Email Address
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa fa-envelope"></i>
+                    </span>
+
+                    <input
+                      type="email"
+                      class="form-control"
+                      #EmailAddError="ngModel"
+                      [(ngModel)]="clinicData().EmailAdd"
+                      name="EmailAdd"
+                      placeholder="Enter email address"
+                      maxlength="100"
+                      required>
+
+                  </div>
+
+                  @if(EmailAddError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      Email Address is required
+                    </div>
+
+                  }
+                  @else if(EmailAddError.errors?.['email']) {
+
+                    <div class="validation-message">
+                      Please enter a valid email address
+                    </div>
+
+                  }
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================== -->
+            <div class="action-container">
+
+              <button
+                type="button"
+                class="btn btn-light cancel-btn"
+                (click)="cliniclist()">
+
+                <i class="fa fa-x-lg"></i>
+
+                <span>
+                  Cancel
+                </span>
+
+              </button>
+
+
+              <button
+                type="button"
+                class="btn btn-primary save-btn"
+                (click)="saveClinic(form)">
+
+                <i class="fa fa-check-circle"></i>
+
+                <span>
+                  {{ clinicData().ClinicId <= 0
+                      ? 'Save Clinic'
+                      : 'Update Clinic' }}
+                </span>
+
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

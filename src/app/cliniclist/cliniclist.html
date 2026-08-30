@@ -1,0 +1,354 @@
+<div class="container-fluid py-4">
+
+  <!-- Page Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+      <h3 class="fw-bold mb-1">
+        <i class="fa fa-hospital me-2 text-primary"></i>
+        Clinic List
+      </h3>
+
+      <p class="text-muted mb-0">
+        Manage your registered clinics
+      </p>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="AddClinic()">
+
+      <i class="fa fa-plus"></i>
+      Add Clinic
+
+    </button>
+
+  </div>
+
+
+  <!-- Clinic Table Card -->
+  <div class="card border-0 shadow-sm">
+
+    <!-- Card Header -->
+    <div class="card-header bg-white py-3">
+
+      <div class="row align-items-center">
+
+        <div class="col-md-6">
+          <h5 class="mb-0 fw-semibold">
+            <i class="fa fa-list-ul me-2 text-primary"></i>
+            Clinics
+          </h5>
+        </div>
+
+        <div class="col-md-6 mt-2 mt-md-0">
+
+          <div class="input-group search-box">
+
+            <span class="input-group-text bg-white">
+              <i class="fa fa-search"></i>
+            </span>
+
+            <input type="text" class="form-control" placeholder="Search clinic..." [(ngModel)]="searchText"
+              (input)="onSearch()" />
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Table -->
+    <div class="card-body p-0">
+
+      <div class="table-responsive">
+
+        <table class="table table-hover align-middle mb-0">
+
+          <thead class="table-light">
+            <tr>
+
+              <th class="text-center" style="width: 6%;">
+                Sr No
+              </th>
+
+              <th style="width: 11%;">
+                Clinic Code
+              </th>
+
+              <th style="width: 17%;">
+                Clinic Name
+              </th>
+
+              <th style="width: 26%;">
+                Address
+              </th>
+
+              <th style="width: 25%;">
+                Contact Details
+              </th>
+
+              <th class="text-center" style="width: 15%;">
+                Action
+              </th>
+
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (item of paginatedClinics(); track item.ClinicId) {
+
+            <tr>
+
+              <!-- Sr No -->
+              <td class="text-center fw-semibold">
+                {{ getSerialNumber($index) }}
+              </td>
+
+
+              <!-- Clinic Code -->
+              <td>
+
+                <span class="badge bg-primary-subtle text-primary px-2 py-1">
+                  {{ item.ClinicCode }}
+                </span>
+
+              </td>
+
+
+              <!-- Clinic Name -->
+              <td>
+
+                <div class="fw-semibold text-dark">
+
+                  <i class="fa fa-hospital me-2 text-primary"></i>
+
+                  {{ item.ClinicName }}
+
+                </div>
+
+              </td>
+
+
+              <!-- Address + State + City -->
+              <td>
+                <div class="address-details">
+                  <!-- Address -->
+                  <div class="address-line">
+                    <i class="fa fa-geo-alt text-danger"></i> <span> {{ item.ClinicAddress }} </span>
+                  </div>
+                  <!-- State -->
+                  <div class="location-line">
+                    <i class="fa fa-map text-primary"></i> <span> {{ item.StateName }} </span>
+                  </div>
+                  <!-- City -->
+                  <div class="location-line">
+                    <i class="fa fa-building text-success"></i> <span> {{ item.CityName }} </span>
+                  </div>
+                </div>
+              </td>
+
+
+              <!-- Contact Details -->
+              <td>
+
+                <div class="contact-details">
+
+                  <!-- Mobile -->
+                  @if (item.MobileNo) {
+
+                  <div class="contact-item">
+
+                    <i class="fa fa-phone text-success"></i>
+
+                    <span>
+                      {{ item.MobileNo }}
+                    </span>
+
+                  </div>
+
+                  }
+
+
+                  <!-- Phone -->
+                  @if (item.PhoneNo) {
+
+                  <div class="contact-item">
+
+                    <i class="fa fa-telephone text-primary"></i>
+
+                    <span>
+                      {{ item.PhoneNo }}
+                    </span>
+
+                  </div>
+
+                  }
+
+
+                  <!-- Email -->
+                  @if (item.EmailAdd) {
+
+                  <div class="contact-item">
+
+                    <i class="fa fa-envelope text-danger"></i>
+
+                    <span class="email-text">
+                      {{ item.EmailAdd }}
+                    </span>
+
+                  </div>
+
+                  }
+
+                </div>
+
+              </td>
+
+
+              <!-- Actions -->
+              <td class="text-center">
+
+                <div class="d-flex justify-content-center gap-2">
+
+                  <!-- Edit -->
+                  <button type="button" class="btn btn-sm btn-outline-primary action-btn me-2" title="Edit Clinic"
+                    (click)="editClinic(item.ClinicId)">
+
+                    <i class="fa fa-pencil"></i>
+
+
+                  </button>
+
+
+                  <!-- Delete -->
+                  @if(item.ClinicId==0){
+                  <button type="button" class="btn btn-sm btn-outline-danger action-btn me-2" title="Delete Clinic"
+                    (click)="deleteClinic(item.ClinicId)">
+
+                    <i class="fa fa-trash"></i>
+
+                  </button>
+                  }
+
+                </div>
+
+              </td>
+
+            </tr>
+
+            }
+
+
+            <!-- No Records -->
+            @if (paginatedClinics().length === 0) {
+
+            <tr>
+
+              <td colspan="8" class="text-center py-5">
+
+                <i class="fa fa-inbox empty-icon"></i>
+
+                <div class="mt-2 text-muted">
+                  No clinic records found
+                </div>
+
+              </td>
+
+            </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <!-- Pagination Footer -->
+    <div class="card-footer bg-white border-top py-3">
+
+      <div class="row align-items-center">
+
+        <!-- Record Information -->
+        <div class="col-md-5">
+
+          <small class="text-muted">
+
+            Showing
+            <strong>{{ startRecord() }}</strong>
+            to
+            <strong>{{ endRecord() }}</strong>
+            of
+            <strong>{{ filteredClinics().length }}</strong>
+            records
+
+          </small>
+
+        </div>
+
+
+        <!-- Pagination -->
+        <div class="col-md-7">
+
+          <nav aria-label="Clinic pagination">
+
+            <ul class="pagination justify-content-end mb-0">
+
+              <!-- Previous -->
+              <li class="page-item" [class.disabled]="currentPage() === 1">
+
+                <button class="page-link" (click)="previousPage()" [disabled]="currentPage() === 1">
+
+                  <i class="fa fa-chevron-left"></i>
+
+                </button>
+
+              </li>
+
+
+              <!-- Page Numbers -->
+              @for (page of pages(); track page) {
+
+              <li class="page-item" [class.active]="currentPage() === page">
+
+                <button class="page-link" (click)="goToPage(page)">
+
+                  {{ page }}
+
+                </button>
+
+              </li>
+
+              }
+
+
+              <!-- Next -->
+              <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+
+                <button class="page-link" (click)="nextPage()" [disabled]="currentPage() === totalPages()">
+
+                  <i class="fa fa-chevron-right"></i>
+
+                </button>
+
+              </li>
+
+            </ul>
+
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

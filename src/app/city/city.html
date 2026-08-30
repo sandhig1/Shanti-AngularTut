@@ -1,0 +1,108 @@
+<div class="container-fluid py-4">
+
+  <div class="row">
+
+    <!-- Left Half Screen -->
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <div class="card shadow-sm border-0">
+
+        <!-- Header -->
+        <div class="row card-header bg-primary text-white">
+          <div class="col-6">
+            <h5 class="mb-0">
+              <i class="bi bi-building me-2"></i>
+              {{cityData().CityId <=0? 'Add': 'Edit'}} City
+            </h5>
+          </div>  
+          <div class="col-6" style="text-align: right;">
+            <button class="btn btn-warning" (click)="citylist()">
+              <i class="fa fa-list"></i> City List
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Body -->
+        <div class="card-body p-4">
+          <form #form = "ngForm">
+            <!-- City Code -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">
+                City Code
+              </label>
+              <input type="text" class="form-control" #CityCodeError="ngModel"  [(ngModel)]="cityData().CityCode" 
+                name="CityCode"
+                placeholder="Enter city code" style="width: 30%;" [minlength]="2" [maxlength]="10" required>
+
+                <!--{{CityCodeError.errors| json}}-->
+
+                @if(CityCodeError.errors?.['required']){
+                  <span style="color: red;">City Code is Required</span>
+                }
+                @else if(CityCodeError.errors?.['minlength']){
+                  <span style="color: red;">City Code shoulde be greater than 2 character</span>
+                }
+            </div>
+
+            <!-- City Name -->
+            <div class="mb-3">
+              <label for="cityName" class="form-label fw-semibold">
+                City Name <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control" #CityNameError="ngModel"  [(ngModel)]="cityData().CityName" name="CityName"
+                placeholder="Enter City Name" style="width: 80%;" [minlength]="3" [maxlength]="50" required>
+
+                 <!--{{CityNameError.errors| json}}-->
+
+                @if(CityNameError.errors?.['required']){
+                  <span style="color: red;">City Name is Required</span>
+                }
+                @else if(CityNameError.errors?.['minlength']){
+                  <span style="color: red;">City Name shoulde be greater than 2 character</span>
+                }
+            </div>
+
+            <!-- State -->
+            <div class="mb-3">
+              <label for="state" class="form-label fw-semibold">
+                State <span class="text-danger">*</span>
+              </label>
+
+              <select  #StateError="ngModel"  [(ngModel)] = "cityData().StateId" class="form-select" style="width: 60%;" name="stateid" required="true">
+
+                <!--{{StateError.errors| json}}-->                
+                <option value="0">--Select State--</option>
+                @for (item of states(); track $index) {
+                <option value="{{item.StateId}}">{{item.StateName}}</option>
+                }
+              </select>
+
+              @if(StateError.errors?.['required'] || this.cityData().StateId.toString()=="0"){
+                  <span style="color: red;">State is Required</span>
+                }
+                @else if(StateError.errors?.['minlength']){
+                  <span style="color: red;">State shoulde be greater than 2 character</span>
+                }
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+
+              <button class="btn btn-primary" (click)="SaveCity(form)">
+                <i class="bi bi-check-circle me-1"></i>
+                {{cityData().CityId <=0? 'Save': 'Update'}} City
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

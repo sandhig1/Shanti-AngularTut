@@ -1,0 +1,117 @@
+<table>
+    <hr>
+    <h2><u>Binding</u></h2><br>
+    <h3>1. INTERPOLATION</h3><BR>
+
+    <h5>a. Uppper /Lower Case</h5>
+    <tr>
+        <td>Select Case 
+            <select [(ngModel)] = "selectedCase">
+                <option value="uc">Upper Case</option> 
+                <option value="lc">Lower Case</option> 
+                <option value="j">Justify</option> 
+                <option value="o">Original</option> 
+            </select>
+        </td>
+        <td>
+            <b>
+                @if(selectedCase=="uc"){
+                    {{msg.toUpperCase()}}
+                }
+                @else if(selectedCase=="lc"){
+                    {{msg.toLowerCase()}}
+                }
+                @else if(selectedCase=="j"){
+                    {{msg | titlecase }}
+                }
+                @else if(selectedCase=="o"){
+                    {{msg}}
+                }
+                @else {
+                    <span style="color:red" >No Case selected</span>
+                }
+            </b>
+        </td>
+    </tr><br>
+    <h5>a. Comparing values</h5>
+    <tr>
+        <td>Enter Value1 <input type ="text" [(ngModel)] = "data1"><br>
+            Enter Value2 <input type ="text" [(ngModel)] = "data2">
+        </td>
+        <td>(value1 == value 2) => <b>{{data1==data2}}</b></td>
+    </tr><br>
+    <h5>C. Selecting Product Type</h5>
+    <tr>
+        <td>
+            <select [(ngModel)]="gadgetName">
+                <option value="Mobile">Mobile</option>
+                <option value="Charger">Charger</option>
+                <option value="Laptop">Laptop</option>
+                <option value="Headphone">Headphone</option>
+            </select>
+        </td>
+        <td><input type="text" [(ngModel)]="gadgetName"></td>
+    </tr><br>
+
+    <h5>d. Changing Input Type Dynamically</h5>
+    <tr>
+        <td>
+            <select  [(ngModel)]="myDynamicType">
+                <option value="radio">Radio</option>
+                <option value="button">Button</option>
+                <option value="textbox">Textbox</option>
+                <option value="checkbox">Checkbox</option>
+            </select> My Dynamic Type = {{myDynamicType}}
+
+        </td>
+        <td><input type="{{myDynamicType}}"></td>
+    </tr>
+    
+    <hr>
+    <h3>PROPERTY BINDING METHOD</h3>
+    <tr>
+        <td><input type="text" [maxLength]="maxAllowedChar"></td>
+        <td><input type="text" [value]="ProductType"></td>
+    </tr>
+</table>
+
+<hr>
+<h3>EVENT BINDING METHOD</h3>
+
+<table>
+    <tr>
+        <td>
+            <button (click) = "showWelcomeText()"> Show Welcome </button>
+        </td>
+        <td>
+            <select (change)="onDropdownChange()">
+                <option value="">Mobile</option>
+                <option value="">Charger</option>
+                <option value="">Laptop</option>
+                <option value="">Headphone</option>
+            </select>
+        </td>
+    </tr>
+</table>
+
+<div (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeft()" style="background-color: blue;width: 100px;height: 100px;border-radius: 50px;">
+
+</div>
+<hr>
+<h3>TWO WAY DATA BINDING</h3>
+
+<table>
+    <tr>
+        <td>
+            <input type="text" [(ngModel)]="ProductType"> 
+        </td>
+        <td>
+            <select  [(ngModel)]="ProductType">
+                <option value="Mobile">Mobile</option>
+                <option value="Charger">Charger</option>
+                <option value="Laptop">Laptop</option>
+                <option value="Headphone">Headphone</option>
+            </select> Product Type = {{ProductType}}
+        </td>
+    </tr>
+</table>

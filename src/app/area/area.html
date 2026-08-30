@@ -1,0 +1,135 @@
+<p>area works!</p>
+
+<div class="container-fluid py-4">
+
+  <div class="row">
+
+    <!-- Left Half Screen -->
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <div class="card shadow-sm border-0">
+
+        <!-- Header -->
+        <div class="row card-header bg-primary text-white">
+          <div class="col-6">
+            <h5 class="mb-0">
+              <i class="bi bi-building me-2"></i>
+              {{areaData().AreaId <=0? 'Add': 'Edit'}} Area
+            </h5>
+          </div> 
+           
+          <div class="col-6" style="text-align: right;">
+            <button class="btn btn-warning" (click)="arealist()">
+              <i class="fa fa-list"></i> Area List
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Body -->
+        <div class="card-body p-4">
+          <form #form = "ngForm">
+            <!-- City Code -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold">
+                Area Code
+              </label>
+              <input type="text" class="form-control" #AreaCodeError="ngModel"  [(ngModel)]="areaData().AreaCode" 
+                name="AreaCode"
+                placeholder="Enter Area code" style="width: 30%;" [minlength]="2" [maxlength]="10" required>
+
+                <!--{{AreaCodeError.errors| json}}-->
+
+                @if(AreaCodeError.errors?.['required']){
+                  <span style="color: red;">Area Code is Required</span>
+                }
+                @else if(AreaCodeError.errors?.['minlength']){
+                  <span style="color: red;">Area Code should be greater than 2 character</span>
+            }
+            </div>
+
+            <!-- City Name -->
+            <div class="mb-3">
+              <label for="areaName" class="form-label fw-semibold">
+                Area Name <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control" #AreaNameError="ngModel"  [(ngModel)]="areaData().AreaName" name="AreaName"
+                placeholder="Enter Area Name" style="width: 80%;" [minlength]="3" [maxlength]="50" required>
+
+                 <!--{{AreaNameError.errors| json}}-->
+
+                @if(AreaNameError.errors?.['required']){
+                  <span style="color: red;">Area Name is Required</span>
+                }
+                @else if(AreaNameError.errors?.['minlength']){
+                  <span style="color: red;">Area Name shoulde be greater than 2 character</span>
+                }
+            </div>
+
+            <!-- State -->
+            <div class="mb-3">
+              <label for="state" class="form-label fw-semibold">
+                State <span class="text-danger">*</span>
+              </label>
+
+              <select  #StateError="ngModel"  [(ngModel)] = "areaData().StateId" class="form-select" 
+                style="width: 60%;" name="stateid" required (change)="onStateChange()">
+
+                <!--{{StateError.errors| json}}-->                
+                <option value="0">--Select State--</option>
+                  @for (item of states(); track $index) {
+                    <option value="{{item.StateId}}">{{item.StateName}}</option>
+                  }
+                </select>
+
+              @if(StateError.errors?.['required'] || this.areaData().StateId.toString()=="0"){
+                  <span style="color: red;">State is Required</span>
+                }
+                @else if(StateError.errors?.['minlength']){
+                  <span style="color: red;">State shoulde be greater than 2 character</span>
+                }
+            </div>
+
+            <!-- City -->
+            <div class="mb-3">
+              <label for="state" class="form-label fw-semibold">
+                City <span class="text-danger">*</span>
+              </label>
+
+              <select  #CityError="ngModel"  [(ngModel)] = "areaData().CityId" class="form-select" style="width: 60%;" name="cityid" required >
+
+                <!--{{CityError.errors| json}}-->                
+                <option value="0">--Select City--</option>
+                @for (item of filteredCities(); track $index) {
+                <option value="{{item.CityId}}">{{item.CityName}}</option>
+                }
+              </select>
+
+              @if(CityError.errors?.['required'] || this.areaData().CityId.toString()=="0"){
+                  <span style="color: red;">City is Required</span>
+                }
+                @else if(CityError.errors?.['minlength']){
+                  <span style="color: red;">City shoulde be greater than 2 character</span>
+                }
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+
+              <button class="btn btn-primary" (click)="SaveArea(form)">
+                <i class="bi bi-check-circle me-1"></i>
+                {{areaData().AreaId <=0? 'Save': 'Update'}} Area
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

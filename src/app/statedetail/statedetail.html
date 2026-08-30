@@ -1,0 +1,77 @@
+<div class="col-lg-8 py-3"> 
+       <div>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+
+          <div>
+            <h4 class="mb-1">State</h4>
+            <small class="text-muted">
+                @if (stateData().StateId<=0) {
+                    <span>Add State</span>
+                }@else{
+                    <span>Edit State</span>
+                }
+            </small>
+          </div>
+
+              <button type="button" class="btn btn-outline-secondary" (click)="goToState()">
+               <i class="bi bi-arrow-left me-1"></i>
+                Back
+              </button>
+          </div>
+        </div>   
+
+    <div class="card shadow-sm border-0"> 
+        <div class="card-body">
+            <form #form = "ngForm">
+                <div class="row g-3">           
+                    <div >
+                        <label class="form-label">
+                            State Code <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="text" class="form-control"  #StateCodeError="ngModel" [(ngModel)]="stateData().StateCode" name ="StateCode" 
+                        placeholder="Enter State Code"  style="width: 30%;" [minlength]="2" [maxlength]="10" required>
+                        <!--{{StateCodeError.errors| json}}-->
+
+                         @if(StateCodeError.errors?.['required']){
+                        <span style="color: red;">State Code is Required</span>
+                        }
+                        @else if(StateCodeError.errors?.['minlength']){
+                       <span style="color: red;">State Code shoulde be greater than 2 character</span>
+                       }
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div>
+                        <label class="form-label">
+                            State Name <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="text" class="form-control"   #StateNameError="ngModel" [(ngModel)]="stateData().StateName" name ="StateName"
+                         placeholder="Enter State Name"  style="width: 30%;" [minlength]="2" [maxlength]="50" required>
+                         <!--{{StateNameError.errors| json}}-->
+
+                         @if(StateNameError.errors?.['required']){
+                        <span style="color: red;">State Name is Required</span>
+                        }
+                        @else if(StateNameError.errors?.['minlength']){
+                       <span style="color: red;">State Name shoulde be greater than 2 character</span>
+                       }
+                    </div>
+                </div>
+
+                <div class = "row mt-4  text-align">
+                   
+                    <div class="col-lg-3">  
+                        <button class ="btn btn-primary" (click)="saveState(form)">{{stateData().StateId<=0? 'Save': 'Update'}}</button>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <button class ="btn btn-danger">Clear</button>
+                    </div>
+                </div> 
+            </form>
+       </div>
+    </div>
+</div>

@@ -1,0 +1,599 @@
+<div class="container-fluid css-page py-4">
+
+  <div class="row">
+
+    <!-- =====================================================
+         ENQUIRY FORM COLUMN
+    ====================================================== -->
+    <div class="col-12 col-lg-7 col-xl-6 css-form-column">
+
+      <div class="card css-card">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+        <div class="card-header css-header">
+
+          <div class="header-content">
+
+            <!-- LEFT SIDE -->
+            <div class="header-left">
+
+              <div class="header-icon">
+                <i class="fa-regular fa-circle-question"></i>
+              </div>
+
+              <div class="header-text">
+
+                <h5 class="css-title">
+                  {{ enquiryData().EnquiryId <= 0 ? 'Add' : 'Edit' }} Enquiry
+                </h5>
+
+                <div class="css-subtitle">
+                  Manage Enquiry information
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm css-list-btn"
+              (click)="goToEnquiryList()">
+
+              <i class="fa fa-list-ul"></i>
+
+              <span>
+                Enquiry List
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CARD BODY
+        ================================================== -->
+        <div class="card-body css-body">
+
+          <form #form="ngForm">
+
+            <!-- =================================================
+                 ENQUIRY DETAILS
+            ================================================== -->
+            <div class="form-section">
+
+              <!-- SECTION HEADING -->
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-clipboard-list"></i>
+                </div>
+
+                <div>
+
+                  <h6 class="section-title">
+                    Enquiry Details
+                  </h6>
+
+                  <small class="section-description">
+                    Basic information about the Enqiury
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <!-- =================================================
+                   ENQUIRY FIELDS
+              ================================================== -->
+              <div class="row g-3">
+
+                <!-- =================================================
+                     ENQUIRY NO.
+                ================================================== -->
+                <div class="col-md-5">
+
+                  <label class="form-label">
+                    Enquiry No.
+                    <span class="required">*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="enquiryData().EnquiryNo"
+                    name="EnquiryNo"
+                    placeholder="Enquiry No."
+                    minlength="2"
+                    maxlength="10">
+
+                </div>
+
+                <!-- =================================================
+                     ENQUIRY DATE
+                ================================================== -->
+                <div class="col-md-7">
+
+                  <label class="form-label">
+                    Enquyiry Date
+                    <span class="required">*</span>
+                  </label>
+
+                  <input
+                    type="date"
+                    class="form-control"
+                    [(ngModel)]="enquiryData().EnquiryDate"
+                    name="EnquiryDate"
+                    placeholder="Enter Enquiry Date">
+
+                </div>
+
+                <!-- =================================================
+                        ENQUIRY DETAIL
+                    ================================================== -->
+                    <div class="col-12">
+
+                    <label class="form-label">
+                        Enquiry Detail
+                        <span class="required">*</span>
+                    </label>
+
+                    <textarea
+                        class="form-control css-address"
+                        #EnquiryDetailError="ngModel"
+                        [(ngModel)]="enquiryData().EnquiryDetail"
+                        name="EnquiryDetail"
+                        rows="2"
+                        placeholder="Enter Enquiry Detail"
+                        minlength="3"
+                        maxlength="500"
+                        required></textarea>
+
+                    @if(EnquiryDetailError.errors?.['required']) {
+
+                        <div class="validation-message">
+                        Enquiry Detail is required
+                        </div>
+
+                    }
+                    @else if(EnquiryDetailError.errors?.['minlength']) {
+
+                        <div class="validation-message">
+                        Minimum 3 characters required
+                        </div>
+
+                    }
+
+                    </div>
+
+            </div>
+
+                 <!-- =================================================
+                    DIVIDER
+                ================================================== -->
+                <div class="section-divider"></div>
+
+                <!-- SECTION HEADING -->
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-address-book"></i>
+                </div>
+
+                <div>
+
+                  <h6 class="section-title">
+                    Customer Details
+                  </h6>
+
+                  <small class="section-description">
+                    Basic information about the Customer
+                  </small>
+
+                </div>
+
+              </div>
+
+              <!-- =================================================
+                   CUSTOMER FIELDS
+              ================================================== -->
+              <div class="row g-3">
+                    <!-- =================================================
+                        CUSTOMER NAME
+                    ================================================== -->
+                    <div class="col-md-12">
+
+                    <label class="form-label">
+                        Customer Name
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        #CustomerNameError="ngModel"
+                        [(ngModel)]="enquiryData().CustomerName"
+                        name="CustomerName"
+                        placeholder="Enter clinic name"
+                        minlength="3"
+                        maxlength="50"
+                        required>
+
+                    @if(CustomerNameError.errors?.['required']) {
+
+                        <div class="validation-message">
+                        Customer Name is required
+                        </div>
+
+                    }
+                    @else if(CustomerNameError.errors?.['minlength']) {
+
+                        <div class="validation-message">
+                        Minimum 3 characters required
+                        </div>
+
+                    }
+
+                    </div>
+
+
+                    <!-- =================================================
+                        CUSTOMER ADDRESS
+                    ================================================== -->
+                    <div class="col-12">
+
+                    <label class="form-label">
+                        Customer Address
+                        <span class="required">*</span>
+                    </label>
+
+                    <textarea
+                        class="form-control css-address"
+                        #CustomerAddressError="ngModel"
+                        [(ngModel)]="enquiryData().CustomerAddress"
+                        name="CustomerAddress"
+                        rows="2"
+                        placeholder="Enter Customer address"
+                        minlength="3"
+                        maxlength="200"
+                        required></textarea>
+
+                    @if(CustomerAddressError.errors?.['required']) {
+
+                        <div class="validation-message">
+                        Clinic Address is required
+                        </div>
+
+                    }
+                    @else if(CustomerAddressError.errors?.['minlength']) {
+
+                        <div class="validation-message">
+                        Minimum 3 characters required
+                        </div>
+
+                    }
+
+                    </div>
+
+
+                    <!-- =================================================
+                        STATE
+                    ================================================== -->
+                    <div class="col-md-6">
+
+                    <label class="form-label">
+                        State
+                        <span class="required">*</span>
+                    </label>
+
+                    <div class="input-group css-input-group">
+
+                        <span class="input-group-text">
+                        <i class="fa-solid fa-location-dot"></i>
+                        </span>
+
+                        <select
+                        class="form-select"
+                        //#StateNameError="ngModel"
+                        //[(ngModel)]="enquiryData().StateId"
+                        name="StateId"
+                        //(change)="onStateChange()"
+                        //required
+                        >
+
+                        <option value="0">
+                            -- Select State --
+                        </option>
+                        
+                        <!--@for (item of states(); track $index) {
+                            <option value="{{item.StateId}}">
+                            {{item.StateName}}
+                            </option>
+                        }-->
+
+                        </select>
+
+                    </div>
+
+                    <!--@if(StateNameError.errors?.['required']) {
+
+                        <div class="validation-message">
+                        State is required
+                        </div>
+
+                    }-->
+
+                    </div>
+
+
+                    <!-- =================================================
+                        CITY
+                    ================================================== -->
+                    <div class="col-md-6">
+
+                    <label class="form-label">
+                        City
+                        <span class="required">*</span>
+                    </label>
+
+                    <div class="input-group css-input-group">
+
+                        <span class="input-group-text">
+                        <i class="fa-solid fa-location-dot"></i>
+                        </span>
+
+                        <select
+                        class="form-select"
+                        //#CityNameError="ngModel"
+                        //[(ngModel)]="enquiryData().CityId"
+                        name="CityId"
+                        //required
+                        >
+
+                        <option value="0">
+                            -- Select City --
+                        </option>
+
+                        <!--@for (item of filteredCities(); track $index) {
+                            <option value="{{item.CityId}}">
+                            {{item.CityName}}
+                            </option>
+                        }-->
+                        </select>
+
+                    </div>
+
+                    <!--@if(CityNameError.errors?.['required']) {
+
+                        <div class="validation-message">
+                        City is required
+                        </div>
+
+                    }-->
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DIVIDER
+            ================================================== -->
+            <div class="section-divider"></div>
+
+
+            <!-- =================================================
+                 CONTACT DETAILS
+            ================================================== -->
+            <div class="form-section">
+
+              <!-- SECTION HEADING -->
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-address-book"></i>
+                </div>
+
+                <div>
+
+                  <h6 class="section-title">
+                    Contact Details
+                  </h6>
+
+                  <small class="section-description">
+                    Contact information for the Customer
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <!-- =================================================
+                   CONTACT FIELDS
+              ================================================== -->
+              <div class="row g-3">
+
+                <!-- =================================================
+                     MOBILE NUMBER
+                ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    Mobile No
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa fa-mobile"></i>
+                    </span>
+
+                    <input
+                      type="text"
+                      class="form-control"
+                      //#MobileNoError="ngModel"
+                      //[(ngModel)]="enquiryData().MobileNo"
+                      name="MobileNo"
+                      placeholder="Enter mobile number"
+                      maxlength="10"
+                      //required
+                      >
+
+                  </div>
+
+                  <!--@if(MobileNoError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      Mobile No. is required
+                    </div>
+
+                }-->
+
+                </div>
+
+
+                <!-- =================================================
+                     PHONE NUMBER
+                ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    Phone No.
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa fa-phone"></i>
+                    </span>
+
+                    <input
+                      type="text"
+                      class="form-control"
+                      #PhoneNoError="ngModel"
+                      [(ngModel)]="enquiryData().PhoneNo"
+                      name="PhoneNo"
+                      placeholder="Enter Phone No."
+                      maxlength="15">
+
+                  </div>
+
+                  @if(PhoneNoError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      Phone No. is required
+                    </div>
+
+                    }
+
+                </div>
+
+
+                <!-- =================================================
+                     EMAIL
+                ================================================== -->
+                <div class="col-12">
+
+                  <label class="form-label">
+                    Email Address
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa fa-envelope"></i>
+                    </span>
+
+                    <input
+                      type="email"
+                      class="form-control"
+                      #EmailAddError="ngModel"
+                      [(ngModel)]="enquiryData().EmailAdd"
+                      name="EmailAdd"
+                      placeholder="Enter email address"
+                      maxlength="100"
+                      required>
+
+                  </div>
+
+                  @if(EmailAddError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      Email Address is required
+                    </div>
+
+                  }
+                  @else if(EmailAddError.errors?.['email']) {
+
+                    <div class="validation-message">
+                      Please enter a valid email address
+                    </div>
+
+                  }
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================== -->
+            <div class="action-container">
+
+              <button
+                type="button"
+                class="btn btn-light cancel-btn"
+                (click)="goToEnquiryList()">
+
+                <i class="fa fa-x-lg"></i>
+
+                <span>
+                  Cancel
+                </span>
+
+              </button>
+
+
+              <button
+                type="button"
+                class="btn btn-primary save-btn"
+                (click)="saveEnquiry(form)">
+
+                <i class="fa fa-check-circle"></i>
+
+                <span>
+                  {{ enquiryData().EnquiryId <= 0
+                      ? 'Save Enquiry'
+                      : 'Update Enquiry' }}
+                </span>
+
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

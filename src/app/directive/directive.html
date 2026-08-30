@@ -1,0 +1,27 @@
+<h1>directive Example!</h1><br>
+<h5>1. Change Class using NgClass</h5>
+
+<div class="p-4" [ngClass]="divClassName" style="width:400px;height: 200px;">Div1</div><br>
+<button (click) ="addDivClass('bg-success')" class="btn btn-success">Apply Success class</button>
+<button (click) ="addDivClass('bg-info')" class="btn btn-info">Apply info class</button>
+<button (click) ="addDivClass('bg-warning')" class="btn btn-warning">Apply Warning class</button>
+<button (click) ="addDivClass('bg-danger')" class="btn btn-danger">Apply Danger class</button>
+
+<br><br>
+<h5>2. Change Class using checkbox</h5>
+<div [ngClass]="isActivechecked==true?'bg-warning':'bg-primary'" style="width:100px;height: 100px;"> </div>
+
+{{isActivechecked==true?'Deactivate':'Activate'}} Checkbox : <input type="checkbox" [(ngModel)]='isActivechecked' style="width: 30px;height: 30px;">
+
+
+<br><br>
+<h5>3. Change background color using ngstyle attribute</h5>
+<div class = "p-3"[ngStyle]="{'background-color':inputcolorvalue}"></div>
+<input type="color"[(ngModel)]="inputcolorvalue">
+
+<br><br>
+<h5>4. Creating Cirle or Square</h5>
+<div class="col-3"[ngStyle] = "divclass"> div Shape </div>
+<button (click)="changeshape('Circle')" class="btn btn-danger">Circle</button>
+<button (click)="changeshape('Square')" class="btn btn-success">Square</button>
+

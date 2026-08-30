@@ -1,77 +1,207 @@
-<div class="col-lg-8 py-3"> 
-       <div>
-          <div class="d-flex justify-content-between align-items-center mb-3">
+<div class="container-fluid css-page py-4">
 
-          <div>
-            <h4 class="mb-1">State</h4>
-            <small class="text-muted">
-                @if (stateData().StateId<=0) {
-                    <span>Add State</span>
-                }@else{
-                    <span>Edit State</span>
-                }
-            </small>
+  <div class="row">
+
+    <!-- =====================================================
+         STATE FORM COLUMN
+    ====================================================== -->
+    <div class="col-12 col-lg-7 col-xl-6 css-form-column">
+
+      <div class="card css-card">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+        <div class="card-header css-header">
+
+          <div class="header-content">
+
+            <!-- LEFT SIDE -->
+            <div class="header-left">
+
+              <div class="header-icon">
+                <i class="fa fa-building"></i>
+              </div>
+
+              <div class="header-text">
+
+                <h5 class="css-title">
+                  {{ stateData().StateId <= 0 ? 'Add' : 'Edit' }} State
+                </h5>
+
+                <div class="css-subtitle">
+                  Manage state information
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm css-list-btn"
+              (click)="goToState()">
+
+              <i class="fa fa-list-ul"></i>
+
+              <span>
+                State List
+              </span>
+
+            </button>
+
           </div>
 
-              <button type="button" class="btn btn-outline-secondary" (click)="goToState()">
-               <i class="bi bi-arrow-left me-1"></i>
-                Back
+        </div>
+
+
+        <!-- =================================================
+             CARD BODY
+        ================================================== -->
+        <div class="card-body css-body">
+
+          <form #form="ngForm">
+
+            <!-- =================================================
+                 STATE DETAILS
+            ================================================== -->
+            <div class="form-section">
+
+              <!-- =================================================
+                   STATE FIELDS
+              ================================================== -->
+              <div class="row g-3">
+
+                <!-- =================================================
+                     STATE CODE
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    State Code
+                    <span class="required">*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    #StateCodeError="ngModel"
+                    [(ngModel)]="stateData().StateCode"
+                    name="StateCode"
+                    placeholder="Enter code"
+                    minlength="2"
+                    maxlength="10"
+                    required
+                    style ="width:30%">
+
+                  @if(StateCodeError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      State Code is required
+                    </div>
+
+                  }
+                  @else if(StateCodeError.errors?.['minlength']) {
+
+                    <div class="validation-message">
+                      Minimum 2 characters required
+                    </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     STATE NAME
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    State Name
+                    <span class="required">*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    #StateNameError="ngModel"
+                    [(ngModel)]="stateData().StateName"
+                    name="StateName"
+                    placeholder="Enter state name"
+                    minlength="3"
+                    maxlength="50"
+                    required>
+
+                  @if(StateNameError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      State Name is required
+                    </div>
+
+                  }
+                  @else if(StateNameError.errors?.['minlength']) {
+
+                    <div class="validation-message">
+                      Minimum 3 characters required
+                    </div>
+
+                  }
+
+                </div>
+
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================== -->
+            <div class="action-container">
+
+              <button
+                type="button"
+                class="btn btn-light cancel-btn"
+                (click)="goToState()">
+
+                <i class="fa fa-x-lg"></i>
+
+                <span>
+                  Cancel
+                </span>
+
               </button>
-          </div>
-        </div>   
 
-    <div class="card shadow-sm border-0"> 
-        <div class="card-body">
-            <form #form = "ngForm">
-                <div class="row g-3">           
-                    <div >
-                        <label class="form-label">
-                            State Code <span class="text-danger">*</span>
-                        </label>
 
-                        <input type="text" class="form-control"  #StateCodeError="ngModel" [(ngModel)]="stateData().StateCode" name ="StateCode" 
-                        placeholder="Enter State Code"  style="width: 30%;" [minlength]="2" [maxlength]="10" required>
-                        <!--{{StateCodeError.errors| json}}-->
+              <button
+                type="button"
+                class="btn btn-primary save-btn"
+                (click)="saveState(form)">
 
-                         @if(StateCodeError.errors?.['required']){
-                        <span style="color: red;">State Code is Required</span>
-                        }
-                        @else if(StateCodeError.errors?.['minlength']){
-                       <span style="color: red;">State Code shoulde be greater than 2 character</span>
-                       }
-                    </div>
-                </div>
+                <i class="fa fa-check-circle"></i>
 
-                <div class="row g-3">
-                    <div>
-                        <label class="form-label">
-                            State Name <span class="text-danger">*</span>
-                        </label>
+                <span>
+                  {{ stateData().StateId <= 0
+                      ? 'Save State'
+                      : 'Update State' }}
+                </span>
 
-                        <input type="text" class="form-control"   #StateNameError="ngModel" [(ngModel)]="stateData().StateName" name ="StateName"
-                         placeholder="Enter State Name"  style="width: 30%;" [minlength]="2" [maxlength]="50" required>
-                         <!--{{StateNameError.errors| json}}-->
+              </button>
 
-                         @if(StateNameError.errors?.['required']){
-                        <span style="color: red;">State Name is Required</span>
-                        }
-                        @else if(StateNameError.errors?.['minlength']){
-                       <span style="color: red;">State Name shoulde be greater than 2 character</span>
-                       }
-                    </div>
-                </div>
+            </div>
 
-                <div class = "row mt-4  text-align">
-                   
-                    <div class="col-lg-3">  
-                        <button class ="btn btn-primary" (click)="saveState(form)">{{stateData().StateId<=0? 'Save': 'Update'}}</button>
-                    </div>
+          </form>
 
-                    <div class="col-lg-3">
-                        <button class ="btn btn-danger">Clear</button>
-                    </div>
-                </div> 
-            </form>
-       </div>
+        </div>
+
+      </div>
+
     </div>
+
+  </div>
+
 </div>

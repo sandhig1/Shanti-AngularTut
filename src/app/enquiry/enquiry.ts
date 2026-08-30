@@ -18,12 +18,6 @@ export class Enquiry {
 
   enquirylist: WritableSignal<any[]> = signal([]);
 
-  searchText: string = ''; 
-  /* ========================================================= 
-  PAGINATION 
-  ========================================================= */ 
-  currentPage = signal(1); pageSize = signal(10);
-
   constructor() {
     this.getAllEnquiries();
   }
@@ -70,6 +64,13 @@ export class Enquiry {
       })
     }
   }
+
+  searchText: string = ''; 
+  
+  /* ========================================================= 
+  PAGINATION 
+  ========================================================= */ 
+  currentPage = signal(1); pageSize = signal(10);
 
   /* ========================================================= 
           SEARCH 

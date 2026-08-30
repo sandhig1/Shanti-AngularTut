@@ -19,16 +19,7 @@ export class Cliniclist {
   // All clinic records
   clinic: WritableSignal<any[]> = signal([]);
 
-
-  // ============================
-  // PAGINATION
-  // ============================
-
-  currentPage = signal(1);
-
-  pageSize = 10;
-
-
+ 
   // ============================
   // SEARCH + FILTER
   // ============================
@@ -104,52 +95,6 @@ export class Cliniclist {
     );
 
   });
-
-
-  // ============================
-  // TOTAL PAGES
-  // ============================
-
-  totalPages = computed(() => {
-
-    return Math.ceil(
-      this.filteredClinics().length / this.pageSize
-    ) || 1;
-
-  });
-
-
-  // ============================
-  // PAGINATED CLINICS
-  // ============================
-
-  paginatedClinics = computed(() => {
-
-    const startIndex =
-      (this.currentPage() - 1) * this.pageSize;
-
-    const endIndex =
-      startIndex + this.pageSize;
-
-    return this.filteredClinics()
-      .slice(startIndex, endIndex);
-
-  });
-
-
-  // ============================
-  // PAGE NUMBERS
-  // ============================
-
-  pages = computed(() => {
-
-    return Array.from(
-      { length: this.totalPages() },
-      (_, index) => index + 1
-    );
-
-  });
-
 
   // ============================
   // CONSTRUCTOR
@@ -261,6 +206,57 @@ export class Cliniclist {
 
   }
 
+  // ============================
+  // TOTAL PAGES
+  // ============================
+
+  totalPages = computed(() => {
+
+    return Math.ceil(
+      this.filteredClinics().length / this.pageSize
+    ) || 1;
+
+  });
+
+
+  // ============================
+  // PAGINATED CLINICS
+  // ============================
+
+  paginatedClinics = computed(() => {
+
+    const startIndex =
+      (this.currentPage() - 1) * this.pageSize;
+
+    const endIndex =
+      startIndex + this.pageSize;
+
+    return this.filteredClinics()
+      .slice(startIndex, endIndex);
+
+  });
+
+
+  // ============================
+  // PAGE NUMBERS
+  // ============================
+
+  pages = computed(() => {
+
+    return Array.from(
+      { length: this.totalPages() },
+      (_, index) => index + 1
+    );
+
+  });
+
+  // ============================
+  // PAGINATION
+  // ============================
+
+  currentPage = signal(1);
+
+  pageSize = 10;
 
   // ============================
   // SEARCH

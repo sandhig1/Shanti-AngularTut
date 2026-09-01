@@ -84,6 +84,21 @@ export class Doctor {
   SaveDoctor(formRef:NgForm){
     debugger;
 
+    console.log('FORM VALID:', formRef.valid);
+  console.log('FORM INVALID:', formRef.invalid);
+
+  Object.keys(formRef.controls).forEach(key => {
+    const control = formRef.controls[key];
+
+    console.log(
+      key,
+      'value =', control.value,
+      'valid =', control.valid,
+      'invalid =', control.invalid,
+      'errors =', control.errors,
+      'pending =', control.pending
+    );
+  });
     if (formRef.valid){
 
       if (this.doctorData().DoctorId<=0){

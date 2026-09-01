@@ -109,7 +109,7 @@
                             <td>{{$index + 1}}</td>
                             <td>{{item.DoctorCode}}</td>
                             <td>{{item.DoctorName}}</td>
-                            <td>{{item.Gender}}</td>
+                            <td>{{item.Gender=="M" ? "Male" : item.Gender=="F" ? "Female" : item.Gender=="O" ? "Other" : "-NA-"}}</td>
                             <td>{{item.Age}}</td>
                             <td>{{item.Qualification}}</td>
                             <!-- Address + State + City -->
@@ -117,7 +117,7 @@
                                 <div class="address-details">
                                     <!-- Address -->
                                     <div class="address-line">
-                                        <i class="fa fa-geo-alt text-danger"></i> <span> {{ item.Address }} </span>
+                                        <i class="fa-solid fa-location-dot"></i> <span> {{ item.Address }} </span>
                                     </div>
                                     <!-- State -->
                                     <div class="location-line">

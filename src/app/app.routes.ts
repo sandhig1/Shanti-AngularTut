@@ -19,6 +19,8 @@ import { Arealist } from './arealist/arealist';
 import { Area } from './area/area';
 import { Cliniclist } from './cliniclist/cliniclist';
 import { Clinic } from './clinic/clinic';
+import { Doctorlist } from './doctorlist/doctorlist';
+import { Doctor } from './doctor/doctor';
 
 export const routes: Routes = [
     {path:'', component:Mainhome},
@@ -47,6 +49,9 @@ export const routes: Routes = [
             {path:"cliniclist", component:Cliniclist},
             {path:"clinic", component:Clinic},
             {path:"clinic/:id", component:Clinic},
+            {path:"doctorlist", component:Doctorlist},
+            {path:"doctor", component:Doctor},
+            {path:"doctor/:id", component:Doctor},
             {path:"dashboard", component:Dashboard},
             {path:"binding", component:Binding},
             {path:"directive", component:Directive},

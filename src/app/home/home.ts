@@ -30,6 +30,10 @@ export class Home {
     this.router.navigate(['cliniclist']);
   }
 
+  doctorlist(){
+    this.router.navigate(['doctorlist']);
+  }
+
   dashboard(){
     this.router.navigate(['dashboard']);
   }

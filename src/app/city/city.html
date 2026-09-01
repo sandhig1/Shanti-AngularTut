@@ -1,97 +1,251 @@
-<div class="container-fluid py-4">
+<div class="container-fluid css-page py-4">
 
   <div class="row">
 
-    <!-- Left Half Screen -->
-    <div class="col-12 col-md-8 col-lg-6">
+    <!-- =====================================================
+         AREA FORM COLUMN
+    ====================================================== -->
+    <div class="col-12 col-lg-7 col-xl-6 css-form-column">
 
-      <div class="card shadow-sm border-0">
+      <div class="card css-card">
 
-        <!-- Header -->
-        <div class="row card-header bg-primary text-white">
-          <div class="col-6">
-            <h5 class="mb-0">
-              <i class="bi bi-building me-2"></i>
-              {{cityData().CityId <=0? 'Add': 'Edit'}} City
-            </h5>
-          </div>  
-          <div class="col-6" style="text-align: right;">
-            <button class="btn btn-warning" (click)="citylist()">
-              <i class="fa fa-list"></i> City List
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+        <div class="card-header css-header">
+
+          <div class="header-content">
+
+            <!-- LEFT SIDE -->
+            <div class="header-left">
+
+              <div class="header-icon">
+                <i class="fa fa-building"></i>
+              </div>
+
+              <div class="header-text">
+
+                <h5 class="css-title">
+                  {{ cityData().CityId <= 0 ? 'Add' : 'Edit' }} City
+                </h5>
+
+                <div class="css-subtitle">
+                  Manage city information
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm css-list-btn"
+              (click)="citylist()">
+
+              <i class="fa fa-list-ul"></i>
+
+              <span>
+                City List
+              </span>
+
             </button>
+
           </div>
+
         </div>
 
-        <!-- Form Body -->
-        <div class="card-body p-4">
-          <form #form = "ngForm">
-            <!-- City Code -->
-            <div class="mb-3">
-              <label class="form-label fw-semibold">
-                City Code
-              </label>
-              <input type="text" class="form-control" #CityCodeError="ngModel"  [(ngModel)]="cityData().CityCode" 
-                name="CityCode"
-                placeholder="Enter city code" style="width: 30%;" [minlength]="2" [maxlength]="10" required>
 
-                <!--{{CityCodeError.errors| json}}-->
+        <!-- =================================================
+             CARD BODY
+        ================================================== -->
+        <div class="card-body css-body">
 
-                @if(CityCodeError.errors?.['required']){
-                  <span style="color: red;">City Code is Required</span>
-                }
-                @else if(CityCodeError.errors?.['minlength']){
-                  <span style="color: red;">City Code shoulde be greater than 2 character</span>
-                }
-            </div>
+          <form #form="ngForm">
 
-            <!-- City Name -->
-            <div class="mb-3">
-              <label for="cityName" class="form-label fw-semibold">
-                City Name <span class="text-danger">*</span>
-              </label>
-              <input type="text" class="form-control" #CityNameError="ngModel"  [(ngModel)]="cityData().CityName" name="CityName"
-                placeholder="Enter City Name" style="width: 80%;" [minlength]="3" [maxlength]="50" required>
-
-                 <!--{{CityNameError.errors| json}}-->
-
-                @if(CityNameError.errors?.['required']){
-                  <span style="color: red;">City Name is Required</span>
-                }
-                @else if(CityNameError.errors?.['minlength']){
-                  <span style="color: red;">City Name shoulde be greater than 2 character</span>
-                }
-            </div>
-
-            <!-- State -->
-            <div class="mb-3">
-              <label for="state" class="form-label fw-semibold">
-                State <span class="text-danger">*</span>
-              </label>
-
-              <select  #StateError="ngModel"  [(ngModel)] = "cityData().StateId" class="form-select" style="width: 60%;" name="stateid" required="true">
-
-                <!--{{StateError.errors| json}}-->                
-                <option value="0">--Select State--</option>
-                @for (item of states(); track $index) {
-                <option value="{{item.StateId}}">{{item.StateName}}</option>
-                }
-              </select>
-
-              @if(StateError.errors?.['required'] || this.cityData().StateId.toString()=="0"){
-                  <span style="color: red;">State is Required</span>
-                }
-                @else if(StateError.errors?.['minlength']){
-                  <span style="color: red;">State shoulde be greater than 2 character</span>
-                }
-            </div>
+            <!-- =================================================
+                 CITY DETAILS
+            ================================================== -->
+            <div class="form-section">
 
 
-            <!-- Buttons -->
-            <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+              <!-- =================================================
+                   CITY FIELDS
+              ================================================== -->
+              <div class="row g-3">
 
-              <button class="btn btn-primary" (click)="SaveCity(form)">
-                <i class="bi bi-check-circle me-1"></i>
-                {{cityData().CityId <=0? 'Save': 'Update'}} City
+                <!-- =================================================
+                     CITY CODE
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    City Code
+                    <span class="required">*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    #CityCodeError="ngModel"
+                    [(ngModel)]="cityData().CityCode"
+                    name="CityCode"
+                    placeholder="Enter code"
+                    minlength="2"
+                    maxlength="10"
+                    style="width:30%"
+                    required>
+
+                  @if(CityCodeError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      City Code is required
+                    </div>
+
+                  }
+                  @else if(CityCodeError.errors?.['minlength']) {
+
+                    <div class="validation-message">
+                      Minimum 2 characters required
+                    </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     CITY NAME
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    City Name
+                    <span class="required">*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    #CityNameError="ngModel"
+                    [(ngModel)]="cityData().CityName"
+                    name="CityName"
+                    placeholder="Enter city name"
+                    minlength="3"
+                    maxlength="50"
+                    style="width:70%"
+                    required>
+
+                  @if(CityNameError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      City Name is required
+                    </div>
+
+                  }
+                  @else if(CityNameError.errors?.['minlength']) {
+
+                    <div class="validation-message">
+                      Minimum 3 characters required
+                    </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     STATE
+                ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    State
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-location-dot"></i>
+                    </span>
+
+                    <select
+                      class="form-select"
+                      #StateNameError="ngModel"
+                      [(ngModel)]="cityData().StateId"
+                      name="StateId"
+                      required>
+
+                      <option value="0">
+                        -- Select State --
+                      </option>
+                      
+                      @for (item of states(); track $index) {
+                        <option value="{{item.StateId}}">
+                          {{item.StateName}}
+                        </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(StateNameError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      State is required
+                    </div>
+
+                  }
+
+                </div>
+
+
+                </div>
+
+              </div>
+
+
+            <!-- =================================================
+                 DIVIDER
+            ================================================== -->
+            <div class="section-divider"></div>
+
+
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================== -->
+            <div class="action-container">
+
+              <button
+                type="button"
+                class="btn btn-light cancel-btn"
+                (click)="citylist()">
+
+                <i class="fa fa-x-lg"></i>
+
+                <span>
+                  Cancel
+                </span>
+
+              </button>
+
+
+              <button
+                type="button"
+                class="btn btn-primary save-btn"
+                (click)="SaveCity(form)">
+
+                <i class="fa fa-check-circle"></i>
+
+                <span>
+                  {{ cityData().CityId <= 0
+                      ? 'Save City'
+                      : 'Update City' }}
+                </span>
+
               </button>
 
             </div>
@@ -99,6 +253,7 @@
           </form>
 
         </div>
+
       </div>
 
     </div>

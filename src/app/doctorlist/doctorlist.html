@@ -84,11 +84,17 @@
                             <th class="customer-column">
                                 Doctor Name
                             </th>
-                            <th class="customer-column">
-                                City Name
+                            <th class="doctor-age-column">
+                                Gender
                             </th>
-                            <th class="customer-column">
-                                State Name
+                            <th class="doctor-age-column">
+                                Age
+                            </th>
+                            <th class="doctor-age-column">
+                                Qualification
+                            </th>
+                            <th style="width: 26%;">
+                                Address
                             </th>
                             <th class="action-column text-center">
                                 Action
@@ -103,36 +109,54 @@
                             <td>{{$index + 1}}</td>
                             <td>{{item.DoctorCode}}</td>
                             <td>{{item.DoctorName}}</td>
-                            <td>{{item.CityName}}</td>
-                            <td>{{item.StateName}}</td>
+                            <td>{{item.Gender}}</td>
+                            <td>{{item.Age}}</td>
+                            <td>{{item.Qualification}}</td>
+                            <!-- Address + State + City -->
+                            <td>
+                                <div class="address-details">
+                                    <!-- Address -->
+                                    <div class="address-line">
+                                        <i class="fa fa-geo-alt text-danger"></i> <span> {{ item.Address }} </span>
+                                    </div>
+                                    <!-- State -->
+                                    <div class="location-line">
+                                        <i class="fa fa-map text-primary"></i> <span> {{ item.StateName }} </span>
+                                    </div>
+                                    <!-- City -->
+                                    <div class="location-line">
+                                        <i class="fa fa-building text-success"></i> <span> {{ item.CityName }} </span>
+                                    </div>
+                                </div>
+                            </td>
                             <!-- Actions -->
                             <td class="text-center">
-
+                        
                                 <div class="action-buttons">
-
+                        
                                     <!-- EDIT -->
-                                    <button type="button" class="btn btn-sm btn-outline-primary action-btn me-2"
-                                        title="Edit Doctor" (click)="editDoctor(item.DoctorId)">
-
+                                    <button type="button" class="btn btn-sm btn-outline-primary action-btn me-2" title="Edit Doctor"
+                                        (click)="editDoctor(item.DoctorId)">
+                        
                                         <i class="fa fa-pencil"></i>
-
+                        
                                     </button>
-
-
+                        
+                        
                                     <!-- DELETE -->
                                     @if(item.DoctorId > 0) {
-
-                                    <button type="button" class="btn btn-sm btn-outline-danger action-btn me-2"
-                                        title="Delete Doctor" (click)="deleteDoctor(item.DoctorId)">
-
+                        
+                                    <button type="button" class="btn btn-sm btn-outline-danger action-btn me-2" title="Delete Doctor"
+                                        (click)="deleteDoctor(item.DoctorId)">
+                        
                                         <i class="fa fa-trash"></i>
-
+                        
                                     </button>
-
+                        
                                     }
-
+                        
                                 </div>
-
+                        
                             </td>
                         </tr>
                         }

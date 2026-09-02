@@ -137,15 +137,11 @@
                 <div class="address-details">
                   <!-- Address -->
                   <div class="address-line">
-                    <i class="fa fa-geo-alt text-danger"></i> <span> {{ item.ClinicAddress }} </span>
+                    <i class="fa-solid fa-location-dot text-primary"></i> <span> {{ item.ClinicAddress }} </span>
                   </div>
-                  <!-- State -->
+                  <!-- City & State -->
                   <div class="location-line">
-                    <i class="fa fa-map text-primary"></i> <span> {{ item.StateName }} </span>
-                  </div>
-                  <!-- City -->
-                  <div class="location-line">
-                    <i class="fa fa-building text-success"></i> <span> {{ item.CityName }} </span>
+                    <i class="fa-solid fa-location-arrow text-primary"></i> <span> {{ item.CityName }}, {{ item.StateName }} </span>
                   </div>
                 </div>
               </td>
@@ -161,7 +157,7 @@
 
                   <div class="contact-item">
 
-                    <i class="fa fa-phone text-success"></i>
+                    <i class="fa fa-mobile text-primary"></i>
 
                     <span>
                       {{ item.MobileNo }}
@@ -177,7 +173,7 @@
 
                   <div class="contact-item">
 
-                    <i class="fa fa-telephone text-primary"></i>
+                    <i class="fa fa-phone text-primary"></i>
 
                     <span>
                       {{ item.PhoneNo }}
@@ -193,7 +189,7 @@
 
                   <div class="contact-item">
 
-                    <i class="fa fa-envelope text-danger"></i>
+                    <i class="fa fa-envelope text-primary"></i>
 
                     <span class="email-text">
                       {{ item.EmailAdd }}

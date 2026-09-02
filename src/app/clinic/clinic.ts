@@ -82,8 +82,25 @@ export class Clinic {
 
   saveClinic(formRef: NgForm) {
     debugger;
+console.log('FORM VALID:', formRef.valid);
+  console.log('FORM INVALID:', formRef.invalid);
 
-    if (formRef.valid) {
+  Object.keys(formRef.controls).forEach(key => {
+    const control = formRef.controls[key];
+
+    console.log(
+      key,
+      'value =', control.value,
+      'valid =', control.valid,
+      'invalid =', control.invalid,
+      'errors =', control.errors,
+      'pending =', control.pending
+    );
+  });
+    if (formRef.invalid){
+      alert("Error while saving Doctor.");
+    }
+    else{
 
       if (this.clinicData().ClinicId <= 0) {
         this.clinicServ.saveClinic(this.clinicData()).subscribe({
@@ -95,6 +112,7 @@ export class Clinic {
             }
             else {
               alert("Error while saving Clinic");
+              console.log("Error while saving Clinic : " + res.msg);
             }
           }
         })
@@ -108,6 +126,7 @@ export class Clinic {
             }
             else {
               alert("Error while updating Clinic");
+              console.log("Error while updating Clinic : " + res.msg);
             }
           }
         })

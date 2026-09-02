@@ -96,6 +96,9 @@
                             <th style="width: 26%;">
                                 Address
                             </th>
+                            <th style="width: 20%;">
+                                Contact Details
+                            </th>
                             <th class="action-column text-center">
                                 Action
                             </th>
@@ -117,17 +120,51 @@
                                 <div class="address-details">
                                     <!-- Address -->
                                     <div class="address-line">
-                                        <i class="fa-solid fa-location-dot"></i> <span> {{ item.Address }} </span>
+                                        <i class="fa-solid fa-location-dot text-primary"></i> <span> {{ item.Address }} </span>
                                     </div>
-                                    <!-- State -->
+                                    <!-- City & State -->
                                     <div class="location-line">
-                                        <i class="fa fa-map text-primary"></i> <span> {{ item.StateName }} </span>
-                                    </div>
-                                    <!-- City -->
-                                    <div class="location-line">
-                                        <i class="fa fa-building text-success"></i> <span> {{ item.CityName }} </span>
+                                        <i class="fa-solid fa-location-arrow text-primary"></i> <span> {{ item.CityName }}, {{ item.StateName }} </span>
                                     </div>
                                 </div>
+                            </td>
+
+                            <!-- Contact Details -->
+                            <td>
+                        
+                                <div class="contact-details">
+                        
+                                    <!-- Mobile -->
+                                    @if (item.MobileNo) {
+                        
+                                    <div class="contact-item">
+                        
+                                        <i class="fa fa-mobile text-primary"></i>
+                        
+                                        <span>
+                                            {{ item.MobileNo }}
+                                        </span>
+                        
+                                    </div>
+                                    }
+                        
+                                    <!-- Email -->
+                                    @if (item.EmailAdd) {
+                        
+                                    <div class="contact-item">
+                        
+                                        <i class="fa fa-envelope text-primary"></i>
+                        
+                                        <span class="email-text">
+                                            {{ item.EmailAdd }}
+                                        </span>
+                        
+                                    </div>
+                        
+                                    }
+                        
+                                </div>
+                        
                             </td>
                             <!-- Actions -->
                             <td class="text-center">

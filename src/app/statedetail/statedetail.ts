@@ -46,7 +46,25 @@ export class Statedetail {
 
   saveState(formRef:NgForm){
     debugger;
-    if (formRef.valid){
+    console.log('FORM VALID:', formRef.valid);
+  console.log('FORM INVALID:', formRef.invalid);
+
+  Object.keys(formRef.controls).forEach(key => {
+    const control = formRef.controls[key];
+
+    console.log(
+      key,
+      'value =', control.value,
+      'valid =', control.valid,
+      'invalid =', control.invalid,
+      'errors =', control.errors,
+      'pending =', control.pending
+    );
+  });
+    if (formRef.invalid){
+      alert("Error while saving Doctor.");
+    }
+    else{
 
     if (this.stateData().StateId<=0){
       this.stateServ.saveState(this.stateData()).subscribe({
@@ -57,7 +75,8 @@ export class Statedetail {
             this.getStateDetail(0);
           }
           else{
-            alert("Error while saving State : " + res.msg);
+            alert("Error while saving State");
+            console.log("Error while saving State : " + res.msg);
           }
         }
       })
@@ -72,6 +91,7 @@ export class Statedetail {
           }
           else{
             alert("Error while Updating State");
+            console.log("Error while updating State : " + res.msg);
           }
         }
       })

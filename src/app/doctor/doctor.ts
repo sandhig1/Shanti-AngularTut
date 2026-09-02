@@ -99,7 +99,10 @@ export class Doctor {
       'pending =', control.pending
     );
   });
-    if (formRef.valid){
+    if (formRef.invalid){
+      alert("Error while saving Doctor.");
+    }
+    else{
 
       if (this.doctorData().DoctorId<=0){
         this.doctorserv.saveDoctor(this.doctorData()).subscribe({
@@ -110,7 +113,8 @@ export class Doctor {
               this.getDoctorDetail(0);
             }
             else{
-              alert("Error while saving Doctor : " + res.msg);
+              alert("Error while saving Doctor");
+              console.log("Error while saving Doctor : " + res.msg);
             }
           }
         })
@@ -119,11 +123,11 @@ export class Doctor {
         this.doctorserv.updateDoctor(this.doctorData()).subscribe({
           next: (res: any) => {
             if (res.status==true){
-              alert("Doctor Updated Successfully")
-             
+              alert("Doctor Updated Successfully")              
             }
             else{
               alert("Error while updating Doctor");
+              console.log("Error while updating Doctor : " + res.msg);
             }
           }
         })

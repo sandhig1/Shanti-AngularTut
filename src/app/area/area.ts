@@ -80,8 +80,25 @@ export class Area {
 
   SaveArea(formRef:NgForm){
     debugger;
+console.log('FORM VALID:', formRef.valid);
+  console.log('FORM INVALID:', formRef.invalid);
 
-    if (formRef.valid){
+  Object.keys(formRef.controls).forEach(key => {
+    const control = formRef.controls[key];
+
+    console.log(
+      key,
+      'value =', control.value,
+      'valid =', control.valid,
+      'invalid =', control.invalid,
+      'errors =', control.errors,
+      'pending =', control.pending
+    );
+  });
+    if (formRef.invalid){
+      alert("Error while saving Doctor.");
+    }
+    else{
 
       if (this.areaData().AreaId<=0){
         this.areaserv.saveArea(this.areaData()).subscribe({
@@ -93,6 +110,7 @@ export class Area {
             }
             else{
               alert("Error while saving Area : " + res.msg);
+              console.log("Error while Saving Area : " + res.msg);
             }
           }
         })
@@ -106,6 +124,7 @@ export class Area {
             }
             else{
               alert("Error while updating Area");
+              console.log("Error while updating Area : " + res.msg);
             }
           }
         })

@@ -76,8 +76,25 @@ export class City {
 
   SaveCity(formRef:NgForm){
     debugger;
+console.log('FORM VALID:', formRef.valid);
+  console.log('FORM INVALID:', formRef.invalid);
 
-    if (formRef.valid){
+  Object.keys(formRef.controls).forEach(key => {
+    const control = formRef.controls[key];
+
+    console.log(
+      key,
+      'value =', control.value,
+      'valid =', control.valid,
+      'invalid =', control.invalid,
+      'errors =', control.errors,
+      'pending =', control.pending
+    );
+  });
+    if (formRef.invalid){
+      alert("Error while saving Doctor.");
+    }
+    else{
 
       if (this.cityData().CityId<=0){
         this.cityserv.saveCity(this.cityData()).subscribe({
@@ -89,6 +106,7 @@ export class City {
             }
             else{
               alert("Error while saving City");
+              console.log("Error while saving City : " + res.msg);
             }
           }
         })
@@ -102,6 +120,7 @@ export class City {
             }
             else{
               alert("Error while updating City");
+              console.log("Error while updating City : " + res.msg);
             }
           }
         })

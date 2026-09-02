@@ -52,7 +52,25 @@ export class Enquirydetail {
 
   saveEnquiry(formRef:NgForm){
     debugger;
-    if (formRef.valid){
+    console.log('FORM VALID:', formRef.valid);
+  console.log('FORM INVALID:', formRef.invalid);
+
+  Object.keys(formRef.controls).forEach(key => {
+    const control = formRef.controls[key];
+
+    console.log(
+      key,
+      'value =', control.value,
+      'valid =', control.valid,
+      'invalid =', control.invalid,
+      'errors =', control.errors,
+      'pending =', control.pending
+    );
+  });
+    if (formRef.invalid){
+      alert("Error while saving Doctor.");
+    }
+    else{
 
     if (this.enquiryData().EnquiryId<=0){
       this.enquiryServ.saveEnquiry(this.enquiryData()).subscribe({
@@ -64,6 +82,7 @@ export class Enquirydetail {
           }
           else{
             alert("Error while saving Enquiry");
+            console.log("Error while saving Enquiry : " + res.msg);
           }
         }
       })
@@ -78,6 +97,7 @@ export class Enquirydetail {
           }
           else{
             alert("Error while Updating Enquiry");
+            console.log("Error while updating Enquiry : " + res.msg);
           }
         }
       })

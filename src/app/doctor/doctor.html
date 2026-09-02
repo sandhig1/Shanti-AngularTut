@@ -1,11 +1,11 @@
 <div class="container-fluid css-page py-4">
 
-  <div class="row">
+  <div class="row justify-content-center">
 
     <!-- =====================================================
          Doctor FORM COLUMN
     ====================================================== -->
-    <div class="col-12 col-lg-7 col-xl-6 css-form-column">
+    <div class="col-12 col-lg-11 col-md-11 col-xs-6 css-form-column">
 
       <div class="card css-card">
 
@@ -257,7 +257,7 @@
                   <div>
 
                     <h6 class="section-title">
-                      Address and Contact Details
+                      Address Details
                     </h6>
 
                     <small class="section-description">
@@ -284,7 +284,7 @@
                   </label>
 
                   <input type="text" class="form-control" #AddressError="ngModel" [(ngModel)]="doctorData().Address"
-                    name="Address" placeholder="Enter address" minlength="3" maxlength="100" style="width:70%" required>
+                    name="Address" placeholder="Enter address" minlength="3" maxlength="100" required>
 
                   @if(AddressError.errors?.['required']) {
 
@@ -406,19 +406,18 @@
                       <i class="fa fa-mobile"></i>
                     </span>
 
-                    <input type="text" class="form-control" //#MobileNoError="ngModel"
-                      //[(ngModel)]="clinicData().MobileNo" name="MobileNo" placeholder="Enter mobile number"
-                      maxlength="10" required>
+                    <input type="text" class="form-control" #MobileNoError="ngModel" [(ngModel)]="doctorData().MobileNo"
+                      name="MobileNo" placeholder="Enter mobile number" maxlength="10" required>
 
                   </div>
 
-                  <!--@if(MobileNoError.errors?.['required']) {
+                  @if(MobileNoError.errors?.['required']) {
 
-                    <div class="validation-message">
-                      Mobile No. is required
-                    </div>
+                  <div class="validation-message">
+                    Mobile No. is required
+                  </div>
 
-                  }-->
+                  }
 
                 </div>
 
@@ -428,6 +427,7 @@
                      EMAIL
                 ================================================== -->
                 <div class="col-6">
+
 
                   <label class="form-label">
                     Email Address
@@ -440,26 +440,26 @@
                       <i class="fa fa-envelope"></i>
                     </span>
 
-                    <input type="email" class="form-control" //#EmailAddError="ngModel"
-                      //[(ngModel)]="clinicData().EmailAdd" name="EmailAdd" placeholder="Enter email address"
-                      maxlength="100" required>
+                    <input type="email" class="form-control" #EmailAddError="ngModel"
+                      [(ngModel)]="doctorData().EmailAdd" name="EmailAdd" placeholder="Enter email address"
+                      maxlength="50" required>
 
                   </div>
 
-                  <!--@if(EmailAddError.errors?.['required']) {
+                  @if(EmailAddError.errors?.['required']) {
 
-                    <div class="validation-message">
-                      Email Address is required
-                    </div>
+                  <div class="validation-message">
+                    Email Address is required
+                  </div>
 
                   }
                   @else if(EmailAddError.errors?.['email']) {
 
-                    <div class="validation-message">
-                      Please enter a valid email address
-                    </div>
+                  <div class="validation-message">
+                    Please enter a valid email address
+                  </div>
 
-                  }-->
+                  }
 
                 </div>
 
@@ -512,16 +512,9 @@
                     <span class="required">*</span>
                   </label>
 
-                    <textarea
-                        class="form-control css-address"
-                        #QualificationError="ngModel"
-                        [(ngModel)]="doctorData().Qualification"
-                        name="Qualification"
-                        rows="2"
-                        placeholder="Enter Qualification"
-                        minlength="3"
-                        maxlength="500"
-                        required></textarea>
+                  <textarea class="form-control css-address" #QualificationError="ngModel"
+                    [(ngModel)]="doctorData().Qualification" name="Qualification" rows="2"
+                    placeholder="Enter Qualification" minlength="3" maxlength="500" required></textarea>
 
 
                   @if(QualificationError.errors?.['required']) {
@@ -553,9 +546,9 @@
             ================================================== -->
             <div class="action-container">
 
-              <button type="button" class="btn btn-light cancel-btn" (click)="doctorlist()">
+              <button type="button" class="btn btn-warning cancel-btn" (click)="doctorlist()">
 
-                <i class="fa fa-x-lg"></i>
+                <i class="fa fa-close"></i>
 
                 <span>
                   Cancel
@@ -566,7 +559,7 @@
 
               <button type="button" class="btn btn-primary save-btn" (click)="SaveDoctor(form)">
 
-                <i class="fa fa-check-circle"></i>
+                <i class="fa fa-save"></i>
 
                 <span>
                   {{ doctorData().DoctorId <= 0 ? 'Save Doctor' : 'Update Doctor' }} </span>

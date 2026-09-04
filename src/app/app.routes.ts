@@ -22,7 +22,7 @@ import { Clinic } from './clinic/clinic';
 import { Doctorlist } from './doctorlist/doctorlist';
 import { Doctor } from './doctor/doctor';
 import { Patientlist } from './patientlist/patientlist';
-//import { Patient } from './patient/patient';
+import { Patient } from './patient/patient';
 
 export const routes: Routes = [
     {path:'', component:Mainhome},
@@ -55,8 +55,8 @@ export const routes: Routes = [
             {path:"doctor", component:Doctor},
             {path:"doctor/:id", component:Doctor},
             {path:"patientlist",component:Patientlist},
-            //{path:"patient", component:Patient},
-            //{path:"patient/:id", component:Patient},
+            {path:"patient", component:Patient},
+            {path:"patient/:id", component:Patient},
             {path:"dashboard", component:Dashboard},
             {path:"binding", component:Binding},
             {path:"directive", component:Directive},

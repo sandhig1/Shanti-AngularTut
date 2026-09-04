@@ -14,6 +14,7 @@ export class Patientlist {
 
   router = inject(Router);
   patientServ = inject(Patientservice);
+  areaServ = inject(Areaservice);
   cityServ = inject(Areaservice);
   stateServ = inject(Areaservice);
 

@@ -30,6 +30,11 @@ export class Patientservice {
             getPatientDetail(id:number){
                 return this.http.get(APIUrl + "patient/getPatientDetail?id=" + id);
             }
+
+            getAreas(){
+                debugger;
+                return this.http.get(APIUrl + "area/getAreas");
+            }
         
             getCities(){
                 debugger;

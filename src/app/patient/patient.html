@@ -1,1 +1,542 @@
-<p>patient works!</p>
+<div class="container-fluid css-page py-4">
+
+  <div class="row justify-content-center">
+
+    <!-- =====================================================
+         Patient FORM COLUMN
+    ====================================================== -->
+    <div class="col-12 col-lg-11 col-md-11 col-xs-6 css-form-column">
+
+      <div class="card css-card">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+        <div class="card-header css-header">
+
+          <div class="header-content">
+
+            <!-- LEFT SIDE -->
+            <div class="header-left">
+
+              <div class="header-icon">
+                <i class="fa fa-building"></i>
+              </div>
+
+              <div class="header-text">
+
+                <h5 class="css-title">
+                  {{ patientData().PatientId <= 0 ? 'Add' : 'Edit' }} Patient </h5>
+
+                    <div class="css-subtitle">
+                      Manage patient information
+                    </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <button type="button" class="btn btn-outline-primary btn-sm css-list-btn" (click)="patientlist()">
+
+              <i class="fa fa-list-ul"></i>
+
+              <span>
+                Patient List
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CARD BODY
+        ================================================== -->
+        <div class="card-body css-body">
+
+          <form #form="ngForm">
+
+            <!-- =================================================
+                 Patient DETAILS
+            ================================================== -->
+            <div class="form-section">
+
+              <!-- =================================================
+                  CLINIC DETAILS
+              ================================================== -->
+              <div class="form-section">
+
+                <!-- SECTION HEADING -->
+                <div class="section-heading">
+
+                  <div class="section-icon">
+                    <i class="fa fa-user"></i>
+                  </div>
+
+                  <div>
+
+                    <h6 class="section-title">
+                      Personal Details
+                    </h6>
+
+                    <small class="section-description">
+                      Basic information about the patient
+                    </small>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+              <!-- =================================================
+                   PATIENT FIELDS
+              ================================================== -->
+              <div class="row g-3">
+
+                <!-- =================================================
+                     PATIENT CODE
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Patient Code
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="text" class="form-control" #PatientCodeError="ngModel"
+                    [(ngModel)]="patientData().PatientCode" name="PatientCode" placeholder="Enter code" minlength="2"
+                    maxlength="10" style="width:30%" required>
+
+                  @if(PatientCodeError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Patient Code is required
+                  </div>
+
+                  }
+                  @else if(PatientCodeError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     PATIENT NAME
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Patient Name
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="text" class="form-control" #PatientNameError="ngModel"
+                    [(ngModel)]="patientData().PatientName" name="PatientName" placeholder="Enter patient name"
+                    minlength="3" maxlength="50" style="width:70%" required>
+
+                  @if(PatientNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Patient Name is required
+                  </div>
+
+                  }
+                  @else if(PatientNameError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 3 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     DATE OF BIRTH
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Date Of Birth
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="date" class="form-control" #DateOfBirthError="ngModel"
+                    [(ngModel)]="patientData().DateOfBirth" name="DateOfBirth" placeholder="Enter date of birth" minlength="2"
+                    maxlength="10" style="width:30%" required>
+
+                  @if(DateOfBirthError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Date Of Birth is required
+                  </div>
+
+                  }
+                  @else if(DateOfBirthError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     GENDER
+                ================================================== -->
+
+                <div class="col-md-4">
+
+                  <label class="form-label">
+                    Gender
+                    <span class="required">*</span>
+                  </label>
+
+                  <select class="form-select" #GenderError="ngModel" [(ngModel)]="patientData().Gender" name="Gender"
+                    required>
+                    <option value="">--Select--</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                  </select>
+
+                  @if(GenderError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Gender is required
+                  </div>
+
+                  }
+                  @else if(GenderError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 1 characters required
+                  </div>
+
+                  }
+                  @else if(GenderError.errors?.['maxlength']) {
+
+                  <div class="validation-message">
+                    Maximum 1 character allowed
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     AGE
+                ================================================== -->
+
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    Age
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="text" class="form-control" #AgeError="ngModel" [(ngModel)]="patientData().Age" name="Age"
+                    placeholder="Enter age" minlength="2" maxlength="10" style="width:30%" required>
+
+                  @if(AgeError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Age is required
+                  </div>
+
+                  }
+                  @else if(AgeError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+              </div>
+
+              <!-- =================================================
+                 DIVIDER
+              ================================================== -->
+              <div class="section-divider"></div>
+
+              <!-- =================================================
+                  ADDRESS AND CONTACT DETAILS
+              ================================================== -->
+              <div class="form-section">
+
+                <!-- SECTION HEADING -->
+                <div class="section-heading">
+
+                  <div class="section-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+
+                  <div>
+
+                    <h6 class="section-title">
+                      Address Details
+                    </h6>
+
+                    <small class="section-description">
+                      Address and contact details of the patient
+                    </small>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- =================================================
+                   ADDRESS AND CONTACT FIELDS
+              ================================================== -->
+              <div class="row g-3">
+                <!-- =================================================
+                      ADDRESS
+                  ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Address
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="text" class="form-control" #AddressError="ngModel" [(ngModel)]="patientData().Address"
+                    name="Address" placeholder="Enter address" minlength="3" maxlength="100" required>
+
+                  @if(AddressError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Address is required
+                  </div>
+
+                  }
+                  @else if(AddressError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 3 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                      STATE
+                  ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    State
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-location-dot"></i>
+                    </span>
+
+                    <select class="form-select" #StateNameError="ngModel" [(ngModel)]="patientData().StateId"
+                      name="StateId" (change)="onStateChange()" required>
+
+                      <option value="0">
+                        -- Select State --
+                      </option>
+
+                      @for (item of states(); track $index) {
+                      <option value="{{item.StateId}}">
+                        {{item.StateName}}
+                      </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(StateNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    State is required
+                  </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                      CITY
+                  ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    City
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-location-dot"></i>
+                    </span>
+
+                    <select class="form-select" #CityNameError="ngModel" [(ngModel)]="patientData().CityId" name="CityId"
+                      required>
+
+                      <option value="0">
+                        -- Select City --
+                      </option>
+
+                      @for (item of filteredCities(); track $index) {
+                      <option value="{{item.CityId}}">
+                        {{item.CityName}}
+                      </option>
+                      }
+                    </select>
+
+                  </div>
+
+                  @if(CityNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    City is required
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     MOBILE NUMBER
+                ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    Mobile No
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa fa-mobile"></i>
+                    </span>
+
+                    <input type="text" class="form-control" #MobileNoError="ngModel" [(ngModel)]="patientData().MobileNo"
+                      name="MobileNo" placeholder="Enter mobile number" maxlength="10" required>
+
+                  </div>
+
+                  @if(MobileNoError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Mobile No. is required
+                  </div>
+
+                  }
+
+                </div>
+
+
+
+                <!-- =================================================
+                     EMAIL
+                ================================================== -->
+                <div class="col-6">
+
+
+                  <label class="form-label">
+                    Email Address
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa fa-envelope"></i>
+                    </span>
+
+                    <input type="email" class="form-control" #EmailAddError="ngModel"
+                      [(ngModel)]="patientData().EmailAdd" name="EmailAdd" placeholder="Enter email address"
+                      maxlength="50" required>
+
+                  </div>
+
+                  @if(EmailAddError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Email Address is required
+                  </div>
+
+                  }
+                  @else if(EmailAddError.errors?.['email']) {
+
+                  <div class="validation-message">
+                    Please enter a valid email address
+                  </div>
+
+                  }
+
+                </div>
+
+              </div>
+
+              <!-- =================================================
+                    DIVIDER
+                ================================================== -->
+             
+            </div>
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================== -->
+            <div class="action-container">
+
+              <button type="button" class="btn btn-warning cancel-btn" (click)="patientlist()">
+
+                <i class="fa fa-close"></i>
+
+                <span>
+                  Cancel
+                </span>
+
+              </button>
+
+
+              <button type="button" class="btn btn-primary save-btn" (click)="SavePatient(form)">
+
+                <i class="fa fa-save"></i>
+
+                <span>
+                  {{ patientData().PatientId <= 0 ? 'Save Patient' : 'Update Patient' }} </span>
+
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

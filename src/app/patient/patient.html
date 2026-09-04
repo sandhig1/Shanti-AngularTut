@@ -197,7 +197,7 @@
                      GENDER
                 ================================================== -->
 
-                <div class="col-md-4">
+                <div class="col-md-2">
 
                   <label class="form-label">
                     Gender
@@ -267,7 +267,105 @@
 
                 </div>
 
+                <!-- =================================================
+                     BLANK DIV
+                ================================================== -->
+
+                <div class="col-md-4">
+                </div>
+
+                <!-- =================================================
+                     BLOOD GROUP
+                ================================================== -->
+
+                <div class="col-md-2">
+
+                  <label class="form-label">
+                    Blood Group
+                    <span class="required">*</span>
+                  </label>
+                  <select class="form-select" #BloodGroupError="ngModel" [(ngModel)]="patientData().BloodGroup" name="BloodGroup"
+                    required>
+                    <option value="">--Select--</option>
+                    <option value="A+ve">A+</option>
+                    <option value="A-ve">A-</option>
+                    <option value="B+ve">B+</option>
+                    <option value="B-ve">B-</option>
+                    <option value="AB+ve">AB+</option>
+                    <option value="AB-ve">AB-</option>
+                    <option value="O+ve">O+</option>
+                    <option value="O-ve">O-</option>
+                  </select>
+
+                  @if(BloodGroupError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Blood Group is required
+                  </div>
+
+                  }
+                  @else if(BloodGroupError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+                  @else if(BloodGroupError.errors?.['maxlength']) {
+
+                  <div class="validation-message">
+                    Maximum 10 characters allowed
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     INSURED
+                ================================================== -->
+
+                <div class="col-md-2">
+
+                  <label class="form-label">
+                    Insured
+                    <span class="required">*</span>
+                  </label>
+
+                  <select class="form-select" #InsuredError="ngModel" [(ngModel)]="patientData().Insured" name="Insured"
+                    required>
+                    <option value="">--Select--</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+
+                  @if(BloodGroupError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Insured is required
+                  </div>
+
+                  }
+                  @else if(BloodGroupError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+                  @else if(BloodGroupError.errors?.['maxlength']) {
+
+                  <div class="validation-message">
+                    Maximum 10 characters allowed
+                  </div>
+
+                  }
+
+                </div>
+
               </div>
+
+              
 
               <!-- =================================================
                  DIVIDER

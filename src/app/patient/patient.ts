@@ -2,10 +2,11 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Patientservice } from '../../services/patientservice/patientservice';
 import { FormsModule, NgForm } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-patient',
-  imports: [FormsModule],
+  imports: [FormsModule, DatePipe],
   templateUrl: './patient.html',
   styleUrl: './patient.css',
 })
@@ -58,6 +59,8 @@ export class Patient {
         debugger;
         this.patientData.set(res.data)    
         
+        this.patientData().DateOfBirth = this.patientData().DateOfBirth?.split('T')[0];
+
         this.onStateChange();
       }
     })

@@ -20,8 +20,8 @@ export class Area {
     AreaId : 0,
     AreaCode:"",
     AreaName:"",
-    CityId: 0,
-    StateId: 0
+    CityId: "",
+    StateId: ""
   })
 
   cities: WritableSignal<any[]> = signal([]);
@@ -96,7 +96,7 @@ console.log('FORM VALID:', formRef.valid);
     );
   });
     if (formRef.invalid){
-      alert("Error while saving Doctor.");
+      alert("Area data is not valid. Please check fields marked with *");
     }
     else{
 

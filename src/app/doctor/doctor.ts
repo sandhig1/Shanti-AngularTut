@@ -23,8 +23,8 @@ export class Doctor {
     Age: 0,
     Qualification:"",
     Address:"",
-    CityId: 0,
-    StateId: 0
+    CityId: "",
+    StateId: ""
   })
 
   cities: WritableSignal<any[]> = signal([]);
@@ -55,7 +55,7 @@ export class Doctor {
         debugger;
         this.doctorData.set(res.data)    
         
-        this.onStateChange();
+        this.getFilteredCities();
       }
     })
   }
@@ -85,7 +85,7 @@ export class Doctor {
     debugger;
 
     console.log('FORM VALID:', formRef.valid);
-  console.log('FORM INVALID:', formRef.invalid);
+    console.log('FORM INVALID:', formRef.invalid);
 
   Object.keys(formRef.controls).forEach(key => {
     const control = formRef.controls[key];
@@ -100,7 +100,7 @@ export class Doctor {
     );
   });
     if (formRef.invalid){
-      alert("Error while saving Doctor.");
+      alert("Doctor data is not valid. Please check fields marked with *");
     }
     else{
 
@@ -135,12 +135,19 @@ export class Doctor {
     }
   }
 
-  onStateChange() {
-    debugger;
+  getFilteredCities(){
     const result = this.cities().filter(x => x.StateId.toString() == this.doctorData().StateId);
 
     // Set filtered cities
     this.filteredCities.set(result);
+  }
+
+  onStateChange() {
+    debugger;
+    
+    this.getFilteredCities();
+
+    this.doctorData().CityId = "";
   }
 
 }

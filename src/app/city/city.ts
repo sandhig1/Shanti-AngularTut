@@ -23,10 +23,10 @@ export class City {
   stateserv = inject(Stateservice);
 
   cityData:WritableSignal<any> = signal({
-      CityId :0,
+      CityId :"0",
       CityCode:"",
       CityName:"",
-      StateId :0
+      StateId :""
     });
 
   states: WritableSignal<any[]> = signal([]);
@@ -92,7 +92,7 @@ console.log('FORM VALID:', formRef.valid);
     );
   });
     if (formRef.invalid){
-      alert("Error while saving Doctor.");
+      alert("City data is not valid. Please check fields marked with *");
     }
     else{
 

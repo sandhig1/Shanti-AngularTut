@@ -26,9 +26,9 @@ export class Patient {
     MobileNo:"",
     EmailAdd:"",
     Address:"",
-    AreaId: 0,
-    CityId: 0,
-    StateId: 0
+    AreaId: "",
+    CityId: "",
+    StateId: ""
   })
   areas: WritableSignal<any[]> = signal([]);
   cities: WritableSignal<any[]> = signal([]);

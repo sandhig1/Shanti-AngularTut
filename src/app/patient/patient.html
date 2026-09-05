@@ -453,7 +453,7 @@
                     <select class="form-select" #StateNameError="ngModel" [(ngModel)]="patientData().StateId"
                       name="StateId" (change)="onStateChange()" required>
 
-                      <option value="0">
+                      <option value="">
                         -- Select State --
                       </option>
 
@@ -484,7 +484,7 @@
                 <div class="col-md-4">
 
                   <label class="form-label">
-                    City {{patientData().CityId}}
+                    City
                     <span class="required">*</span>
                   </label>
 

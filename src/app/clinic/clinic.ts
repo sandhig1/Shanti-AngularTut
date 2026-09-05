@@ -20,9 +20,9 @@ export class Clinic {
     ClinicId: 0,
     ClinicCode: "",
     ClinicName: "",
-    StateId: 0,
+    StateId: "",
     StateName: "",
-    CityId: 0,
+    CityId: "",
     CityName: ""
   });
 
@@ -54,7 +54,7 @@ export class Clinic {
         debugger;
         this.clinicData.set(res.data)
 
-        this.onStateChange();
+        this.getFilteredCities();
       }
     })
   }
@@ -82,7 +82,7 @@ export class Clinic {
 
   saveClinic(formRef: NgForm) {
     debugger;
-console.log('FORM VALID:', formRef.valid);
+  console.log('FORM VALID:', formRef.valid);
   console.log('FORM INVALID:', formRef.invalid);
 
   Object.keys(formRef.controls).forEach(key => {
@@ -98,7 +98,7 @@ console.log('FORM VALID:', formRef.valid);
     );
   });
     if (formRef.invalid){
-      alert("Error while saving Doctor.");
+      alert("Clinic data is not valid. Please check fields marked with *");
     }
     else{
 
@@ -134,12 +134,18 @@ console.log('FORM VALID:', formRef.valid);
     }
   }
 
-  onStateChange() {
-    debugger;
+  getFilteredCities(){
     const result = this.cities().filter(x => x.StateId.toString() == this.clinicData().StateId);
 
     // Set filtered cities
     this.filteredCities.set(result);
+  }
+
+  onStateChange() {
+    debugger;
+     this.getFilteredCities();
+
+     this.clinicData().CityId = "";
   }
 
 }

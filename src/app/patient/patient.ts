@@ -33,12 +33,14 @@ export class Patient {
   areas: WritableSignal<any[]> = signal([]);
   cities: WritableSignal<any[]> = signal([]);
   filteredCities : WritableSignal<any[]> = signal([]);
+  filteredAreas : WritableSignal<any[]> = signal([]);
   states: WritableSignal<any[]> = signal([]);  
 
   constructor() {
     this.getAllState();
     this.getAllCity();
     this.getAllArea();
+
     const id= Number(this.route.snapshot.paramMap.get('id'));
 
     if (id>0){
@@ -61,7 +63,11 @@ export class Patient {
         
         this.patientData().DateOfBirth = this.patientData().DateOfBirth?.split('T')[0];
 
-        this.onStateChange();
+        this.patientData().AreaId = this.patientData().AreaId==0? "": this.patientData().AreaId;
+
+        this.getFilteredCities();
+        this.getFilteredAreas();
+
       }
     })
   }
@@ -116,7 +122,7 @@ export class Patient {
     );
   });
     if (formRef.invalid){
-      alert("Error while saving Patient.");
+      alert("Patient data is not valid. Please check fields marked with *");
     }
     else{
 
@@ -151,12 +157,35 @@ export class Patient {
     }
   }
 
-  onStateChange() {
-    debugger;
+  getFilteredCities(){
     const result = this.cities().filter(x => x.StateId.toString() == this.patientData().StateId);
 
     // Set filtered cities
     this.filteredCities.set(result);
+  }
+
+  onStateChange() {
+    debugger;
+
+    this.getFilteredCities();
+
+    this.patientData().CityId = "";
+    this.patientData().AreaId = "";
+  }
+
+  getFilteredAreas(){
+    const result = this.areas().filter(x => x.CityId.toString() == this.patientData().CityId);
+
+    // Set filtered areas
+    this.filteredAreas.set(result);
+  }
+
+  onCityChange() {
+    debugger;
+    this.getFilteredAreas();
+
+    this.patientData().AreaId = "";
+  
   }
 
 }

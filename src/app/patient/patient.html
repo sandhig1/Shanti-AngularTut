@@ -339,21 +339,21 @@
                     <option value="false">No</option>
                   </select>
 
-                  @if(BloodGroupError.errors?.['required']) {
+                  @if(InsuredError.errors?.['required']) {
 
                   <div class="validation-message">
                     Insured is required
                   </div>
 
                   }
-                  @else if(BloodGroupError.errors?.['minlength']) {
+                  @else if(InsuredError.errors?.['minlength']) {
 
                   <div class="validation-message">
                     Minimum 2 characters required
                   </div>
 
                   }
-                  @else if(BloodGroupError.errors?.['maxlength']) {
+                  @else if(InsuredError.errors?.['maxlength']) {
 
                   <div class="validation-message">
                     Maximum 10 characters allowed
@@ -437,7 +437,7 @@
                 <!-- =================================================
                       STATE
                   ================================================== -->
-                <div class="col-md-6">
+                <div class="col-md-4">
 
                   <label class="form-label">
                     State
@@ -481,10 +481,10 @@
                 <!-- =================================================
                       CITY
                   ================================================== -->
-                <div class="col-md-6">
+                <div class="col-md-4">
 
                   <label class="form-label">
-                    City
+                    City {{patientData().CityId}}
                     <span class="required">*</span>
                   </label>
 
@@ -494,10 +494,10 @@
                       <i class="fa-solid fa-location-dot"></i>
                     </span>
 
-                    <select class="form-select" #CityNameError="ngModel" [(ngModel)]="patientData().CityId" name="CityId"
-                      required>
+                    <select class="form-select" #CityNameError="ngModel" [(ngModel)]="patientData().CityId" 
+                       name="CityId"  (change)="onCityChange()" required>
 
-                      <option value="0">
+                      <option value="">
                         -- Select City --
                       </option>
 
@@ -519,6 +519,50 @@
                   }
 
                 </div>
+
+                <div class="col-md-4">
+
+                  <label class="form-label">
+                    Area {{patientData().AreaId}}
+                    <span class="required"></span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-location-dot"></i>
+                    </span>
+                    
+                    <select
+                      class="form-select"
+                      #AreaNameError="ngModel"
+                      [(ngModel)]="patientData().AreaId"
+                      name="AreaId">
+
+                      <option value="">
+                        -- Select Area --
+                      </option>
+                      
+                      @for (item of filteredAreas(); track $index) {
+                        <option value="{{item.AreaId}}">
+                          {{item.AreaName}}
+                        </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(AreaNameError.errors?.['required']) {
+
+                    <div class="validation-message">
+                      Area is required
+                    </div>
+
+                  }
+
+                </div>
+
 
                 <!-- =================================================
                      MOBILE NUMBER

@@ -1,3 +1,4 @@
+<p>stafflist works!</p>
 <div class="container-fluid py-4">
 <!-- Page Header -->
   <div class="d-flex justify-content-between align-items-center mb-4">
@@ -5,18 +6,18 @@
     <div>
       <h3 class="fw-bold mb-1">
         <i class="fa fa-hospital me-2 text-primary"></i>
-        Patient List
+        Staff List
       </h3>
 
       <p class="text-muted mb-0">
-        Manage your registered patients
+        Manage your registered staff
       </p>
     </div>
 
-    <button type="button" class="btn btn-primary" (click)="AddPatient()">
+    <button type="button" class="btn btn-primary" (click)="AddStaff()">
 
       <i class="fa fa-plus"></i>
-      Add Patient
+      Add Staff
 
     </button>
 
@@ -35,7 +36,7 @@
             <div class="col-md-6">
                 <h5 class="mb-0 fw-semibold ms-4">
                     <i class="fa fa-list-ul me-2 text-primary"></i>
-                    Patients
+                    Staffs
                 </h5>
             </div>
 
@@ -47,7 +48,7 @@
                         <i class="fa fa-search"></i>
                     </span>
 
-                    <input type="text" class="form-control" placeholder="Search Patient..." [(ngModel)]="searchText"
+                    <input type="text" class="form-control" placeholder="Search Staff..." [(ngModel)]="searchText"
                         (input)="onSearch()" />
 
                     @if(searchText) {
@@ -79,10 +80,10 @@
                                 Sr No
                             </th>
                             <th style="width: 5%;">
-                                Patient Code
+                                Staff Code
                             </th>
                             <th class="patient-column">
-                                Patient Name
+                                Staff Name
                             </th>
                             <th class="patient-dob-column">
                                 Date of Birth
@@ -93,19 +94,8 @@
                             <th class="patient-age-column">
                                 Age
                             </th>
-                            <th class="patient-bloodgroup-column">
-                                Blood Group
-                            </th>
-                            <th style="width: 20%;">
-                                Medical History
-                            </th>
-                            <th class="patient-Medicine-column">
-                                Medicine
-                            </th>
-                            <th class="patient-Insured-column">
-                                Insured
-                            </th>
-                            <th style="width: 30%;">
+                            
+                            <th style="width: 35%;">
                                 Address
                             </th>
                             <th style="width: 15%;">
@@ -118,19 +108,15 @@
                     </thead>
 
                     <tbody>
-                        @for (item of paginatedpatients(); track $index) {
+                        @for (item of paginatedstaff(); track $index) {
 
                         <tr>
                             <td>{{$index + 1}}</td>
-                            <td>{{item.PatientCode}}</td>
-                            <td>{{item.PatientName}}</td>
+                            <td>{{item.StaffCode}}</td>
+                            <td>{{item.StaffName}}</td>
                             <td>{{item.DateOfBirthFormatted}}</td>
                             <td>{{item.Gender=="M" ? "Male" : item.Gender=="F" ? "Female" : item.Gender=="O" ? "Other" : "-NA-"}}</td>
                             <td>{{item.Age}}</td>
-                            <td>{{item.BloodGroup}}</td>
-                            <td>{{item.MedicalHistory}}</td>
-                            <td>{{item.Medicine}}</td>
-                            <td>{{item.Insured == 1 ? "Yes" : "No"}}</td>
                             <!-- Address + State + City + Area -->
                             <td>
                                 <div class="address-details">
@@ -140,7 +126,7 @@
                                     </div>
                                     <!-- City & State -->
                                     <div class="location-line">
-                                        <i class="fa-solid fa-location-arrow text-primary"></i> <span> {{ item.AreaName }}, {{ item.CityName }}, {{ item.StateName }} </span>
+                                        <i class="fa-solid fa-location-arrow text-primary"></i> <span> {{ item.StaffCategoryName }}, {{ item.DepartmentName }} </span>
                                     </div>
                                 </div>
                             </td>
@@ -188,8 +174,8 @@
                                 <div class="action-buttons">
                         
                                     <!-- EDIT -->
-                                    <button type="button" class="btn btn-sm btn-outline-primary action-btn me-2" title="Edit Patient"
-                                        (click)="editPatient(item.PatientId)">
+                                    <button type="button" class="btn btn-sm btn-outline-primary action-btn me-2" title="Edit Staff"
+                                        (click)="editStaff(item.StaffId)">
                         
                                         <i class="fa fa-pencil"></i>
                         
@@ -197,9 +183,9 @@
                         
                         
                                     <!-- DELETE -->
-                                    @if(item.PatientId > 0) {
-                                    <button type="button" class="btn btn-sm btn-outline-danger action-btn me-2" title="Delete Patient"
-                                        (click)="deletePatient(item.PatientId)">
+                                    @if(item.StaffId > 0) {
+                                    <button type="button" class="btn btn-sm btn-outline-danger action-btn me-2" title="Delete Staff"
+                                        (click)="deleteStaff(item.StaffId)">
                         
                                         <i class="fa fa-trash"></i>
                         
@@ -216,7 +202,7 @@
                         <!-- =================================================
                      NO RECORDS
                 ================================================== -->
-                        @if(paginatedpatients().length === 0) {
+                        @if(paginatedstaff().length === 0) {
 
                         <tr>
 
@@ -269,7 +255,7 @@
                         to
                         <strong>{{ endRecord() }}</strong>
                         of
-                        <strong>{{ filteredpatients().length }}</strong>
+                        <strong>{{ filteredstaff().length }}</strong>
                         records
 
                     </small>
@@ -335,6 +321,7 @@
 </div>
 
     
+
 
 
 

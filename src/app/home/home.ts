@@ -38,6 +38,10 @@ export class Home {
     this.router.navigate(['patientlist']);
   }
 
+   stafflist(){
+    this.router.navigate(['stafflist']);
+  }
+
   dashboard(){
     this.router.navigate(['dashboard']);
   }

@@ -24,6 +24,7 @@ import { Doctor } from './doctor/doctor';
 import { Patientlist } from './patientlist/patientlist';
 import { Patient } from './patient/patient';
 import { Stafflist } from './stafflist/stafflist';
+import { Staff } from './staff/staff';
 
 export const routes: Routes = [
     {path:'', component:Mainhome},
@@ -59,8 +60,8 @@ export const routes: Routes = [
             {path:"patient", component:Patient},
             {path:"patient/:id", component:Patient},
             {path:"stafflist",component:Stafflist},
-            //{path:"staff", component:Staff},
-            //{path:"staff/:id", component:Staff},
+            {path:"staff", component:Staff},
+            {path:"staff/:id", component:Staff},
             {path:"dashboard", component:Dashboard},
             {path:"binding", component:Binding},
             {path:"directive", component:Directive},

@@ -1,0 +1,588 @@
+
+<div class="container-fluid css-page py-4">
+
+  <div class="row justify-content-center">
+
+    <!-- =====================================================
+         Staff FORM COLUMN
+    ====================================================== -->
+    <div class="col-12 col-lg-11 col-md-11 col-xs-6 css-form-column">
+
+      <div class="card css-card">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+        <div class="card-header css-header">
+
+          <div class="header-content">
+
+            <!-- LEFT SIDE -->
+            <div class="header-left">
+
+              <div class="header-icon">
+                <i class="fa fa-building"></i>
+              </div>
+
+              <div class="header-text">
+
+                <h5 class="css-title">
+                  {{ staffData().StaffId <= 0 ? 'Add' : 'Edit' }} Staff </h5>
+
+                    <div class="css-subtitle">
+                      Manage staff information
+                    </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <button type="button" class="btn btn-outline-primary btn-sm css-list-btn" (click)="stafflist()">
+
+              <i class="fa fa-list-ul"></i>
+
+              <span>
+                Staff List
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CARD BODY
+        ================================================== -->
+        <div class="card-body css-body">
+
+          <form #form="ngForm">
+
+            <!-- =================================================
+                 Staff DETAILS
+            ================================================== -->
+            <div class="form-section">
+
+              <!-- =================================================
+                  CLINIC DETAILS
+              ================================================== -->
+              <div class="form-section">
+
+                <!-- SECTION HEADING -->
+                <div class="section-heading">
+
+                  <div class="section-icon">
+                    <i class="fa fa-user"></i>
+                  </div>
+
+                  <div>
+
+                    <h6 class="section-title">
+                      Personal Details
+                    </h6>
+
+                    <small class="section-description">
+                      Basic information about the staff
+                    </small>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+              <!-- =================================================
+                   STAFF FIELDS
+              ================================================== -->
+              <div class="row g-3">
+
+                <!-- =================================================
+                     STAFF CODE
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Staff Code
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="text" class="form-control" #StaffCodeError="ngModel"
+                    [(ngModel)]="staffData().StaffCode" name="StaffCode" placeholder="Enter code" minlength="2"
+                    maxlength="10" style="width:30%" required>
+
+                  @if(StaffCodeError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Staff Code is required
+                  </div>
+
+                  }
+                  @else if(StaffCodeError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     STAFF NAME
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Staff Name
+                    <span class="required"><i class="fa-solid fa-user-doctor text-primary"></i>*</span>
+                  </label>
+
+                  <input type="text" class="form-control" #StaffNameError="ngModel"
+                    [(ngModel)]="staffData().StaffName" name="StaffName" placeholder="Enter Staff name"
+                    minlength="3" maxlength="50" style="width:70%" required>
+
+                  @if(StaffNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Staff Name is required
+                  </div>
+
+                  }
+                  @else if(StaffNameError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 3 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     DATE OF BIRTH
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Date Of Birth
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="date" class="form-control" #DateOfBirthError="ngModel"
+                    [(ngModel)]="staffData().DateOfBirth" name="DateOfBirth" placeholder="Enter date of birth" minlength="2"
+                    maxlength="10" style="width:30%" required>
+
+                  @if(DateOfBirthError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Date Of Birth is required
+                  </div>
+
+                  }
+                  @else if(DateOfBirthError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     GENDER
+                ================================================== -->
+
+                <div class="col-md-2">
+
+                  <label class="form-label">
+                    Gender
+                    <span class="required">*</span>
+                  </label>
+
+                  <select class="form-select" #GenderError="ngModel" [(ngModel)]="staffData().Gender" name="Gender"
+                    required>
+                    <option value="">--Select--</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                  </select>
+
+                  @if(GenderError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Gender is required
+                  </div>
+
+                  }
+                  @else if(GenderError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 1 characters required
+                  </div>
+
+                  }
+                  @else if(GenderError.errors?.['maxlength']) {
+
+                  <div class="validation-message">
+                    Maximum 1 character allowed
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     AGE
+                ================================================== -->
+
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    Age
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="text" class="form-control" #AgeError="ngModel" [(ngModel)]="staffData().Age" name="Age"
+                    placeholder="Enter age" minlength="2" maxlength="10" style="width:30%" required>
+
+                  @if(AgeError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Age is required
+                  </div>
+
+                  }
+                  @else if(AgeError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     BLANK DIV
+                ================================================== -->
+
+                <div class="col-md-4">
+                </div>
+
+                <!-- =================================================
+                    JOINING DATE
+                ================================================== -->
+
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Joining Date
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="date" class="form-control" #JoiningDateError="ngModel"
+                    [(ngModel)]="staffData().JoiningDate" name="JoiningDate" placeholder="Enter Joining Date" minlength="2"
+                    maxlength="10" style="width:30%" required>
+
+                  @if(JoiningDateError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Joining Date is required
+                  </div>
+
+                  }
+                  @else if(JoiningDateError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     Staff Category
+                ================================================== -->
+
+                <div class="col-md-4">
+
+                  <label class="form-label">
+                    Staff Category
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-users text-primary"></i>
+                    </span>
+
+                    <select class="form-select" #StaffCategoryNameError="ngModel" [(ngModel)]="staffData().StaffCategoryId"
+                      name="StaffCategoryId" required>
+
+                      <option value="">
+                        -- Select Staff Category --
+                      </option>
+
+                      @for (item of StaffCategory(); track $index) {
+                      <option value="{{item.StaffCategoryId}}">
+                        {{item.StaffCategoryName}}
+                      </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(StaffCategoryNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Staff Category is required
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     Department
+                ================================================== -->
+
+                <div class="col-md-4">
+
+                  <label class="form-label">
+                    Department
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-building text-primary"></i>
+                    </span>
+
+                    <select class="form-select" #DepartmentNameError="ngModel" [(ngModel)]="staffData().DepartmentId"
+                      name="DepartmentId" required>
+
+                      <option value="">
+                        -- Select Department --
+                      </option>
+
+                      @for (item of Department(); track $index) {
+                      <option value="{{item.DepartmentId}}">
+                        {{item.DepartmentName}}
+                      </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(DepartmentNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Department is required
+                  </div>
+
+                  }
+
+                </div>
+
+                
+              </div>
+
+              
+
+              <!-- =================================================
+                 DIVIDER
+              ================================================== -->
+              <div class="section-divider"></div>
+
+              <!-- =================================================
+                  ADDRESS AND CONTACT DETAILS
+              ================================================== -->
+              <div class="form-section">
+
+                <!-- SECTION HEADING -->
+                <div class="section-heading">
+
+                  <div class="section-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+
+                  <div>
+
+                    <h6 class="section-title">
+                      Address Details
+                    </h6>
+
+                    <small class="section-description">
+                      Address and contact details of the Staff
+                    </small>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- =================================================
+                   ADDRESS AND CONTACT FIELDS
+              ================================================== -->
+              <div class="row g-3">
+                <!-- =================================================
+                      ADDRESS
+                  ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Address
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="text" class="form-control" #AddressError="ngModel" [(ngModel)]="staffData().Address"
+                    name="Address" placeholder="Enter address" minlength="3" maxlength="100" required>
+
+                  @if(AddressError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Address is required
+                  </div>
+
+                  }
+                  @else if(AddressError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 3 characters required
+                  </div>
+
+                  }
+
+                </div>
+                
+
+                <!-- =================================================
+                     MOBILE NUMBER
+                ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    Mobile No
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa fa-mobile"></i>
+                    </span>
+
+                    <input type="text" class="form-control" #MobileNoError="ngModel" [(ngModel)]="staffData().MobileNo"
+                      name="MobileNo" placeholder="Enter mobile number" maxlength="10" required>
+
+                  </div>
+
+                  @if(MobileNoError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Mobile No. is required
+                  </div>
+
+                  }
+
+                </div>
+
+
+
+                <!-- =================================================
+                     EMAIL
+                ================================================== -->
+                <div class="col-6">
+
+
+                  <label class="form-label">
+                    Email Address
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa fa-envelope"></i>
+                    </span>
+
+                    <input type="email" class="form-control" #EmailAddError="ngModel"
+                      [(ngModel)]="staffData().EmailAdd" name="EmailAdd" placeholder="Enter email address"
+                      maxlength="50" required>
+
+                  </div>
+
+                  @if(EmailAddError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Email Address is required
+                  </div>
+
+                  }
+                  @else if(EmailAddError.errors?.['email']) {
+
+                  <div class="validation-message">
+                    Please enter a valid email address
+                  </div>
+
+                  }
+
+                </div>
+
+              </div>
+
+              <!-- =================================================
+                    DIVIDER
+                ================================================== -->
+             
+            </div>
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================== -->
+            <div class="action-container">
+
+              <button type="button" class="btn btn-warning cancel-btn" (click)="stafflist()">
+
+                <i class="fa fa-close"></i>
+
+                <span>
+                  Cancel
+                </span>
+
+              </button>
+
+
+              <button type="button" class="btn btn-primary save-btn" (click)="SaveStaff(form)">
+
+                <i class="fa fa-save"></i>
+
+                <span>
+                  {{ staffData().StaffId <= 0 ? 'Save Staff' : 'Update Staff' }} </span>
+
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+

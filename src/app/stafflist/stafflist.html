@@ -1,4 +1,4 @@
-<p>stafflist works!</p>
+
 <div class="container-fluid py-4">
 <!-- Page Header -->
   <div class="d-flex justify-content-between align-items-center mb-4">
@@ -82,23 +82,28 @@
                             <th style="width: 5%;">
                                 Staff Code
                             </th>
-                            <th class="patient-column">
+                            <th style="width: 15%;">
                                 Staff Name
                             </th>
-                            <th class="patient-dob-column">
+                            <th class="dob-column">
                                 Date of Birth
                             </th>
-                            <th class="patient-gender-column">
+                            <th class="gender-column">
                                 Gender
                             </th>
-                            <th class="patient-age-column">
+                            <th class="age-column">
                                 Age
                             </th>
-                            
-                            <th style="width: 35%;">
-                                Address
+                            <th style="width: 10%;">
+                                Staff Category
                             </th>
                             <th style="width: 15%;">
+                                Department
+                            </th>
+                            <th style="width: 25%;">
+                                Address
+                            </th>
+                            <th style="width: 20%;">
                                 Contact Details
                             </th>
                             <th class="action-column text-center">
@@ -117,16 +122,21 @@
                             <td>{{item.DateOfBirthFormatted}}</td>
                             <td>{{item.Gender=="M" ? "Male" : item.Gender=="F" ? "Female" : item.Gender=="O" ? "Other" : "-NA-"}}</td>
                             <td>{{item.Age}}</td>
-                            <!-- Address + State + City + Area -->
+                            <td>
+                                <div>
+                                    <i class="fa-solid fa-users text-primary"> </i> <span> {{item.StaffCategoryName}} </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <i class="fa-solid fa-building text-primary"> </i> <span> {{item.DepartmentName}} </span>
+                                </div>
+                            </td>
                             <td>
                                 <div class="address-details">
                                     <!-- Address -->
                                     <div class="address-line">
                                         <i class="fa-solid fa-location-dot text-primary"></i> <span> {{ item.Address }} </span>
-                                    </div>
-                                    <!-- City & State -->
-                                    <div class="location-line">
-                                        <i class="fa-solid fa-location-arrow text-primary"></i> <span> {{ item.StaffCategoryName }}, {{ item.DepartmentName }} </span>
                                     </div>
                                 </div>
                             </td>

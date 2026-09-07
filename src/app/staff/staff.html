@@ -138,13 +138,13 @@
 
                   <label class="form-label">
                     Staff Name
-                    <span class="required"><i class="fa-solid fa-user-doctor text-primary"></i>*</span>
+                    <span class="required">*</span>
                   </label>
 
                   <input type="text" class="form-control" #StaffNameError="ngModel"
                     [(ngModel)]="staffData().StaffName" name="StaffName" placeholder="Enter Staff name"
                     minlength="3" maxlength="50" style="width:70%" required>
-
+                   
                   @if(StaffNameError.errors?.['required']) {
 
                   <div class="validation-message">
@@ -159,6 +159,7 @@
                   </div>
 
                   }
+                  
 
                 </div>
 

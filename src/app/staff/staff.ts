@@ -59,6 +59,7 @@ stafflist(){
         this.staffData.set(res.data)    
         
         this.staffData().DateOfBirth = this.staffData().DateOfBirth?.split('T')[0];
+        this.staffData().JoiningDate = this.staffData().JoiningDate?.split('T')[0];
 
       }
     })

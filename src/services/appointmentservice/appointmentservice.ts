@@ -7,7 +7,7 @@ export class Appointmentservice {
 
     http = inject(HttpClient);
 
-    getAppointments(){
+            getAppointments(){
                 debugger;
                 return this.http.get(APIUrl + "appointment/getAppointments");
             }

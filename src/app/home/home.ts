@@ -38,8 +38,12 @@ export class Home {
     this.router.navigate(['patientlist']);
   }
 
-   stafflist(){
+  stafflist(){
     this.router.navigate(['stafflist']);
+  }
+
+  appointmentlist(){
+    this.router.navigate(['appointmentlist']);
   }
 
   dashboard(){

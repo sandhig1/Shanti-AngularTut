@@ -45,5 +45,10 @@ export class Patientservice {
                 debugger;
                 return this.http.get(APIUrl + "state/getstates");
             }
+
+            getClinics() {
+                debugger;
+                return this.http.get(APIUrl + "clinic/getClinics");
+            }
     
 }

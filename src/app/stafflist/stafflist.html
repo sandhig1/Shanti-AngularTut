@@ -100,6 +100,9 @@
                             <th style="width: 15%;">
                                 Department
                             </th>
+                            <th style="width: 15%;">
+                                Clinic
+                            </th>
                             <th style="width: 25%;">
                                 Address
                             </th>
@@ -130,6 +133,11 @@
                             <td>
                                 <div>
                                     <i class="fa-solid fa-building text-primary"> </i> <span> {{item.DepartmentName}} </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <i class="fa-solid fa-hospital text-primary"></i> <span> {{item.ClinicName}} </span>
                                 </div>
                             </td>
                             <td>
@@ -221,7 +229,7 @@
                                 <i class="fa fa-inbox empty-icon"></i>
 
                                 <div>
-                                    No patient records found
+                                    No staff records found
                                 </div>
 
                                 @if(searchText) {

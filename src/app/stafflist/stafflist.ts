@@ -2,6 +2,7 @@ import { Component, inject, computed, signal, WritableSignal } from '@angular/co
 import { Router } from '@angular/router';
 import { Staffservice } from '../../services/staffservice/staffservice';
 import { FormsModule } from '@angular/forms';
+//import { Clinicservice } from '../../services/clinicservice/clinicservice';
 
 @Component({
   selector: 'app-stafflist',
@@ -13,6 +14,7 @@ export class Stafflist {
 
   router = inject(Router);
   staffServ = inject(Staffservice);
+  //clinicServ = inject(Clinicservice);
 
   staff: WritableSignal<any[]> = signal([]);
 

@@ -7,38 +7,43 @@ export class Staffservice {
 
     http = inject(HttpClient);
 
-            getStaffs(){
-                debugger;
-                return this.http.get(APIUrl + "staff/getStaffs");
-            }
-        
-            saveStaff(staffData:WritableSignal<any>){
-                return this.http.post(APIUrl + "staff/saveStaff", staffData);
-        
-            }
-        
-            updateStaff(staffData:WritableSignal<any>){
-                return this.http.put(APIUrl + "staff/updateStaff", staffData)
-        
-            }
-        
-            deleteStaff(id:number){
-                return this.http.delete(APIUrl + "staff/deleteStaff?id=" + id);
-            }
-        
-            getStaffDetail(id:number){
-                return this.http.get(APIUrl + "staff/getStaffDetail?id=" + id);
-            }
+    getStaffs() {
+        debugger;
+        return this.http.get(APIUrl + "staff/getStaffs");
+    }
 
-            getStaffCategory(){
-                debugger;
-                return this.http.get(APIUrl + "staffcategory/getStaffCategory");
-            }
-        
-            getDepartment(){
-                debugger;
-                return this.http.get(APIUrl + "department/getDepartment");
-            }
+    saveStaff(staffData: WritableSignal<any>) {
+        return this.http.post(APIUrl + "staff/saveStaff", staffData);
+
+    }
+
+    updateStaff(staffData: WritableSignal<any>) {
+        return this.http.put(APIUrl + "staff/updateStaff", staffData)
+
+    }
+
+    deleteStaff(id: number) {
+        return this.http.delete(APIUrl + "staff/deleteStaff?id=" + id);
+    }
+
+    getStaffDetail(id: number) {
+        return this.http.get(APIUrl + "staff/getStaffDetail?id=" + id);
+    }
+
+    getStaffCategory() {
+        debugger;
+        return this.http.get(APIUrl + "staffcategory/getStaffCategory");
+    }
+
+    getDepartment() {
+        debugger;
+        return this.http.get(APIUrl + "department/getDepartment");
+    }
+
+    getClinics() {
+        debugger;
+        return this.http.get(APIUrl + "clinic/getClinics");
+    }
         
             
 

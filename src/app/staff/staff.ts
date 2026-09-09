@@ -28,16 +28,18 @@ export class Staff {
     JoiningDate:"",
     StaffCategoryId: "",
     DepartmentId: "",
-    Status: ""
+    Status: "",
+    ClinicId: ""
 })
 
 StaffCategory: WritableSignal<any[]> = signal([]);  
-Department: WritableSignal<any[]> = signal([]);  
+Department: WritableSignal<any[]> = signal([]);
+clinic: WritableSignal<any[]> = signal([]);   
 
 constructor() {
     this.getAllStaffCategory();
     this.getAllDepartment();
-
+    this.getAllClinic();
 
     const id= Number(this.route.snapshot.paramMap.get('id'));
 
@@ -60,6 +62,8 @@ stafflist(){
         
         this.staffData().DateOfBirth = this.staffData().DateOfBirth?.split('T')[0];
         this.staffData().JoiningDate = this.staffData().JoiningDate?.split('T')[0];
+
+        this.staffData().ClinicId = this.staffData().ClinicId==0?"": this.staffData().ClinicId;
 
       }
     })
@@ -135,6 +139,16 @@ stafflist(){
       next: (res: any) => {
         debugger;
         this.Department.set(res.data)
+      }
+    })
+  }
+
+  getAllClinic() {
+    debugger;
+    this.staffserv.getClinics().subscribe({
+      next: (res: any) => {
+        debugger;
+        this.clinic.set(res.data)
       }
     })
   }

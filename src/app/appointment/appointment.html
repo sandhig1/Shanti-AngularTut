@@ -1,1 +1,391 @@
-<p>appointment works!</p>
+
+<div class="container-fluid css-page py-4">
+
+  <div class="row justify-content-center">
+
+    <!-- =====================================================
+         Appointment FORM COLUMN
+    ====================================================== -->
+    <div class="col-12 col-lg-11 col-md-11 col-xs-6 css-form-column">
+
+      <div class="card css-card">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+        <div class="card-header css-header">
+
+          <div class="header-content">
+
+            <!-- LEFT SIDE -->
+            <div class="header-left">
+
+              <div class="header-icon">
+                <i class="fa fa-building"></i>
+              </div>
+
+              <div class="header-text">
+
+                <h5 class="css-title">
+                  {{ appointmentData().AppointmentId <= 0 ? 'Add' : 'Edit' }} Appointment </h5>
+
+                    <div class="css-subtitle">
+                      Manage Appointment information
+                    </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <button type="button" class="btn btn-outline-primary btn-sm css-list-btn" (click)="appointmentlist()">
+
+              <i class="fa fa-list-ul"></i>
+
+              <span>
+                Appointment List
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CARD BODY
+        ================================================== -->
+        <div class="card-body css-body">
+
+          <form #form="ngForm">
+
+            <!-- =================================================
+                 Appointment DETAILS
+            ================================================== -->
+            <div class="form-section">
+
+              <!-- =================================================
+                  CLINIC DETAILS
+              ================================================== -->
+              <div class="form-section">
+
+                <!-- SECTION HEADING -->
+                <div class="section-heading">
+
+                  <div class="section-icon">
+                    <i class="fa fa-user"></i>
+                  </div>
+
+                  <div>
+
+                    <h6 class="section-title">
+                      Personal Details
+                    </h6>
+
+                    <small class="section-description">
+                      Basic information about the appointment
+                    </small>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+              <!-- =================================================
+                   APPOINTMENT FIELDS
+              ================================================== -->
+              <div class="row g-3">
+
+                <!-- =================================================
+                     APPOINTMENT NO
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Appointment No
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="text" class="form-control" #AppointmentNoError="ngModel"
+                    [(ngModel)]="appointmentData().AppointmentNo" name="AppointmentNo" placeholder="Enter no" minlength="2"
+                    maxlength="10" style="width:30%" required>
+
+                  @if(AppointmentNoError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Appointment No is required
+                  </div>
+
+                  }
+                  @else if(AppointmentNoError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     APPOINTMENT DATE
+                ================================================== -->
+                <div class="col-lg-12 col-md-12">
+
+                  <label class="form-label">
+                    Appointment Date
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                      <input type="date" class="form-control" #AppointmentDateError="ngModel" [(ngModel)]="appointmentData().AppointmentDate"
+                        name="AppointmentDate" placeholder="Enter Appointment Date" minlength="2" maxlength="10" style="width:100%" required>
+                      @if(AppointmentDateError.errors?.['required']) {
+
+                      <div class="validation-message">
+                        Appointment Date is required
+                      </div>
+
+                      }
+                      @else if(AppointmentDateError.errors?.['minlength']) {
+
+                      <div class="validation-message">
+                        Minimum 2 characters required
+                      </div>
+
+                      }
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                      <input type="time" class="form-control" #AppointmentTimeError="ngModel" [(ngModel)]="appointmentData().AppointmentTimeFormatted"
+                        name="AppointmentTime" placeholder="Enter Appointment Time" minlength="2" maxlength="10" style="width:100%" required>
+
+                    </div>
+                  </div>
+
+                </div>
+
+                
+                <!-- =================================================
+                     Clinic
+                ================================================== -->
+
+                <div class="col-md-4">
+
+                  <label class="form-label">
+                    Clinic
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-hospital text-primary"></i>
+                    </span>
+
+                    <select class="form-select" #ClinicNameError="ngModel" [(ngModel)]="appointmentData().ClinicId"
+                      name="ClinicId" required>
+
+                      <option value="">
+                        -- Select Clinic --
+                      </option>
+
+                      @for (item of Clinic(); track $index) {
+                      <option value="{{item.ClinicId}}">
+                        {{item.ClinicName}}
+                      </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(ClinicNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Clinic is required
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     Doctor
+                ================================================== -->
+
+                <div class="col-md-4">
+
+                  <label class="form-label">
+                    Doctor
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-user-doctor text-primary"></i>
+                    </span>
+
+                    <select class="form-select" #DoctorNameError="ngModel" [(ngModel)]="appointmentData().DoctorId"
+                      name="DoctorId" required>
+
+                      <option value="">
+                        -- Select Doctor --
+                      </option>
+
+                      @for (item of Doctor(); track $index) {
+                      <option value="{{item.DoctorId}}">
+                        {{item.DoctorName}}
+                      </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(DoctorNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Doctor is required
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     Patient
+                ================================================== -->
+
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    Patient
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-user-injured text-primary"></i>
+                    </span>
+
+                    <select class="form-select" #PatientNameError="ngModel" [(ngModel)]="appointmentData().PatientId"
+                      name="PatientId" required>
+
+                      <option value="">
+                        -- Select Patient --
+                      </option>
+
+                      @for (item of Patient(); track $index) {
+                      <option value="{{item.PatientId}}">
+                        {{item.PatientName}}
+                      </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(PatientNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Patient is required
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     Reason
+                ================================================== -->
+                <div class="col-md-12">
+
+                  <label class="form-label">
+                    Reason
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="text" class="form-control" #ReasonError="ngModel"
+                    [(ngModel)]="appointmentData().Reason" name="Reason" placeholder="Enter Reason" minlength="2"
+                    maxlength="1000" style="width:30%" required>
+
+                  @if(ReasonError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Reason is required
+                  </div>
+
+                  }
+                  @else if(ReasonError.errors?.['minlength']) {
+
+                  <div class="validation-message">
+                    Minimum 2 characters required
+                  </div>
+
+                  }
+
+                </div>
+
+                <!-- =================================================
+                     Status
+                ================================================== -->
+
+                
+                
+              </div>
+
+              
+
+              <!-- =================================================
+                 DIVIDER
+              ================================================== -->
+              <div class="section-divider"></div>
+              
+            </div>
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================== -->
+            <div class="action-container">
+
+              <button type="button" class="btn btn-warning cancel-btn" (click)="appointmentlist()">
+
+                <i class="fa fa-close"></i>
+
+                <span>
+                  Cancel
+                </span>
+
+              </button>
+
+
+              <button type="button" class="btn btn-primary save-btn" (click)="SaveAppointment(form)">
+
+                <i class="fa fa-save"></i>
+
+                <span>
+                  {{ appointmentData().AppointmentId <= 0 ? 'Save Appointment' : 'Update Appointment' }} </span>
+
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+

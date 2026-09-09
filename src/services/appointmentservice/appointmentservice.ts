@@ -32,12 +32,19 @@ export class Appointmentservice {
 
             getClinic(){
                 debugger;
-                return this.http.get(APIUrl + "clinic/getClinic");
+                return this.http.get(APIUrl + "clinic/getClinics");
             }
         
             getPatient(){
                 debugger;
-                return this.http.get(APIUrl + "patient/getPatient");
+                return this.http.get(APIUrl + "patient/getPatients");
             }
+
+            getDoctor(){
+                debugger;
+                return this.http.get(APIUrl + "doctor/getDoctors");
+            }
+
+            
         
 }

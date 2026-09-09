@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Doctorservice } from '../../services/doctorservice/doctorservice';
 import { Areaservice } from '../../services/areaservice/areaservice';
 import { FormsModule } from '@angular/forms';
+import { Clinicservice } from '../../services/clinicservice/clinicservice';
 
 @Component({
   selector: 'app-doctorlist',
@@ -16,6 +17,8 @@ export class Doctorlist {
   doctorServ = inject(Doctorservice);
   cityServ = inject(Areaservice);
   stateServ = inject(Areaservice);
+  clinicServ = inject(Clinicservice);
+
 
   doctors: WritableSignal<any[]> = signal([]);
 

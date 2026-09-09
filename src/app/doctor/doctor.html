@@ -534,6 +534,49 @@
 
                 </div>
 
+                <!-- =================================================
+                      CLINIC
+                  ================================================== -->
+                <div class="col-md-6">
+
+                  <label class="form-label">
+                    Clinic
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-location-dot"></i>
+                    </span>
+
+                    <select class="form-select" #ClinicNameError="ngModel" [(ngModel)]="doctorData().ClinicId"
+                      name="ClinicId"  required>
+
+                      <option value="">
+                        -- Select Clinic --
+                      </option>
+
+                      @for (item of clinic(); track $index) {
+                      <option value="{{item.ClinicId}}">
+                        {{item.ClinicName}}
+                      </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(ClinicNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Clinic is required
+                  </div>
+
+                  }
+
+                </div>
+
 
               </div>
 

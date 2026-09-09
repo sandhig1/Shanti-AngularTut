@@ -24,16 +24,19 @@ export class Doctor {
     Qualification:"",
     Address:"",
     CityId: "",
-    StateId: ""
+    StateId: "",
+    ClinicId: ""
   })
 
   cities: WritableSignal<any[]> = signal([]);
   filteredCities : WritableSignal<any[]> = signal([]);
   states: WritableSignal<any[]> = signal([]);  
+  clinic: WritableSignal<any[]> = signal([]);  
 
   constructor() {
     this.getAllState();
     this.getAllCity();
+    this.getAllClinic();
 
     const id= Number(this.route.snapshot.paramMap.get('id'));
 
@@ -77,6 +80,16 @@ export class Doctor {
       next: (res: any) => {
         debugger;
         this.cities.set(res.data)
+      }
+    })
+  }
+
+  getAllClinic() {
+    debugger;
+    this.doctorserv.getClinics().subscribe({
+      next: (res: any) => {
+        debugger;
+        this.clinic.set(res.data)
       }
     })
   }

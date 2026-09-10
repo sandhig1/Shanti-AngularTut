@@ -97,18 +97,15 @@
                                 Blood Group
                             </th>
                             <th style="width: 20%;">
-                                Medical History
+                                Medical History / Medicine
                             </th>
-                            <th class="patient-Medicine-column">
-                                Medicine
-                            </th>
-                            <th class="patient-Medicine-column">
+                            <th class="Clinic-column">
                                 Clinic
                             </th>
                             <th class="patient-Insured-column">
                                 Insured
                             </th>
-                            <th style="width: 30%;">
+                            <th style="width: 25%;">
                                 Address
                             </th>
                             <th style="width: 15%;">
@@ -131,8 +128,14 @@
                             <td>{{item.Gender=="M" ? "Male" : item.Gender=="F" ? "Female" : item.Gender=="O" ? "Other" : "-NA-"}}</td>
                             <td>{{item.Age}}</td>
                             <td>{{item.BloodGroup}}</td>
-                            <td>{{item.MedicalHistory}}</td>
-                            <td>{{item.Medicine}}</td>
+                            <td>
+                                <div>
+                                    <i class="fa-solid fa-file-medical text-primary"></i><span> {{item.MedicalHistory}} </span>
+                                </div>
+                                 <div>
+                                    <i class="fa-solid fa-pills text-primary"></i><span> {{item.Medicine}} </span>
+                                 </div>
+                            </td>
                             <td>{{item.ClinicName}}</td>
                             <td>{{item.Insured == 1 ? "Yes" : "No"}}</td>
                             <!-- Address + State + City + Area -->

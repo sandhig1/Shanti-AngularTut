@@ -163,4 +163,6 @@ export class Doctor {
     this.doctorData().CityId = "";
   }
 
+  
+
 }

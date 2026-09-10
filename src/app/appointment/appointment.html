@@ -102,7 +102,7 @@
                 <!-- =================================================
                      APPOINTMENT NO
                 ================================================== -->
-                <div class="col-md-12">
+                <div class="col-md-2">
 
                   <label class="form-label">
                     Appointment No
@@ -111,7 +111,7 @@
 
                   <input type="text" class="form-control" #AppointmentNoError="ngModel"
                     [(ngModel)]="appointmentData().AppointmentNo" name="AppointmentNo" placeholder="Enter no" minlength="2"
-                    maxlength="10" style="width:30%" required>
+                    maxlength="10" style="width:100%" required>
 
                   @if(AppointmentNoError.errors?.['required']) {
 
@@ -134,7 +134,7 @@
                 <!-- =================================================
                      APPOINTMENT DATE
                 ================================================== -->
-                <div class="col-lg-12 col-md-12">
+                <div class="col-lg-9 col-md-9">
 
                   <label class="form-label">
                     Appointment Date
@@ -142,7 +142,7 @@
                   </label>
 
                   <div class="row">
-                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                       <input type="date" class="form-control" #AppointmentDateError="ngModel" [(ngModel)]="appointmentData().AppointmentDate"
                         name="AppointmentDate" placeholder="Enter Appointment Date" minlength="2" maxlength="10" style="width:100%" required>
                       @if(AppointmentDateError.errors?.['required']) {
@@ -188,7 +188,7 @@
                     </span>
 
                     <select class="form-select" #ClinicNameError="ngModel" [(ngModel)]="appointmentData().ClinicId"
-                      name="ClinicId" required>
+                      name="ClinicId" (change)="onClinicChange()" required>
 
                       <option value="">
                         -- Select Clinic --
@@ -208,6 +208,51 @@
 
                   <div class="validation-message">
                     Clinic is required
+                  </div>
+
+                  }
+
+                </div>
+
+
+                <!-- =================================================
+                     Patient
+                ================================================== -->
+
+                <div class="col-md-5">
+
+                  <label class="form-label">
+                    Patient
+                    <span class="required">*</span>
+                  </label>
+
+                  <div class="input-group css-input-group">
+
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-user-injured text-primary"></i>
+                    </span>
+
+                    <select class="form-select" #PatientNameError="ngModel" [(ngModel)]="appointmentData().PatientId"
+                      name="PatientId" required>
+
+                      <option value="">
+                        -- Select Patient --
+                      </option>
+
+                      @for (item of filteredPatients(); track $index) {
+                      <option value="{{item.PatientId}}">
+                        {{item.PatientName}}
+                      </option>
+                      }
+
+                    </select>
+
+                  </div>
+
+                  @if(PatientNameError.errors?.['required']) {
+
+                  <div class="validation-message">
+                    Patient is required
                   </div>
 
                   }
@@ -238,7 +283,7 @@
                         -- Select Doctor --
                       </option>
 
-                      @for (item of Doctor(); track $index) {
+                      @for (item of filteredDoctors(); track $index) {
                       <option value="{{item.DoctorId}}">
                         {{item.DoctorName}}
                       </option>
@@ -259,50 +304,6 @@
                 </div>
 
                 <!-- =================================================
-                     Patient
-                ================================================== -->
-
-                <div class="col-md-6">
-
-                  <label class="form-label">
-                    Patient
-                    <span class="required">*</span>
-                  </label>
-
-                  <div class="input-group css-input-group">
-
-                    <span class="input-group-text">
-                      <i class="fa-solid fa-user-injured text-primary"></i>
-                    </span>
-
-                    <select class="form-select" #PatientNameError="ngModel" [(ngModel)]="appointmentData().PatientId"
-                      name="PatientId" required>
-
-                      <option value="">
-                        -- Select Patient --
-                      </option>
-
-                      @for (item of Patient(); track $index) {
-                      <option value="{{item.PatientId}}">
-                        {{item.PatientName}}
-                      </option>
-                      }
-
-                    </select>
-
-                  </div>
-
-                  @if(PatientNameError.errors?.['required']) {
-
-                  <div class="validation-message">
-                    Patient is required
-                  </div>
-
-                  }
-
-                </div>
-
-                <!-- =================================================
                      Reason
                 ================================================== -->
                 <div class="col-md-12">
@@ -312,9 +313,10 @@
                     <span class="required">*</span>
                   </label>
 
-                  <input type="text" class="form-control" #ReasonError="ngModel"
-                    [(ngModel)]="appointmentData().Reason" name="Reason" placeholder="Enter Reason" minlength="2"
-                    maxlength="1000" style="width:30%" required>
+                  <textarea type="text" class="form-control" #ReasonError="ngModel"
+                    [(ngModel)]="appointmentData().Reason" name="Reason" 
+                    placeholder="Enter Reason" minlength="2" rows="3"
+                    maxlength="1000" style="width:50%" required></textarea>
 
                   @if(ReasonError.errors?.['required']) {
 

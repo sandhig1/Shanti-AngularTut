@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,7 +8,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './ganeshfestival.css',
 })
 export class Ganeshfestival {
+  
+  selectedDay = signal(1);
 
-dailyProgramme: string = "DAY 1";
+  showDay(day: number) {
+    this.selectedDay.set(day);
+  }
 
 }

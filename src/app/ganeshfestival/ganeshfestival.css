@@ -1,7 +1,6 @@
 
 /* =========================================================
-   GANESH FESTIVAL 2026
-   Complete Responsive CSS
+   GLOBAL
 ========================================================= */
 
 * {
@@ -11,11 +10,27 @@
 .ganesh-page {
   width: 100%;
   min-height: 100vh;
+
   padding: 30px 20px 50px;
+
   background:
-    radial-gradient(circle at top, rgba(255, 193, 7, 0.12), transparent 35%),
-    linear-gradient(135deg, #fff8ef 0%, #fff1df 50%, #fff8ef 100%);
-  font-family: "Segoe UI", Arial, sans-serif;
+    radial-gradient(
+      circle at top,
+      rgba(255, 193, 7, 0.12),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #fff8ef 0%,
+      #fff1df 50%,
+      #fff8ef 100%
+    );
+
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
   color: #3e1c00;
 }
 
@@ -26,10 +41,14 @@
 
 .festival-header {
   position: relative;
+
   width: 100%;
   max-width: 1200px;
+
   min-height: 280px;
+
   margin: 0 auto 30px;
+
   overflow: hidden;
 
   background:
@@ -42,18 +61,21 @@
     );
 
   border: 5px solid #d99b1d;
+
   border-radius: 22px;
 
   box-shadow:
     0 12px 30px rgba(91, 35, 0, 0.25),
-    inset 0 0 0 2px rgba(255, 230, 140, 0.35);
+    inset 0 0 0 2px
+    rgba(255, 230, 140, 0.35);
 }
 
 
-/* Decorative background */
+/* Header pattern */
 
 .header-pattern {
   position: absolute;
+
   inset: 0;
 
   background-image:
@@ -64,6 +86,7 @@
     );
 
   background-size: 25px 25px;
+
   opacity: 0.5;
 }
 
@@ -72,40 +95,54 @@
 
 .header-content {
   position: relative;
+
   z-index: 2;
 
   min-height: 270px;
+
   padding: 30px 45px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   gap: 30px;
 }
 
 
-/* Om symbol */
+/* OM */
 
 .om-symbol {
   width: 100px;
   height: 100px;
 
+  flex-shrink: 0;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   border: 3px solid #ffd76a;
+
   border-radius: 50%;
 
   color: #ffd76a;
+
   font-size: 55px;
+
   font-weight: 700;
 
-  background: rgba(255, 255, 255, 0.08);
+  background:
+    rgba(255, 255, 255, 0.08);
 
   box-shadow:
     0 0 20px rgba(255, 215, 106, 0.35),
-    inset 0 0 15px rgba(255, 215, 106, 0.15);
+    inset 0 0 15px
+    rgba(255, 215, 106, 0.15);
 }
 
 
@@ -113,7 +150,9 @@
 
 .header-text {
   flex: 1;
+
   text-align: center;
+
   color: #fff;
 }
 
@@ -121,32 +160,46 @@
   margin-bottom: 8px;
 
   color: #ffd76a;
+
   font-size: 16px;
+
   font-weight: 600;
+
   letter-spacing: 2px;
 }
 
 .header-text h1 {
   margin: 0;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: clamp(36px, 5vw, 62px);
+  font-size:
+    clamp(36px, 5vw, 62px);
+
   font-weight: 800;
+
   letter-spacing: 2px;
 
   color: #fff;
+
   text-shadow:
     2px 3px 0 #7b1608,
-    0 0 15px rgba(255, 213, 100, 0.4);
+    0 0 15px
+    rgba(255, 213, 100, 0.4);
 }
 
 .year {
   margin-top: 3px;
 
   color: #ffd76a;
+
   font-size: 34px;
+
   font-weight: 800;
+
   letter-spacing: 5px;
 }
 
@@ -154,20 +207,28 @@
   margin-top: 12px;
 
   color: #fff6df;
+
   font-size: 18px;
+
   font-weight: 600;
+
   letter-spacing: 1px;
 }
 
 
-/* Ganesh image */
+/* Ganesh */
 
 .ganesh-icon {
   width: 170px;
 
+  flex-shrink: 0;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
+
   justify-content: center;
 
   text-align: center;
@@ -180,9 +241,13 @@
   object-fit: contain;
 
   filter:
-    drop-shadow(0 8px 10px rgba(0, 0, 0, 0.25));
+    drop-shadow(
+      0 8px 10px
+      rgba(0, 0, 0, 0.25)
+    );
 
-  transition: transform 0.3s ease;
+  transition:
+    transform 0.3s ease;
 }
 
 .ganesh-icon img:hover {
@@ -195,13 +260,15 @@
   color: #ffd76a;
 
   font-size: 16px;
+
   font-weight: 800;
+
   letter-spacing: 1px;
 }
 
 
 /* =========================================================
-   WELCOME CARD
+   WELCOME
 ========================================================= */
 
 .welcome-card {
@@ -209,6 +276,7 @@
   max-width: 1050px;
 
   margin: 0 auto 35px;
+
   padding: 28px 40px;
 
   text-align: center;
@@ -216,12 +284,16 @@
   background: #fff;
 
   border: 1px solid #f1c66b;
+
   border-left: 6px solid #c72b0b;
+
   border-right: 6px solid #c72b0b;
 
   border-radius: 15px;
 
-  box-shadow: 0 8px 25px rgba(102, 48, 0, 0.1);
+  box-shadow:
+    0 8px 25px
+    rgba(102, 48, 0, 0.1);
 }
 
 .section-title {
@@ -230,12 +302,15 @@
   color: #b52208;
 
   font-size: 23px;
+
   font-weight: 800;
+
   letter-spacing: 1px;
 }
 
 .section-title span {
   margin: 0 10px;
+
   color: #d49a18;
 }
 
@@ -244,9 +319,10 @@
 
   margin: auto;
 
-   color: #198754;
+  color: #2e7d32;
 
   font-size: 16px;
+
   line-height: 1.8;
 }
 
@@ -262,7 +338,9 @@
   margin: 35px auto 25px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   gap: 18px;
@@ -275,10 +353,15 @@
 
   color: #a82007;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
   font-size: 30px;
+
   font-weight: 800;
+
   letter-spacing: 2px;
 }
 
@@ -286,9 +369,76 @@
   color: #d69c18;
 
   font-size: 18px;
+
   letter-spacing: 4px;
 
   white-space: nowrap;
+}
+
+
+/* =========================================================
+   DAY NAVIGATION
+========================================================= */
+
+.day-navigation {
+  width: 100%;
+  max-width: 1050px;
+
+  margin: 25px auto 30px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+  text-align: center;
+}
+
+.day-navigation button {
+  min-width: 100px;
+
+  padding: 11px 20px;
+
+  border: 2px solid #d49b1d;
+
+  border-radius: 25px;
+
+  background: #fff;
+
+  color: #a52207;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    all 0.25s ease;
+}
+
+.day-navigation button:hover {
+  background: #fff2d2;
+
+  transform:
+    translateY(-2px);
+}
+
+.day-navigation button.active {
+  background: #a52207;
+
+  color: #fff;
+
+  border-color: #a52207;
+
+  box-shadow:
+    0 5px 12px
+    rgba(120, 35, 0, 0.2);
 }
 
 
@@ -307,21 +457,33 @@
   background: #fff;
 
   border: 1px solid #efc86f;
+
   border-radius: 16px;
 
   box-shadow:
-    0 7px 20px rgba(87, 38, 0, 0.1);
+    0 7px 20px
+    rgba(87, 38, 0, 0.1);
 
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+  animation:
+    fadeIn 0.3s ease;
 }
 
-.programme-card:hover {
-  transform: translateY(-4px);
+@keyframes fadeIn {
 
-  box-shadow:
-    0 12px 28px rgba(87, 38, 0, 0.17);
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
 }
 
 
@@ -333,7 +495,9 @@
   padding: 15px 25px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   gap: 20px;
@@ -353,19 +517,24 @@
   padding: 8px 18px;
 
   border: 1px solid #ffd66b;
+
   border-radius: 30px;
 
-  background: rgba(255, 255, 255, 0.1);
+  background:
+    rgba(255, 255, 255, 0.1);
 
   color: #ffd66b;
 
   font-size: 15px;
+
   font-weight: 800;
+
   letter-spacing: 1px;
 }
 
 .day-date {
   font-size: 18px;
+
   font-weight: 700;
 }
 
@@ -383,35 +552,35 @@
   min-height: 65px;
 
   display: flex;
+
   align-items: center;
 
   gap: 18px;
 
   padding: 13px 5px;
 
-  border-bottom: 1px dashed #e4c481;
+  border-bottom:
+    1px dashed #e4c481;
 }
 
-.programme-item:last-of-type {
-  border-bottom: none;
-}
-
-
-/* Programme icon */
+/* Icon */
 
 .programme-icon {
-  flex-shrink: 0;
-
   width: 48px;
   height: 48px;
 
+  flex-shrink: 0;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   border-radius: 50%;
 
   background: #fff1d2;
+
   border: 1px solid #e7bd56;
 
   font-size: 23px;
@@ -430,6 +599,7 @@
   color: #552b0a;
 
   font-size: 17px;
+
   font-weight: 700;
 }
 
@@ -439,6 +609,7 @@
   color: #b32a0a;
 
   font-size: 14px;
+
   font-weight: 700;
 }
 
@@ -449,10 +620,13 @@
 
 .dinner-item {
   margin-top: 15px;
+
   padding: 14px 18px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   gap: 15px;
@@ -460,6 +634,7 @@
   background: #fff7e7;
 
   border: 1px solid #f1d28b;
+
   border-radius: 10px;
 }
 
@@ -467,6 +642,7 @@
   color: #a52107;
 
   font-size: 15px;
+
   font-weight: 800;
 }
 
@@ -474,6 +650,7 @@
   color: #6a441b;
 
   font-size: 15px;
+
   font-weight: 600;
 
   text-align: right;
@@ -502,12 +679,7 @@
   margin-top: 25px;
 }
 
-
-/* Special card */
-
 .special-card {
-  position: relative;
-
   padding: 28px 18px;
 
   text-align: center;
@@ -520,12 +692,14 @@
     );
 
   border: 1px solid #e8c46a;
+
   border-top: 5px solid #bd2809;
 
   border-radius: 15px;
 
   box-shadow:
-    0 7px 18px rgba(91, 41, 0, 0.1);
+    0 7px 18px
+    rgba(91, 41, 0, 0.1);
 
   transition:
     transform 0.25s ease,
@@ -533,14 +707,13 @@
 }
 
 .special-card:hover {
-  transform: translateY(-5px);
+  transform:
+    translateY(-5px);
 
   box-shadow:
-    0 12px 25px rgba(91, 41, 0, 0.16);
+    0 12px 25px
+    rgba(91, 41, 0, 0.16);
 }
-
-
-/* Special icon */
 
 .special-icon {
   width: 65px;
@@ -549,12 +722,15 @@
   margin: 0 auto 15px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   border-radius: 50%;
 
   background: #fff0ca;
+
   border: 2px solid #e0ae39;
 
   font-size: 28px;
@@ -566,6 +742,7 @@
   color: #a52207;
 
   font-size: 18px;
+
   font-weight: 800;
 }
 
@@ -573,6 +750,7 @@
   color: #704a21;
 
   font-size: 14px;
+
   font-weight: 600;
 
   line-height: 1.6;
@@ -584,12 +762,13 @@
   color: #c12b09;
 
   font-size: 15px;
+
   font-weight: 800;
 }
 
 
 /* =========================================================
-   VENUE CARD
+   VENUE
 ========================================================= */
 
 .venue-card {
@@ -597,10 +776,13 @@
   max-width: 900px;
 
   margin: 40px auto 35px;
+
   padding: 30px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   gap: 25px;
@@ -614,12 +796,14 @@
     );
 
   border: 3px solid #e1ad38;
+
   border-radius: 18px;
 
   color: #fff;
 
   box-shadow:
-    0 10px 25px rgba(80, 28, 0, 0.2);
+    0 10px 25px
+    rgba(80, 28, 0, 0.2);
 }
 
 .venue-icon {
@@ -629,15 +813,19 @@
   flex-shrink: 0;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   border: 2px solid #ffd66b;
+
   border-radius: 50%;
 
   font-size: 32px;
 
-  background: rgba(255, 255, 255, 0.08);
+  background:
+    rgba(255, 255, 255, 0.08);
 }
 
 .venue-content {
@@ -650,6 +838,7 @@
   color: #ffd66b;
 
   font-size: 20px;
+
   letter-spacing: 1px;
 }
 
@@ -659,6 +848,7 @@
   color: #fff8e9;
 
   font-size: 15px;
+
   line-height: 1.6;
 }
 
@@ -684,17 +874,22 @@
   color: #d29b1c;
 
   font-size: 15px;
+
   letter-spacing: 4px;
 }
 
 .festival-footer h2 {
   margin: 15px 0 8px;
 
-  font-family: Georgia, "Times New Roman", serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
   color: #ad2407;
 
   font-size: 28px;
+
   font-weight: 800;
 }
 
@@ -762,6 +957,7 @@
     min-height: auto;
 
     border-width: 3px;
+
     border-radius: 16px;
   }
 
@@ -799,11 +995,13 @@
 
   .small-title {
     font-size: 12px;
+
     letter-spacing: 1px;
   }
 
   .header-text h1 {
     font-size: 34px;
+
     letter-spacing: 1px;
   }
 
@@ -822,6 +1020,7 @@
     padding: 22px 18px;
 
     border-left-width: 4px;
+
     border-right-width: 4px;
   }
 
@@ -831,6 +1030,7 @@
 
   .welcome-card p {
     font-size: 14px;
+
     line-height: 1.7;
   }
 
@@ -843,25 +1043,47 @@
 
   .programme-heading h2 {
     font-size: 21px;
+
     letter-spacing: 1px;
   }
 
   .heading-decoration {
     font-size: 12px;
+
     letter-spacing: 2px;
   }
 
 
-  /* Programme card */
+  /* Day navigation */
 
-  .programme-card {
-    border-radius: 12px;
+  .day-navigation {
+    width: 100%;
+
+    margin: 20px auto 25px;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
   }
+
+  .day-navigation button {
+    min-width: 75px;
+
+    padding: 9px 13px;
+
+    font-size: 13px;
+  }
+
+
+  /* Programme */
 
   .day-header {
     padding: 12px 15px;
 
     flex-direction: column;
+
     align-items: flex-start;
 
     gap: 8px;
@@ -903,6 +1125,7 @@
 
   .dinner-item {
     flex-direction: column;
+
     align-items: flex-start;
 
     gap: 5px;
@@ -910,11 +1133,12 @@
 
   .dinner-menu {
     text-align: left;
+
     font-size: 14px;
   }
 
 
-  /* Special programmes */
+  /* Special */
 
   .special-grid {
     grid-template-columns: 1fr;
@@ -989,7 +1213,7 @@
 
 
 /* =========================================================
-   PRINT / A4 STYLE
+   PRINT
 ========================================================= */
 
 @media print {
@@ -1008,22 +1232,11 @@
     box-shadow: none;
   }
 
-  .programme-card:hover,
-  .special-card:hover,
-  .ganesh-icon img:hover {
-    transform: none;
-  }
-
-  .programme-card {
-    break-inside: avoid;
-  }
-
-  .special-card {
-    break-inside: avoid;
-  }
-
+  .programme-card,
+  .special-card,
   .venue-card {
     break-inside: avoid;
   }
 
 }
+

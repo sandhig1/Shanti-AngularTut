@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Patientservice } from '../../services/patientservice/patientservice';
 import { FormsModule, NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { concat } from 'rxjs';
 
 @Component({
   selector: 'app-patient',
@@ -39,17 +40,24 @@ export class Patient {
   clinic: WritableSignal<any[]> = signal([]); 
 
   constructor() {
-    this.getAllState();
-    this.getAllCity();
-    this.getAllArea();
-    this.getAllClinic();
-
-    const id= Number(this.route.snapshot.paramMap.get('id'));
+    concat(
+    this.getAllState(),
+    this.getAllCity(),
+    this.getAllArea(),
+    this.getAllClinic(),
+    ).subscribe({
+      next: res => {
+        console.log('API completed:', res);
+        const id= Number(this.route.snapshot.paramMap.get('id'));
 
     if (id>0){
       this.getPatientDetail(id);
-    }   
-    
+    }
+   }, 
+   complete: () => {
+        console.log('All APIs completed');
+      }  
+  })
   }
 
 
@@ -75,7 +83,7 @@ export class Patient {
     })
   }
 
-  getAllState() {
+  async getAllState():Promise<void> {
     debugger;
     this.patientserv.getStates().subscribe({
       next: (res: any) => {
@@ -86,7 +94,7 @@ export class Patient {
   }
 
 
- getAllCity() {
+ async getAllCity():Promise<void> {
     debugger;
     this.patientserv.getCities().subscribe({
       next: (res: any) => {
@@ -96,7 +104,7 @@ export class Patient {
     })
   }
 
-  getAllArea() {
+  async getAllArea():Promise<void> {
     debugger;
     this.patientserv.getAreas().subscribe({
       next: (res: any) => {
@@ -106,7 +114,7 @@ export class Patient {
     })
   }
 
-  getAllClinic() {
+  async getAllClinic():Promise<void> {
     debugger;
     this.patientserv.getClinics().subscribe({
       next: (res: any) => {

@@ -88,10 +88,7 @@
                                 Date of Birth
                             </th>
                             <th class="patient-gender-column">
-                                Gender
-                            </th>
-                            <th class="patient-age-column">
-                                Age
+                                Gender / Age
                             </th>
                             <th class="patient-bloodgroup-column">
                                 Blood Group
@@ -125,8 +122,14 @@
                             <td>{{item.PatientCode}}</td>
                             <td>{{item.PatientName}}</td>
                             <td>{{item.DateOfBirthFormatted}}</td>
-                            <td>{{item.Gender=="M" ? "Male" : item.Gender=="F" ? "Female" : item.Gender=="O" ? "Other" : "-NA-"}}</td>
-                            <td>{{item.Age}}</td>
+                            <td>
+                                <div>
+                                  <i class="fa-solid fa-user text-primary"></i><span> {{item.Gender=="M" ? "Male" : item.Gender=="F" ? "Female" : item.Gender=="O" ? "Other" : "-NA-"}} </span>
+                                </div>
+                                <div>
+                                  <i class="fa-solid fa-calendar-days text-primary"></i><span> {{item.Age}} </span>
+                                </div>
+                            </td>
                             <td>{{item.BloodGroup}}</td>
                             <td>
                                 <div>

@@ -6,6 +6,7 @@ import { State } from '../state/state';
 import { JsonPipe, NgIf } from '@angular/common';
 import { Cityservice } from '../../services/cityservice/cityservice';
 import { Stateservice } from '../../services/stateservice/stateservice';
+import { concat } from 'rxjs';
 
 
 @Component({
@@ -39,14 +40,20 @@ export class City {
 
   
   constructor() {
+    concat(
+      this.getAllState(),
+    ).subscribe({
+      next: res => {
+        const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    const id= Number(this.route.snapshot.paramMap.get('id'));
-
-    if (id>0){
-      this.getCityDetail(id);
-    }
-
-    this.getAllState();
+        if (id > 0) {
+          this.getCityDetail(id);
+        }
+      },
+      complete: () => {
+        console.log('All APIs completed');
+      }
+    });
   }
 
   citylist(){
@@ -64,7 +71,7 @@ export class City {
     })
   }
  
-  getAllState() {
+  async getAllState(): Promise<void> {
     debugger;
     this.stateserv.getStates().subscribe({
       next: (res: any) => {
@@ -76,7 +83,7 @@ export class City {
 
   SaveCity(formRef:NgForm){
     debugger;
-console.log('FORM VALID:', formRef.valid);
+  console.log('FORM VALID:', formRef.valid);
   console.log('FORM INVALID:', formRef.invalid);
 
   Object.keys(formRef.controls).forEach(key => {

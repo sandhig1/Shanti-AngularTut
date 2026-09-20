@@ -3,6 +3,7 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Areaservice } from '../../services/areaservice/areaservice';
 import { FormsModule, NgForm } from '@angular/forms';
+import { concat } from 'rxjs';
 
 @Component({
   selector: 'app-area',
@@ -29,15 +30,22 @@ export class Area {
   states: WritableSignal<any[]> = signal([]);  
 
   constructor() {
-    this.getAllState();
-    this.getAllCity();
+    concat(
+      this.getAllState(),
+      this.getAllCity(),
+    ).subscribe({
+      next: res => {
+        console.log('API completed:', res);
+        const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    const id= Number(this.route.snapshot.paramMap.get('id'));
-
-    if (id>0){
-      this.getAreaDetail(id);
-    }   
-    
+        if (id > 0) {
+          this.getAreaDetail(id);
+        }
+      },
+      complete: () => {
+        console.log('All APIs completed');
+      }
+    })
   }
 
 
@@ -57,7 +65,7 @@ export class Area {
     })
   }
 
-  getAllState() {
+  async getAllState(): Promise<void> {
     debugger;
     this.areaserv.getStates().subscribe({
       next: (res: any) => {
@@ -68,7 +76,7 @@ export class Area {
   }
 
 
- getAllCity() {
+ async getAllCity(): Promise<void> {
     debugger;
     this.areaserv.getCities().subscribe({
       next: (res: any) => {
@@ -80,7 +88,7 @@ export class Area {
 
   SaveArea(formRef:NgForm){
     debugger;
-console.log('FORM VALID:', formRef.valid);
+  console.log('FORM VALID:', formRef.valid);
   console.log('FORM INVALID:', formRef.invalid);
 
   Object.keys(formRef.controls).forEach(key => {

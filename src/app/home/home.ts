@@ -62,6 +62,10 @@ export class Home {
     this.router.navigate(['controlflow']);
   }
 
+  ganeshfestival(){
+    this.router.navigate(['ganeshfestival']);
+  }
+
   signOut(){
     this.router.navigate(['login']);
   }

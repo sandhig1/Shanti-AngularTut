@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Clinicservice } from '../../services/clinicservice/clinicservice';
 import { FormsModule, NgForm } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
+import { concat } from 'rxjs';
 
 @Component({
   selector: 'app-clinic',
@@ -31,14 +32,22 @@ export class Clinic {
   states: WritableSignal<any[]> = signal([]);
 
   constructor() {
-    this.getAllState();
-    this.getAllCity();
+    concat(
+      this.getAllState(),
+      this.getAllCity(),
+    ).subscribe({
+      next: res => {
+        console.log('API completed:', res);
+        const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-
-    if (id > 0) {
-      this.getClinicDetail(id);
-    }
+        if (id > 0) {
+          this.getClinicDetail(id);
+        }
+      },
+      complete: () => {
+        console.log('All APIs completed');
+      }
+    })
   }
 
 
@@ -59,7 +68,7 @@ export class Clinic {
     })
   }
 
-  getAllState() {
+  async getAllState(): Promise<void> {
     debugger;
     this.clinicServ.getStates().subscribe({
       next: (res: any) => {
@@ -70,7 +79,7 @@ export class Clinic {
   }
 
 
-  getAllCity() {
+  async getAllCity(): Promise<void> {
     debugger;
     this.clinicServ.getCities().subscribe({
       next: (res: any) => {

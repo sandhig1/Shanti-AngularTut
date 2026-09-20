@@ -27,6 +27,7 @@ import { Stafflist } from './stafflist/stafflist';
 import { Staff } from './staff/staff';
 import { Appointmentlist } from './appointmentlist/appointmentlist';
 import { Appointment } from './appointment/appointment';
+import { Ganeshfestival } from './ganeshfestival/ganeshfestival';
 
 export const routes: Routes = [
     {path:'', component:Mainhome},
@@ -70,7 +71,8 @@ export const routes: Routes = [
             {path:"dashboard", component:Dashboard},
             {path:"binding", component:Binding},
             {path:"directive", component:Directive},
-            {path:"controlflow", component:Controlflow}
+            {path:"controlflow", component:Controlflow},
+            {path:"ganeshfestival", component:Ganeshfestival}
         ]
     },
     {

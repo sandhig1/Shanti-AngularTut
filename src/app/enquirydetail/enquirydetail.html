@@ -269,7 +269,7 @@
                     @if(CustomerAddressError.errors?.['required']) {
 
                         <div class="validation-message">
-                        Clinic Address is required
+                        Customer Address is required
                         </div>
 
                     }
@@ -280,104 +280,6 @@
                         </div>
 
                     }
-
-                    </div>
-
-
-                    <!-- =================================================
-                        STATE
-                    ================================================== -->
-                    <div class="col-md-6">
-
-                    <label class="form-label">
-                        State
-                        <span class="required">*</span>
-                    </label>
-
-                    <div class="input-group css-input-group">
-
-                        <span class="input-group-text">
-                        <i class="fa-solid fa-location-dot"></i>
-                        </span>
-
-                        <select
-                        class="form-select"
-                        //#StateNameError="ngModel"
-                        //[(ngModel)]="enquiryData().StateId"
-                        name="StateId"
-                        //(change)="onStateChange()"
-                        //required
-                        >
-
-                        <option value="0">
-                            -- Select State --
-                        </option>
-                        
-                        <!--@for (item of states(); track $index) {
-                            <option value="{{item.StateId}}">
-                            {{item.StateName}}
-                            </option>
-                        }-->
-
-                        </select>
-
-                    </div>
-
-                    <!--@if(StateNameError.errors?.['required']) {
-
-                        <div class="validation-message">
-                        State is required
-                        </div>
-
-                    }-->
-
-                    </div>
-
-
-                    <!-- =================================================
-                        CITY
-                    ================================================== -->
-                    <div class="col-md-6">
-
-                    <label class="form-label">
-                        City
-                        <span class="required">*</span>
-                    </label>
-
-                    <div class="input-group css-input-group">
-
-                        <span class="input-group-text">
-                        <i class="fa-solid fa-location-dot"></i>
-                        </span>
-
-                        <select
-                        class="form-select"
-                        //#CityNameError="ngModel"
-                        //[(ngModel)]="enquiryData().CityId"
-                        name="CityId"
-                        //required
-                        >
-
-                        <option value="0">
-                            -- Select City --
-                        </option>
-
-                        <!--@for (item of filteredCities(); track $index) {
-                            <option value="{{item.CityId}}">
-                            {{item.CityName}}
-                            </option>
-                        }-->
-                        </select>
-
-                    </div>
-
-                    <!--@if(CityNameError.errors?.['required']) {
-
-                        <div class="validation-message">
-                        City is required
-                        </div>
-
-                    }-->
 
                     </div>
                 </div>

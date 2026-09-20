@@ -2,6 +2,7 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Doctorservice } from '../../services/doctorservice/doctorservice';
 import { FormsModule, NgForm } from '@angular/forms';
+import { concat } from 'rxjs';
 
 @Component({
   selector: 'app-doctor',
@@ -34,17 +35,24 @@ export class Doctor {
   clinic: WritableSignal<any[]> = signal([]);  
 
   constructor() {
-    this.getAllState();
-    this.getAllCity();
-    this.getAllClinic();
-
-    const id= Number(this.route.snapshot.paramMap.get('id'));
+    concat(
+    this.getAllState(),
+    this.getAllCity(),
+    this.getAllClinic(),
+    ).subscribe({
+      next: res => {
+      console.log('API completed:', res);
+      const id= Number(this.route.snapshot.paramMap.get('id'));
 
     if (id>0){
       this.getDoctorDetail(id);
-    }   
-    
-  }
+    }
+   },
+    complete: () => {
+        console.log('All APIs completed');
+      }
+  }); 
+}
 
 
   doctorlist(){
@@ -63,7 +71,7 @@ export class Doctor {
     })
   }
 
-  getAllState() {
+  async getAllState(): Promise<void> {
     debugger;
     this.doctorserv.getStates().subscribe({
       next: (res: any) => {
@@ -74,7 +82,7 @@ export class Doctor {
   }
 
 
- getAllCity() {
+ async getAllCity(): Promise<void> {
     debugger;
     this.doctorserv.getCities().subscribe({
       next: (res: any) => {
@@ -84,7 +92,7 @@ export class Doctor {
     })
   }
 
-  getAllClinic() {
+  async getAllClinic(): Promise<void> {
     debugger;
     this.doctorserv.getClinics().subscribe({
       next: (res: any) => {

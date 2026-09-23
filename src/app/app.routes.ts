@@ -28,6 +28,10 @@ import { Staff } from './staff/staff';
 import { Appointmentlist } from './appointmentlist/appointmentlist';
 import { Appointment } from './appointment/appointment';
 import { Ganeshfestival } from './ganeshfestival/ganeshfestival';
+import { AppointmentsForDoctor } from './appointmentsfordoctor/appointmentsfordoctor';
+import { Appointmentdetailview } from './appointmentdetailview/appointmentdetailview';
+import { Pagenotfound } from './pagenotfound/pagenotfound';
+import { DoctorConsultancy } from './doctorconsultancy/doctorconsultancy';
 
 export const routes: Routes = [
     {path:'', component:Mainhome},
@@ -68,11 +72,17 @@ export const routes: Routes = [
             {path:"appointmentlist",component:Appointmentlist},
             {path:"appointment", component:Appointment},
             {path:"appointment/:id", component:Appointment},
+            {path:"appointmentsfordoctor", component:AppointmentsForDoctor},
+            {path:"appointmentdetailview", component:Appointmentdetailview},
+            {path:"appointmentdetailview/:id", component:Appointmentdetailview},
+            {path:"doctorconsultancy/:id", component:DoctorConsultancy},
             {path:"dashboard", component:Dashboard},
             {path:"binding", component:Binding},
             {path:"directive", component:Directive},
             {path:"controlflow", component:Controlflow},
-            {path:"ganeshfestival", component:Ganeshfestival}
+            {path:"ganeshfestival", component:Ganeshfestival},
+            
+            {path:"**", component:Pagenotfound},
         ]
     },
     {

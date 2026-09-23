@@ -46,6 +46,14 @@ export class Home {
     this.router.navigate(['appointmentlist']);
   }
 
+  appointmentsfordoctor(){
+    this.router.navigate(['appointmentsfordoctor']);
+  }
+
+  doctorconsultancy(){
+    this.router.navigate(['doctorconsultancy']);
+  }
+
   dashboard(){
     this.router.navigate(['dashboard']);
   }

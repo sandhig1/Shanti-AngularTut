@@ -1,0 +1,192 @@
+<div class="container-fluid appointment-page py-4">
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-11 col-md-11">
+
+      <div class="card appointment-card">
+
+        <!-- HEADER -->
+        <div class="card-header appointment-header">
+          <div class="header-content">
+
+            <div class="header-left">
+              <div class="header-icon">
+                <i class="fa fa-calendar"></i>
+              </div>
+
+              <div class="header-text">
+                <h5 class="page-title">Appointment Details</h5>
+                <div class="page-subtitle">
+                  View appointment and patient information
+                </div>
+              </div>
+            </div>
+
+            <button type="button"
+                    class="btn btn-outline-primary btn-sm back-btn"
+                    (click)="goBack()">
+              <i class="fa fa-arrow-left me-1"></i>
+              Back
+            </button>
+
+          </div>
+        </div>
+
+        <!-- BODY -->
+        <div class="card-body appointment-body">
+
+          <!-- APPOINTMENT DETAILS -->
+          <div class="form-section">
+
+            <div class="section-heading">
+              <div class="section-icon">
+                <i class="fa fa-calendar"></i>
+              </div>
+
+              <div>
+                <h6 class="section-title">Appointment Details</h6>
+                <small class="section-description">
+                  Date, time and appointment information
+                </small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Appointment No :</label>
+                  <label class="form-label-value appointment-number">
+                    {{ appointmentsfordoctor().AppointmentNo || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Appointment Date :</label>
+                  <label class="form-label-value ">
+                    {{ appointmentsfordoctor().AppointmentDateFormatted || '-NA-' }} {{ appointmentsfordoctor().AppointmentTimeFormatted || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Status :</label>
+                  <label class="form-label-value status-name">
+                    {{ appointmentsfordoctor().StatusName || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-10">
+                <div class="detail-field detail-field-wide">
+                  <label class="form-label">Reason :</label>
+                  <label class="form-label-value multiline-value">
+                    {{ appointmentsfordoctor().Reason || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              
+
+            </div>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <!-- PATIENT DETAILS -->
+          <div class="form-section">
+
+            <div class="section-heading">
+              <div class="section-icon">
+                <i class="fa fa-user"></i>
+              </div>
+
+              <div>
+                <h6 class="section-title">Patient Details</h6>
+                <small class="section-description">
+                  Basic information about the patient
+                </small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+
+              <div class="col-md-12 col-sm-12">
+                <div class="detail-field">
+                  <label class="form-label">Patient Code :</label>
+                  <label class="form-label-value">
+                    {{ appointmentsfordoctor().PatientCode || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Patient Name :</label>
+                  <label class="form-label-value patient-name">
+                    {{ appointmentsfordoctor().PatientName || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Gender :</label>
+                  <label class="form-label-value ">
+                    <i class="fa fa-user text-primary me-2"></i>
+                    {{ appointmentsfordoctor().Gender == "M" ? "Male" :
+                       appointmentsfordoctor().Gender == "F" ? "Female" :
+                       appointmentsfordoctor().Gender == "O" ? "Other" : "-NA-" }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Age :</label>
+                  <label class="form-label-value">
+                    {{ appointmentsfordoctor().Age || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-8 col-sm-12">
+                <div class="detail-field detail-field-wide">
+                  <label class="form-label">Medical History :</label>
+                  <label class="form-label-value multiline-value">
+                    {{ appointmentsfordoctor().MedicalHistory || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ACTION -->
+          <div class="action-container button-container">
+            <button type="button" class="btn btn-sm btn-success attend-btn" title="Attend Now" (click)="attendNow()">
+              <i class="fa fa-user-md me-1"></i>
+              Attend Now
+            </button>
+
+            <button type="button" class="btn btn-outline-secondary print-btn" (click)="print()">
+              Print
+            </button>
+
+            <button type="button"
+                    class="btn btn-outline-secondary cancel-btn"
+                    (click)="goBack()">
+              <i class="fa fa-arrow-left me-1"></i>
+              Back to Appointments
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

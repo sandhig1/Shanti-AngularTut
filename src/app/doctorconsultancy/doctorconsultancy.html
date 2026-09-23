@@ -1,0 +1,510 @@
+<div class="container-fluid appointment-page py-4">
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-11 col-md-11">
+
+      <div class="card appointment-card">
+
+        <!-- HEADER -->
+        <div class="card-header appointment-header">
+          <div class="header-content">
+
+            <div class="header-left">
+              <div class="header-icon">
+                <i class="fa fa-stethoscope"></i>
+              </div>
+
+              <div class="header-text">
+                <h5 class="page-title">Doctor Consultation</h5>
+                <div class="page-subtitle">
+                  Appointment, patient and consultation information
+                </div>
+              </div>
+            </div>
+
+            <button type="button"
+                    class="btn btn-outline-primary btn-sm back-btn"
+                    (click)="goBack()">
+              <i class="fa fa-arrow-left me-1"></i>
+              Back
+            </button>
+
+          </div>
+        </div>
+
+        <!-- BODY -->
+        <div class="card-body appointment-body">
+
+          <!-- APPOINTMENT DETAILS -->
+          <div class="form-section">
+
+            <div class="section-heading">
+              <div class="section-icon">
+                <i class="fa fa-calendar"></i>
+              </div>
+
+              <div>
+                <h6 class="section-title">Appointment Details</h6>
+                <small class="section-description">
+                  Date, time and appointment information
+                </small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Appointment No :</label>
+                  <label class="form-label-value appointment-number">
+                    {{ appointmentsfordoctor().AppointmentNo || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Appointment Date :</label>
+                  <label class="form-label-value">
+                    {{ appointmentsfordoctor().AppointmentDateFormatted || '-NA-' }}
+                    {{ appointmentsfordoctor().AppointmentTimeFormatted || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Status :</label>
+                  <label class="form-label-value">
+                    {{ appointmentsfordoctor().StatusName || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-12">
+                <div class="detail-field detail-field-wide">
+                  <label class="form-label">Reason :</label>
+                  <label class="form-label-value multiline-value">
+                    {{ appointmentsfordoctor().Reason || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <!-- PATIENT DETAILS -->
+          <div class="form-section">
+
+            <div class="section-heading">
+              <div class="section-icon">
+                <i class="fa fa-user"></i>
+              </div>
+
+              <div>
+                <h6 class="section-title">Patient Details</h6>
+                <small class="section-description">
+                  Basic information about the patient
+                </small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+
+              <div class="col-md-12 col-sm-12">
+                <div class="detail-field">
+                  <label class="form-label">Patient Code :</label>
+                  <label class="form-label-value">
+                    {{ appointmentsfordoctor().PatientCode || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Patient Name :</label>
+                  <label class="form-label-value patient-name">
+                    {{ appointmentsfordoctor().PatientName || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Gender :</label>
+                  <label class="form-label-value">
+                    <i class="fa fa-user text-primary me-2"></i>
+                    {{ appointmentsfordoctor().Gender == "M" ? "Male" :
+                       appointmentsfordoctor().Gender == "F" ? "Female" :
+                       appointmentsfordoctor().Gender == "O" ? "Other" : "-NA-" }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6">
+                <div class="detail-field">
+                  <label class="form-label">Age :</label>
+                  <label class="form-label-value">
+                    {{ appointmentsfordoctor().Age || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-8 col-sm-12">
+                <div class="detail-field detail-field-wide">
+                  <label class="form-label">Medical History :</label>
+                  <label class="form-label-value multiline-value">
+                    {{ appointmentsfordoctor().MedicalHistory || '-NA-' }}
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <!-- CONSULTATION DETAIL -->
+          <div class="form-section">
+
+            <div class="section-heading">
+              <div class="section-icon">
+                <i class="fa fa-notes-medical"></i>
+              </div>
+
+              <div>
+                <h6 class="section-title">Consultation Detail</h6>
+                <small class="section-description">
+                  Record patient complaint, consultation and advice
+                </small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+
+              <div class="col-6">
+                <label class="form-label mb-1">
+                  Patient Complaint <span class="text-danger">*</span>
+                </label>
+                <textarea
+                  class="form-control"
+                  name="patientComplaint"
+                  rows="4"
+                  maxlength="1000"
+                  required
+                  [(ngModel)]="consultation.patientComplaint"
+                  placeholder="Enter patient complaint"></textarea>
+                <small class="text-muted">Maximum 1000 characters.</small>
+              </div>
+
+              <div class="col-6">
+                <label class="form-label mb-1">
+                  Consultation <span class="text-danger">*</span>
+                </label>
+                <textarea
+                  class="form-control"
+                  name="consultation"
+                  rows="4"
+                  maxlength="1000"
+                  required
+                  [(ngModel)]="consultation.consultation"
+                  placeholder="Enter consultation details"></textarea>
+                <small class="text-muted">Maximum 1000 characters.</small>
+              </div>
+
+              <div class="col-6">
+                <label class="form-label mb-1">
+                  Advice
+                </label>
+                <textarea
+                  class="form-control"
+                  name="advice"
+                  rows="3"
+                  maxlength="500"
+                  [(ngModel)]="consultation.advice"
+                  placeholder="Enter advice"></textarea>
+                <small class="text-muted">Maximum 500 characters.</small>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <!-- PRESCRIPTION DETAIL -->
+          <div class="form-section">
+
+            <div class="section-heading prescription-heading">
+              <div class="section-icon">
+                <i class="fa fa-pills"></i>
+              </div>
+
+              <div>
+                <h6 class="section-title">Prescription Detail</h6>
+                <small class="section-description">
+                  Add medicines prescribed during the consultation
+                </small>
+              </div>
+
+              <button type="button"
+                      class="btn btn-primary btn-sm add-medicine-btn ms-auto"
+                      (click)="openMedicinePopup()">
+                <i class="fa fa-plus me-1"></i>
+                Add Medicine
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover prescription-table mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th class="text-center">Sr. No.</th>
+                    <th>Medicine</th>
+                    <th>Dosage</th>
+                    <th>Frequency</th>
+                    <th>Before/After</th>
+                    <th>Remark</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let medicine of prescriptions; let i = index">
+                    <td class="text-center">{{ i + 1 }}</td>
+                    <td>{{ medicine.medicineName }}</td>
+                    <td>{{ medicine.dosage }}</td>
+                    <td>{{ medicine.frequency }}</td>
+                    <td>{{ medicine.beforeAfter }}</td>
+                    <td>{{ medicine.remark || '-' }}</td>
+                    <td class="text-center">
+                      <button type="button"
+                              class="btn btn-sm btn-outline-primary me-1"
+                              title="Edit"
+                              (click)="editMedicine(i)">
+                        <i class="fa fa-edit"></i>
+                      </button>
+
+                      <button type="button"
+                              class="btn btn-sm btn-outline-danger"
+                              title="Delete"
+                              (click)="deleteMedicine(i)">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!prescriptions || prescriptions.length === 0">
+                    <td colspan="7" class="text-center text-muted py-4">
+                      No medicine added.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- ACTION -->
+          <div class="action-container button-container">
+
+            <button type="button"
+                    class="btn btn-success save-consultation-btn"
+                    (click)="saveConsultation()">
+              <i class="fa fa-save me-1"></i>
+              Save Consultation
+            </button>
+
+            <button type="button"
+                    class="btn btn-outline-secondary cancel-btn"
+                    (click)="goBack()">
+              <i class="fa fa-times me-1"></i>
+              Close
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ADD / EDIT MEDICINE MODAL -->
+<div class="modal fade show"
+     tabindex="-1"
+     role="dialog"
+     *ngIf="showMedicinePopup"
+     style="display: block;"
+     aria-modal="true">
+
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title">{{editingMedicineIndex <0? 'Add': 'Edit'}} Medicine</h5>
+          <small class="text-muted">Enter medicine prescription details {{editingMedicineIndex}}</small>
+        </div>
+
+        <button type="button"
+                class="btn-close"
+                aria-label="Close"
+                (click)="closeMedicinePopup()"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="row g-3">
+
+          <!-- MEDICINE -->
+          <div class="col-md-6">
+            <label class="form-label">
+              Medicine <span class="text-danger">*</span>
+            </label>
+
+            <select class="form-select"
+                    name="medicine"
+                    required
+                    [(ngModel)]="medicineForm.medicineId">
+              <option value="">Select Medicine</option>
+              <option *ngFor="let medicine of medicines"
+                      [value]="medicine.id">
+                {{medicine.name}}
+              </option>
+            </select>
+          </div>
+
+          <!-- DOSAGE -->
+          <div class="col-md-6">
+            <label class="form-label">
+              Dosage <span class="text-danger">*</span>
+            </label>
+
+            <select class="form-select"
+                    name="dosage"
+                    required
+                    [(ngModel)]="medicineForm.dosage">
+              <option value="">Select Dosage</option>
+              <option *ngFor="let dosage of dosages"
+                      [value]="dosage">
+                {{ dosage }}
+              </option>
+            </select>
+          </div>
+
+          <!-- FREQUENCY -->
+          <div class="col-12">
+            <label class="form-label">
+              Frequency <span class="text-danger">*</span>
+            </label>
+
+            <div class="row g-2">
+
+              <div class="col-md-4">
+                <label class="small text-muted">Morning</label>
+                <input type="text"
+                       class="form-control"
+                       name="morning"
+                       required
+                       [(ngModel)]="medicineForm.morning"
+                       placeholder="e.g. 1">
+              </div>
+
+              <div class="col-md-4">
+                <label class="small text-muted">Afternoon</label>
+                <input type="text"
+                       class="form-control"
+                       name="afternoon"
+                       required
+                       [(ngModel)]="medicineForm.afternoon"
+                       placeholder="e.g. 1">
+              </div>
+
+              <div class="col-md-4">
+                <label class="small text-muted">Night</label>
+                <input type="text"
+                       class="form-control"
+                       name="night"
+                       required
+                       [(ngModel)]="medicineForm.night"
+                       placeholder="e.g. 1">
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BEFORE / AFTER FOR EACH FREQUENCY -->
+          <div class="col-md-4">
+            <label class="form-label">Morning Before/After</label>
+            <select class="form-select"
+                    name="morningBeforeAfter"
+                    [(ngModel)]="medicineForm.morningBeforeAfter">
+              <option value="">Select</option>
+              <option value="Before Meal">Before Meal</option>
+              <option value="After Meal">After Meal</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Afternoon Before/After</label>
+            <select class="form-select"
+                    name="afternoonBeforeAfter"
+                    [(ngModel)]="medicineForm.afternoonBeforeAfter">
+              <option value="">Select</option>
+              <option value="Before Meal">Before Meal</option>
+              <option value="After Meal">After Meal</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Night Before/After</label>
+            <select class="form-select"
+                    name="nightBeforeAfter"
+                    [(ngModel)]="medicineForm.nightBeforeAfter">
+              <option value="">Select</option>
+              <option value="Before Meal">Before Meal</option>
+              <option value="After Meal">After Meal</option>
+            </select>
+          </div>
+
+          <!-- REMARK -->
+          <div class="col-12">
+            <label class="form-label">Remark</label>
+            <textarea class="form-control"
+                      name="remark"
+                      rows="3"
+                      [(ngModel)]="medicineForm.remark"
+                      placeholder="Enter remark"></textarea>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button"
+                class="btn btn-success"
+                (click)="saveMedicine()">
+          <i class="fa fa-save me-1"></i>
+          Save Medicine
+        </button>
+
+        <button type="button"
+                class="btn btn-outline-secondary"
+                (click)="closeMedicinePopup()">
+          <i class="fa fa-times me-1"></i>
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL BACKDROP -->
+<div class="modal-backdrop fade show"
+     *ngIf="showMedicinePopup"></div>

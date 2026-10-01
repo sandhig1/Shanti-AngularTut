@@ -3,6 +3,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Appointmentservice } from '../../services/appointmentservice/appointmentservice';
 import { NgFor, NgIf } from '@angular/common';
+import { Doctorconsultancyservice } from '../../services/doctorconsultancyservice/doctorconsultancyservice';
 
 @Component({
   selector: 'app-doctorConsultancy',
@@ -15,6 +16,7 @@ export class DoctorConsultancy {
   router = inject(Router);
   route = inject(ActivatedRoute);
   appointmentserv = inject(Appointmentservice);
+  doctorconsultancyserv = inject(Doctorconsultancyservice);
 
   appointmentsfordoctor: WritableSignal<any> = signal({
     AppointmentId: 0,
@@ -35,21 +37,13 @@ export class DoctorConsultancy {
     StatusName: ''
   });
 
-  consultation = {
+  consultationDetail = {
     patientComplaint: '',
     consultation: '',
     advice: ''
   };
 
-  prescriptions: any[] = [];
-
-  medicines = [
-    { id: 1, name: 'Paracetamol' },
-    { id: 2, name: 'Amoxicillin' },
-    { id: 3, name: 'Azithromycin' },
-    { id: 4, name: 'Ibuprofen' },
-    { id: 5, name: 'Cetirizine' }
-  ];
+  
 
   dosages = [
     '1/2 Tablet',
@@ -61,19 +55,12 @@ export class DoctorConsultancy {
     '2 Capsules'
   ];
 
-  showMedicinePopup = false;
-  editingMedicineIndex = -1;
+  prescriptions: any[] = [];
 
   medicineForm: any = this.createEmptyMedicine();
-
-  constructor() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-
-    if (id > 0) {
-      this.getAppointmentDetail(id);
-    }
-  }
-
+  
+  medicines: WritableSignal<any[]> = signal([]);
+  
   createEmptyMedicine() {
     return {
       medicineId: '',
@@ -87,6 +74,19 @@ export class DoctorConsultancy {
       nightBeforeAfter: '',
       remark: ''
     };
+  }
+
+  showMedicinePopup = false;
+  editingMedicineIndex = -1;
+
+  constructor() {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    if (id > 0) {
+      this.getAppointmentDetail(id);
+    }
+
+    this.getMedicineList();
   }
 
   getAppointmentDetail(id: number) {
@@ -111,6 +111,18 @@ export class DoctorConsultancy {
     });
   }
 
+  
+
+  getMedicineList() {
+    debugger;
+    this.doctorconsultancyserv.getMedicineList().subscribe({
+      next: (res: any) => {
+        debugger;
+        this.medicines.set(res.data)
+      }
+    })
+  }
+
   openMedicinePopup() {
     this.editingMedicineIndex = -1;
     this.medicineForm = this.createEmptyMedicine();
@@ -124,20 +136,21 @@ export class DoctorConsultancy {
   }
 
   editMedicine(index: number) {
-    const medicine = this.prescriptions[index];
-
     this.editingMedicineIndex = index;
+
+    const selectedPrescriptionData = this.prescriptions[index];
+    
     this.medicineForm = {
-      medicineId: medicine.medicineId,
-      medicineName: medicine.medicineName,
-      dosage: medicine.dosage,
-      morning: medicine.morning,
-      afternoon: medicine.afternoon,
-      night: medicine.night,
-      morningBeforeAfter: medicine.morningBeforeAfter,
-      afternoonBeforeAfter: medicine.afternoonBeforeAfter,
-      nightBeforeAfter: medicine.nightBeforeAfter,
-      remark: medicine.remark
+      medicineId: selectedPrescriptionData.medicineId,
+      medicineName: selectedPrescriptionData.medicineName,
+      dosage: selectedPrescriptionData.dosage,
+      morning: selectedPrescriptionData.morning,
+      afternoon: selectedPrescriptionData.afternoon,
+      night: selectedPrescriptionData.night,
+      morningBeforeAfter: selectedPrescriptionData.morningBeforeAfter,
+      afternoonBeforeAfter: selectedPrescriptionData.afternoonBeforeAfter,
+      nightBeforeAfter: selectedPrescriptionData.nightBeforeAfter,
+      remark: selectedPrescriptionData.remark
     };
 
     this.showMedicinePopup = true;
@@ -149,6 +162,7 @@ export class DoctorConsultancy {
   }
 
   saveMedicine() {
+    //Checking Mandatory Fields
     if (!this.medicineForm.medicineId) {
       alert('Please select Medicine.');
       return;
@@ -158,7 +172,7 @@ export class DoctorConsultancy {
       alert('Please select Dosage.');
       return;
     }
-
+    
     if (!this.medicineForm.morning &&
         !this.medicineForm.afternoon &&
         !this.medicineForm.night) {
@@ -166,11 +180,14 @@ export class DoctorConsultancy {
       return;
     }
 
-    const selectedMedicine = this.medicines.find(
+    //Getting Medicine Detail from medicines variable
+    const selectedMedicine = this.medicines().find(
       x => String(x.id) === String(this.medicineForm.medicineId)
     );
 
-    this.medicineForm.medicineName = selectedMedicine?.name || '';
+    //Setting medicineName of medicineForm array variable from selectedMedicine Constant Variable
+    //this.medicineForm.medicineName = selectedMedicine?.name || '';
+    this.medicineForm.medicineName = selectedMedicine?.name;
 
     const prescription = {
       ...this.medicineForm,
@@ -178,12 +195,23 @@ export class DoctorConsultancy {
       beforeAfter: this.buildBeforeAfter()
     };
 
-    if (this.editingMedicineIndex >= 0) {
+    /*if (this.editingMedicineIndex >= 0) {
       this.prescriptions[this.editingMedicineIndex] = prescription;
       this.prescriptions = [...this.prescriptions];
     } else {
       this.prescriptions = [...this.prescriptions, prescription];
-    }
+    }*/
+    debugger;
+      if (this.editingMedicineIndex >= 0){
+          //update medicineForm variable data in prescriptions array list against editingMedicineIndex  
+
+          //this.prescriptions[this.editingMedicineIndex] = this.medicineForm;
+          this.prescriptions[this.editingMedicineIndex] = prescription;
+      }else{
+        //Insert medicineForm variable data in prescriptions array list  
+        //this.prescriptions.push(this.medicineForm);
+        this.prescriptions.push(prescription);
+      }
 
     this.closeMedicinePopup();
   }
@@ -231,12 +259,12 @@ export class DoctorConsultancy {
   }
 
   saveConsultation() {
-    if (!this.consultation.patientComplaint.trim()) {
+    if (!this.consultationDetail.patientComplaint.trim()) {
       alert('Patient Complaint is mandatory.');
       return;
     }
 
-    if (!this.consultation.consultation.trim()) {
+    if (!this.consultationDetail.consultation.trim()) {
       alert('Consultation is mandatory.');
       return;
     }
@@ -244,9 +272,9 @@ export class DoctorConsultancy {
     const consultationData = {
       appointmentId: this.appointmentsfordoctor().AppointmentId,
       patientId: this.appointmentsfordoctor().PatientId,
-      patientComplaint: this.consultation.patientComplaint,
-      consultation: this.consultation.consultation,
-      advice: this.consultation.advice,
+      patientComplaint: this.consultationDetail.patientComplaint,
+      consultation: this.consultationDetail.consultation,
+      advice: this.consultationDetail.advice,
       prescriptions: this.prescriptions
     };
 
@@ -265,5 +293,80 @@ export class DoctorConsultancy {
   print() {
     window.print();
   }
+
+  tests = [
+    { id: 1, name: 'bloodtest' },
+    { id: 2, name: 'urinetest' }
+  ];
+
+  testlist: any[] = [];
+
+ testForm: any = this.createEmptytest();
+  
+  createEmptytest() {
+    return {
+      testId: '',
+      testName: ''
+    };
+  }
+
+  showTestPopup = false;
+  editingTestIndex = -1;
+
+  addTestPopup() {
+    this.editingTestIndex = -1;
+    this.testForm = this.createEmptytest();
+    this.showTestPopup = true;
+  }
+
+  closeTestPopup() {
+    this.showTestPopup = false;
+    this.editingTestIndex = -1;
+    this.testForm = this.createEmptytest();
+  }
+
+  editTest(index: number) {
+    this.editingTestIndex = index;
+
+    const selectedtestData = this.testlist[index];
+    
+    this.testForm = {
+      testId: selectedtestData.testId,
+      testName: selectedtestData.testName
+    };
+
+    this.showTestPopup = true;
+  }
+
+  deleteTest(index: number) {
+    this.testlist.splice(index, 1);
+    this.testlist = [...this.testlist];
+  }
+
+
+  saveTest() {
+    //Checking Mandatory Fields
+    if (!this.testForm.testId) {
+      alert('Please select Test.');
+      return;
+    }
+
+    //Getting Test Detail from testlist variable
+    const selectedTest = this.tests.find(
+      x => String(x.id) === String(this.testForm.testId)
+    );
+
+    this.testForm.testName = selectedTest?.name;
+    
+    if (this.editingTestIndex >= 0){
+        this.testlist[this.editingTestIndex] = this.testForm;
+    }
+    else{
+      this.testlist.push(this.testForm);
+    }
+
+    this.closeTestPopup();
+  }
+
 }
 

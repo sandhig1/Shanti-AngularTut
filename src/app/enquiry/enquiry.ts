@@ -34,9 +34,9 @@ export class Enquiry {
     })
   }
 
-  viewenquiry(id:number){
-    this.router.navigate(['viewenquiry/'+id]);
-  };
+  //viewenquiry(id:number){
+    //this.router.navigate(['viewenquiry/'+id]);
+  //};
 
   EditEnquiryDetail(id: number) {
     debugger;

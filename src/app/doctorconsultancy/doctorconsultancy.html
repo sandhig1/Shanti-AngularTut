@@ -194,7 +194,7 @@
                   rows="4"
                   maxlength="1000"
                   required
-                  [(ngModel)]="consultation.patientComplaint"
+                  [(ngModel)]="consultationDetail.patientComplaint"
                   placeholder="Enter patient complaint"></textarea>
                 <small class="text-muted">Maximum 1000 characters.</small>
               </div>
@@ -209,7 +209,7 @@
                   rows="4"
                   maxlength="1000"
                   required
-                  [(ngModel)]="consultation.consultation"
+                  [(ngModel)]="consultationDetail.consultation"
                   placeholder="Enter consultation details"></textarea>
                 <small class="text-muted">Maximum 1000 characters.</small>
               </div>
@@ -223,7 +223,7 @@
                   name="advice"
                   rows="3"
                   maxlength="500"
-                  [(ngModel)]="consultation.advice"
+                  [(ngModel)]="consultationDetail.advice"
                   placeholder="Enter advice"></textarea>
                 <small class="text-muted">Maximum 500 characters.</small>
               </div>
@@ -306,6 +306,69 @@
 
           </div>
 
+          <div class="section-divider"></div>
+
+
+          <!-- TEST SUGGESTED -->
+        <div class="form-section">
+        
+            <div class="section-heading test-heading">
+                <div class="section-icon">
+                    <i class="fa fa-clipboard-list"></i>
+                </div>
+        
+                <div>
+                    <h6 class="section-title">Test Suggested</h6>
+                </div>
+        
+                <button type="button" class="btn btn-primary btn-sm add-medicine-btn ms-auto" (click)="addTestPopup()">
+                    <i class="fa fa-plus me-1"></i>
+                    Add Test
+                </button>
+            </div>
+        
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover test-table mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-center">Sr. No.</th>
+                            <th>Test</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        <tr *ngFor="let test of testlist; let i = index">
+                            <td class="text-center">{{ i + 1 }}</td>
+                            <td>{{ test.testName }}</td>
+                            <td class="text-center">
+                              <button type="button"
+                                      class="btn btn-sm btn-outline-primary me-1"
+                                      title="Edit"
+                                      (click)="editTest(i)">
+                                <i class="fa fa-edit"></i>
+                              </button>
+        
+                              <button type="button"
+                                      class="btn btn-sm btn-outline-danger"
+                                      title="Delete"
+                                      (click)="deleteTest(i)">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                            </td>
+                        </tr>
+        
+                        <tr *ngIf="!testlist || testlist.length === 0">
+                            <td colspan="7" class="text-center text-muted py-4">
+                                No test added.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
           <!-- ACTION -->
           <div class="action-container button-container">
 
@@ -334,177 +397,199 @@
 
 
 <!-- ADD / EDIT MEDICINE MODAL -->
-<div class="modal fade show"
-     tabindex="-1"
-     role="dialog"
-     *ngIf="showMedicinePopup"
-     style="display: block;"
-     aria-modal="true">
+<div class="modal fade show" tabindex="-1" role="dialog" *ngIf="showMedicinePopup" style="display: block;"
+    aria-modal="true">
 
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
 
-      <div class="modal-header">
-        <div>
-          <h5 class="modal-title">{{editingMedicineIndex <0? 'Add': 'Edit'}} Medicine</h5>
-          <small class="text-muted">Enter medicine prescription details {{editingMedicineIndex}}</small>
-        </div>
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title">{{editingMedicineIndex <0? 'Add' : 'Edit' }} Medicine</h5>
+                            <small class="text-muted">Enter medicine prescription details</small>
+                </div>
 
-        <button type="button"
-                class="btn-close"
-                aria-label="Close"
-                (click)="closeMedicinePopup()"></button>
-      </div>
+                <button type="button" class="btn-close" aria-label="Close" (click)="closeMedicinePopup()"></button>
+            </div>
 
-      <div class="modal-body">
+            <div class="modal-body">
 
-        <div class="row g-3">
+                <div class="row g-3">
 
-          <!-- MEDICINE -->
-          <div class="col-md-6">
-            <label class="form-label">
-              Medicine <span class="text-danger">*</span>
-            </label>
+                    <!-- MEDICINE -->
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            Medicine <span class="text-danger">*</span>
+                        </label>
 
-            <select class="form-select"
-                    name="medicine"
-                    required
-                    [(ngModel)]="medicineForm.medicineId">
-              <option value="">Select Medicine</option>
-              <option *ngFor="let medicine of medicines"
-                      [value]="medicine.id">
-                {{medicine.name}}
-              </option>
-            </select>
-          </div>
+                        {{medicines()}}
 
-          <!-- DOSAGE -->
-          <div class="col-md-6">
-            <label class="form-label">
-              Dosage <span class="text-danger">*</span>
-            </label>
+                        <select class="form-select" name="medicine" required [(ngModel)]="medicineForm.medicineId">
+                            <option value="">Select Medicine</option>
+                            <option *ngFor="let row of medicines()" [value]="row.MedicineId">
+                                {{row.MedicineName}}
+                            </option>
+                        </select>
+                    </div>
 
-            <select class="form-select"
-                    name="dosage"
-                    required
-                    [(ngModel)]="medicineForm.dosage">
-              <option value="">Select Dosage</option>
-              <option *ngFor="let dosage of dosages"
-                      [value]="dosage">
-                {{ dosage }}
-              </option>
-            </select>
-          </div>
+                    <!-- DOSAGE -->
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            Dosage <span class="text-danger">*</span>
+                        </label>
 
-          <!-- FREQUENCY -->
-          <div class="col-12">
-            <label class="form-label">
-              Frequency <span class="text-danger">*</span>
-            </label>
+                        <select class="form-select" name="dosage" required [(ngModel)]="medicineForm.dosage">
+                            <option value="">Select Dosage</option>
+                            <option *ngFor="let row of dosages()" [value]="row.DosageId">
+                                {{ row.Dosage }}
+                            </option>
+                        </select>
+                    </div>
 
-            <div class="row g-2">
+                    <!-- FREQUENCY -->
+                    <div class="col-12">
+                        <label class="form-label">
+                            Frequency <span class="text-danger">*</span>
+                        </label>
 
-              <div class="col-md-4">
-                <label class="small text-muted">Morning</label>
-                <input type="text"
-                       class="form-control"
-                       name="morning"
-                       required
-                       [(ngModel)]="medicineForm.morning"
-                       placeholder="e.g. 1">
-              </div>
+                        <div class="row g-2">
 
-              <div class="col-md-4">
-                <label class="small text-muted">Afternoon</label>
-                <input type="text"
-                       class="form-control"
-                       name="afternoon"
-                       required
-                       [(ngModel)]="medicineForm.afternoon"
-                       placeholder="e.g. 1">
-              </div>
+                            <div class="col-md-4">
+                                <label class="small text-muted">Morning</label>
+                                <input type="text" class="form-control" name="morning" required
+                                    [(ngModel)]="medicineForm.morning" placeholder="e.g. 1">
+                            </div>
 
-              <div class="col-md-4">
-                <label class="small text-muted">Night</label>
-                <input type="text"
-                       class="form-control"
-                       name="night"
-                       required
-                       [(ngModel)]="medicineForm.night"
-                       placeholder="e.g. 1">
-              </div>
+                            <div class="col-md-4">
+                                <label class="small text-muted">Afternoon</label>
+                                <input type="text" class="form-control" name="afternoon" required
+                                    [(ngModel)]="medicineForm.afternoon" placeholder="e.g. 1">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="small text-muted">Night</label>
+                                <input type="text" class="form-control" name="night" required
+                                    [(ngModel)]="medicineForm.night" placeholder="e.g. 1">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- BEFORE / AFTER FOR EACH FREQUENCY -->
+                    <div class="col-md-4">
+                        <label class="form-label">Morning Before/After</label>
+                        <select class="form-select" name="morningBeforeAfter"
+                            [(ngModel)]="medicineForm.morningBeforeAfter">
+                            <option value="">Select</option>
+                            <option value="Before Meal">Before Meal</option>
+                            <option value="After Meal">After Meal</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Afternoon Before/After</label>
+                        <select class="form-select" name="afternoonBeforeAfter"
+                            [(ngModel)]="medicineForm.afternoonBeforeAfter">
+                            <option value="">Select</option>
+                            <option value="Before Meal">Before Meal</option>
+                            <option value="After Meal">After Meal</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Night Before/After</label>
+                        <select class="form-select" name="nightBeforeAfter" [(ngModel)]="medicineForm.nightBeforeAfter">
+                            <option value="">Select</option>
+                            <option value="Before Meal">Before Meal</option>
+                            <option value="After Meal">After Meal</option>
+                        </select>
+                    </div>
+
+                    <!-- REMARK -->
+                    <div class="col-12">
+                        <label class="form-label">Remark</label>
+                        <textarea class="form-control" name="remark" rows="3" [(ngModel)]="medicineForm.remark"
+                            placeholder="Enter remark"></textarea>
+                    </div>
+
+                </div>
 
             </div>
-          </div>
 
-          <!-- BEFORE / AFTER FOR EACH FREQUENCY -->
-          <div class="col-md-4">
-            <label class="form-label">Morning Before/After</label>
-            <select class="form-select"
-                    name="morningBeforeAfter"
-                    [(ngModel)]="medicineForm.morningBeforeAfter">
-              <option value="">Select</option>
-              <option value="Before Meal">Before Meal</option>
-              <option value="After Meal">After Meal</option>
-            </select>
-          </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="saveMedicine()">
+                    <i class="fa fa-save me-1"></i>
+                    Save Medicine
+                </button>
 
-          <div class="col-md-4">
-            <label class="form-label">Afternoon Before/After</label>
-            <select class="form-select"
-                    name="afternoonBeforeAfter"
-                    [(ngModel)]="medicineForm.afternoonBeforeAfter">
-              <option value="">Select</option>
-              <option value="Before Meal">Before Meal</option>
-              <option value="After Meal">After Meal</option>
-            </select>
-          </div>
-
-          <div class="col-md-4">
-            <label class="form-label">Night Before/After</label>
-            <select class="form-select"
-                    name="nightBeforeAfter"
-                    [(ngModel)]="medicineForm.nightBeforeAfter">
-              <option value="">Select</option>
-              <option value="Before Meal">Before Meal</option>
-              <option value="After Meal">After Meal</option>
-            </select>
-          </div>
-
-          <!-- REMARK -->
-          <div class="col-12">
-            <label class="form-label">Remark</label>
-            <textarea class="form-control"
-                      name="remark"
-                      rows="3"
-                      [(ngModel)]="medicineForm.remark"
-                      placeholder="Enter remark"></textarea>
-          </div>
+                <button type="button" class="btn btn-outline-secondary" (click)="closeMedicinePopup()">
+                    <i class="fa fa-times me-1"></i>
+                    Close
+                </button>
+            </div>
 
         </div>
-
-      </div>
-
-      <div class="modal-footer">
-        <button type="button"
-                class="btn btn-success"
-                (click)="saveMedicine()">
-          <i class="fa fa-save me-1"></i>
-          Save Medicine
-        </button>
-
-        <button type="button"
-                class="btn btn-outline-secondary"
-                (click)="closeMedicinePopup()">
-          <i class="fa fa-times me-1"></i>
-          Close
-        </button>
-      </div>
-
     </div>
-  </div>
 </div>
 
 <!-- MODAL BACKDROP -->
-<div class="modal-backdrop fade show"
-     *ngIf="showMedicinePopup"></div>
+<div class="modal-backdrop fade show" *ngIf="showMedicinePopup"></div>
+
+
+
+<!-- ADD / EDIT TEST MODAL -->
+<div class="modal fade show" tabindex="-1" role="dialog" *ngIf="showTestPopup" style="display: block;"
+    aria-modal="true">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title">{{editingTestIndex <0? 'Add' : 'Edit' }} Test</h5>
+                            <small class="text-muted">Enter test details {{editingTestIndex}}</small>
+                </div>
+
+                <button type="button" class="btn-close" aria-label="Close" (click)="closeTestPopup()"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row g-3">
+
+                    <!-- TEST -->
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            Test <span class="text-danger">*</span>
+                        </label>
+
+                        <select class="form-select" name="test" required [(ngModel)]="testForm.testId">
+                            <option value="">Select Test</option>
+                            <option *ngFor="let row of tests" [value]="row.id">
+                                {{row.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" (click)="saveTest()">
+                            <i class="fa fa-save me-1"></i>
+                            Save Test
+                        </button>
+
+                        <button type="button" class="btn btn-outline-secondary" (click)="closeTestPopup()">
+                            <i class="fa fa-times me-1"></i>
+                            Close
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL BACKDROP -->
+<div class="modal-backdrop fade show" *ngIf="showTestPopup"></div>

@@ -32,6 +32,7 @@ import { AppointmentsForDoctor } from './appointmentsfordoctor/appointmentsfordo
 import { Appointmentdetailview } from './appointmentdetailview/appointmentdetailview';
 import { Pagenotfound } from './pagenotfound/pagenotfound';
 import { DoctorConsultancy } from './doctorconsultancy/doctorconsultancy';
+import { Doctorconsultancylist } from './doctorconsultancylist/doctorconsultancylist';
 
 export const routes: Routes = [
     {path:'', component:Mainhome},
@@ -75,7 +76,9 @@ export const routes: Routes = [
             {path:"appointmentsfordoctor", component:AppointmentsForDoctor},
             {path:"appointmentdetailview", component:Appointmentdetailview},
             {path:"appointmentdetailview/:id", component:Appointmentdetailview},
+            {path:"doctorconsultancylist",component:Doctorconsultancylist},
             {path:"doctorconsultancy/:id", component:DoctorConsultancy},
+            {path:"doctorconsultancy/:id/:mode", component:DoctorConsultancy},
             {path:"dashboard", component:Dashboard},
             {path:"binding", component:Binding},
             {path:"directive", component:Directive},

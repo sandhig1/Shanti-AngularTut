@@ -54,6 +54,10 @@ export class Home {
     this.router.navigate(['doctorconsultancy']);
   }
 
+  doctorconsultancylist(){
+    this.router.navigate(['doctorconsultancylist']);
+  }
+
   dashboard(){
     this.router.navigate(['dashboard']);
   }

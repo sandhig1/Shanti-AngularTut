@@ -1,0 +1,184 @@
+/* Main Page */
+.container-fluid {
+  /*background-color: #f5f7fb;*/
+  background-color: #e5e7eb;
+  min-height: calc(100vh - 20px);
+  padding-left: 55px !important;
+  padding-right: 45px !important;
+}
+
+
+/* Page Heading */
+h3 {
+  color: #212529;
+}
+
+h3 i {
+  font-size: 24px;
+}
+
+
+/* Add Button */
+.btn-primary {
+  border-radius: 7px;
+  padding: 9px 18px;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+
+/* Card */
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+/* Card Header */
+.card-header {
+  border-bottom: 1px solid #e9ecef;
+}
+
+
+/* Search Box */
+.input-group {
+  max-width: 350px;
+  margin-left: auto;
+}
+
+.input-group-text {
+  border-right: 0;
+  color: #6c757d;
+}
+
+.input-group .form-control {
+  border-left: 0;
+  box-shadow: none;
+}
+
+.input-group .form-control:focus {
+  border-color: #dee2e6;
+  box-shadow: none;
+}
+
+
+/* Table */
+.table {
+  font-size: 14px;
+}
+
+
+/* Table Header */
+.table thead th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 14px 12px;
+  white-space: nowrap;
+  border-bottom: 1px solid #dee2e6;
+}
+
+
+/* Table Body */
+.table tbody td {
+  padding: 14px 12px;
+  color: #495057;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+
+/* Row Hover */
+.table-hover tbody tr:hover {
+  background-color: #f8fbff;
+}
+
+
+/* Clinic Name */
+.table tbody td .fw-semibold {
+  color: #212529;
+}
+
+
+/* Icons */
+.table td i {
+  font-size: 15px;
+}
+
+
+/* Clinic Code Badge */
+.badge {
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+
+/* Action Buttons */
+.action-btn {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+}
+
+
+/* Edit Button */
+.btn-outline-primary:hover {
+  color: #fff;
+}
+
+
+/* Delete Button */
+.btn-outline-danger:hover {
+  color: #fff;
+}
+
+
+/* Footer */
+.card-footer {
+  color: #6c757d;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+
+  .container-fluid {
+    padding: 15px !important;
+  }
+
+  .d-flex.justify-content-between {
+    align-items: flex-start !important;
+    gap: 15px;
+  }
+
+  .input-group {
+    max-width: 100%;
+  }
+
+  .card-header .row {
+    display: block;
+  }
+
+  .table {
+    min-width: 1200px;
+  }
+
+}

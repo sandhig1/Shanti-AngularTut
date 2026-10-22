@@ -36,17 +36,17 @@ export class Doctor {
 
   constructor() {
     concat(
-    this.getAllState(),
-    this.getAllCity(),
-    this.getAllClinic(),
+      this.getAllState(),
+      this.getAllCity(),
+      this.getAllClinic(),
     ).subscribe({
       next: res => {
       console.log('API completed:', res);
       const id= Number(this.route.snapshot.paramMap.get('id'));
 
-    if (id>0){
-      this.getDoctorDetail(id);
-    }
+      if (id>0){
+        this.getDoctorDetail(id);
+      }
    },
     complete: () => {
         console.log('All APIs completed');

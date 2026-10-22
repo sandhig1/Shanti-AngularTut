@@ -58,6 +58,7 @@ export class Patient {
         console.log('All APIs completed');
       }  
   })
+  
   }
 
 

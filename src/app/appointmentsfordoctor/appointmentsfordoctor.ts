@@ -18,7 +18,7 @@ export class AppointmentsForDoctor {
 
 
    constructor() {
-    this.getappointmentsfordoctor(1);
+    this.getappointmentsfordoctor(0);
   }
 
   getappointmentsfordoctor(id: number) {
@@ -42,9 +42,9 @@ export class AppointmentsForDoctor {
     this.router.navigate(['/appointmentdetailview/' + id]);
   };
 
-   attendNow(id: number) {
+  attendNow(id: number) {
     debugger;
-    this.router.navigate(['/doctorconsultancy/' + id] );
+    this.router.navigate(['/doctorconsultancy/' + id +'/A'] );
   };
 
  searchText: string = ''; 

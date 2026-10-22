@@ -68,9 +68,8 @@ export class DoctorConsultancy {
   testForm: any = this.createEmptytest();
 
   medicines: WritableSignal<any[]> = signal([]);
-
   dosages: WritableSignal<any[]> = signal([]);
-  
+
   tests: WritableSignal<any[]> = signal([]);
 
   createEmptyMedicine() {
@@ -269,6 +268,7 @@ export class DoctorConsultancy {
       this.DoctorConsultancy().AppointmentId = this.refId;
       this.DoctorConsultancy().DoctorId = this.appointmentsfordoctor().DoctorId;
       this.DoctorConsultancy().CreatedBy = 1;//localStorage.getItem("UserId");
+      
       this.DoctorConsultancy().Prescriptions = this.prescriptions;
       this.DoctorConsultancy().Tests = this.testlist;
 

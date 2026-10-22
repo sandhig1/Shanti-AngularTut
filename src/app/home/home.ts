@@ -1,9 +1,10 @@
+import { NgIf } from '@angular/common';
 import { Component, inject,  } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NgIf],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -11,6 +12,13 @@ export class Home {
  
    router = inject(Router);
 
+  showMasters: boolean = false;
+
+  toggleMasters() {
+    //alert('toggleMasters called');
+    this.showMasters = !this.showMasters;
+  }
+    
   enquiry(){
     this.router.navigate(['enquiry']);
   }

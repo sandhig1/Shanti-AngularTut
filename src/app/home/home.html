@@ -1,3 +1,17 @@
+<script>
+   alert('script called');
+    function toggleMasters() {
+      alert('toggleMasters called');
+        var submenu = document.getElementById("mastersSubmenu");
+
+        if (submenu.style.display === "block") {
+            submenu.style.display = "none";
+        } else {
+            submenu.style.display = "block";
+        }
+    }
+</script>
+
 <h1 style="text-align: center;">Welcome To Homepage</h1>
 
 <p style="text-align: center;">This is Home</p>
@@ -5,9 +19,12 @@
 <div>
     <ul style="display: flex; list-style-type: none;">
         <li>
-           <button (click)="enquiry()">Enquiry</button>
+           <button (click)="dashboard()">Dashboard</button>
         </li>
         <li>
+           <button (click)="enquiry()">Enquiry</button>
+        </li>
+        <!--<li>
            <button (click)="state()">State</button>
         </li>
         <li>
@@ -15,7 +32,7 @@
         </li>
         <li>
            <button (click)="arealist()">Area</button>
-        </li>
+        </li>-->
         <li>
            <button (click)="cliniclist()">Clinic</button>
         </li>
@@ -37,11 +54,9 @@
         <li>
           <button (click)="doctorconsultancylist()">DoctorConsultancyList</button>
         </li>
-        <li>
-           <button (click)="dashboard()">Dashboard</button>
-        </li>
         
-        <li>
+        
+        <!--<li>
            <button (click)="binding()">Binding</button>
         </li>
         <li>
@@ -49,13 +64,29 @@
         </li>
         <li>
            <button (click)="controlflow()">ControlFlow</button>
-        </li>
+        </li>-->
         <li>
            <button (click)="ganeshfestival()">GaneshFestival</button>
         </li>
-         <li>
-            <button  (click)="signOut()">signOut</button>
-         </li>
+        <li style="border-radius:10px!important; background-color: #f0f0f0; padding: 2px 2px;margin-top: -5px;">
+            <ul id="masters">
+               <li (mouseenter)="showMasters = true"
+                     (mouseleave)="showMasters = false">
+                  <a href="javascript:void(0)">
+                     Masters <span>{{ showMasters ? '▼' : '▶' }}</span>
+                  </a>
+
+                  <ul *ngIf="showMasters" id="mastersSubmenu">
+                     <li><a href="javascript:void(0)" (click)="state()">States</a></li>
+                     <li><a href="javascript:void(0)" (click)="city()">Cities</a></li>
+                     <li><a href="javascript:void(0)" (click)="arealist()">Areas</a></li>
+                     <li><a href="javascript:void(0)" (click)="arealist()">Medicines</a></li>
+                     <li><a href="javascript:void(0)" (click)="arealist()">Dosages</a></li>
+                     <li><a href="javascript:void(0)" (click)="arealist()">Tests</a></li>
+                  </ul>
+               </li>
+            </ul>
+        </li>
       </ul>
 </div>
 
